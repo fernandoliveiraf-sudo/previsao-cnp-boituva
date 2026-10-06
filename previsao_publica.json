@@ -1,0 +1,3813 @@
+{
+  "gerado_em": "2026-10-06T17:50:34+00:00",
+  "local": {
+    "nome": "CNP Boituva (SDOI)",
+    "lat": -23.2983,
+    "lon": -47.6924
+  },
+  "fonte_tempo": "previsao corrigida (Tentativa 13): ECMWF IFS/AIFS + GFS + ensemble ECMWF + previsoes antigas, via Open-Meteo e ECMWF open data",
+  "modelo_decisao": "GBM + CORN calibrado, treinado em decisoes reais de RTA (TCC)",
+  "janela_operacao_local": [
+    8,
+    17
+  ],
+  "janela_detalhe_local": [
+    7,
+    18
+  ],
+  "dias_validados": 7,
+  "correcao_15d": true,
+  "fonte_camada_limite": null,
+  "nomes_niveis": [
+    "fechado",
+    "so D",
+    "C e D",
+    "B, C e D",
+    "todas (incl. A/AI)"
+  ],
+  "limites_cbpq": {
+    "vento_kt": {
+      "AI": 12,
+      "A": 12,
+      "B": 14,
+      "C": 18,
+      "D": 22
+    },
+    "rajada_kt": 18,
+    "abertura_ft": {
+      "AI": 5000,
+      "A": 4000,
+      "B": 3500,
+      "C": 2500,
+      "D": 2500
+    }
+  },
+  "vies_teto_aplicado_ft": 4585.117016622921,
+  "dias": [
+    {
+      "data": "2026-10-06",
+      "prob_niveis": [
+        0.49753940173889977,
+        0.0069092022696821825,
+        0.23397686097013928,
+        0.1369881274056181,
+        0.12458640761566069
+      ],
+      "nivel_mais_provavel": 0,
+      "nivel_mais_provavel_texto": "fechado",
+      "prob_por_categoria": {
+        "AI": 0.12458640761566069,
+        "A": 0.12458640761566069,
+        "B": 0.2615745350212788,
+        "C": 0.4955513959914181,
+        "D": 0.5024605982611002
+      },
+      "tempo": {
+        "vento_kt_med": 4.176199102940869,
+        "vento_kt_max": 4.835614055488574,
+        "rajada_kt_max": 14.53957086012468,
+        "frac_horas_camada_baixa": 1.0,
+        "chuva_mm_total": 10.8,
+        "prob_chuva_max": 96.05021211615168,
+        "nuvem_baixa_med": 48.0,
+        "temp_med": 21.41161562153693
+      },
+      "horas_consideradas": 10,
+      "dias_a_frente": 0,
+      "validado": true,
+      "confianca": "alta",
+      "horas": [
+        {
+          "hora": 7,
+          "operacao": false,
+          "prob_por_categoria": {
+            "AI": 0.07425064814325627,
+            "A": 0.07425064814325627,
+            "B": 0.1723947982200293,
+            "C": 0.39511746077657145,
+            "D": 0.39861181920425726
+          },
+          "nivel_mais_provavel": 0,
+          "vento_kt": 3.3685631753096565,
+          "rajada_kt": 6.9146044042862735,
+          "nuvem_baixa": 42.0,
+          "chuva_mm": 0.0,
+          "temp": 17.98610579331976,
+          "camada_baixa": true
+        },
+        {
+          "hora": 8,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.08018874726933972,
+            "A": 0.08018874726933972,
+            "B": 0.2560990870124041,
+            "C": 0.5932611298132213,
+            "D": 0.5985078405627458
+          },
+          "nivel_mais_provavel": 0,
+          "vento_kt": 3.7921580012443328,
+          "rajada_kt": 8.18455349923017,
+          "nuvem_baixa": 39.0,
+          "chuva_mm": 0.0,
+          "temp": 19.23513187656073,
+          "camada_baixa": true
+        },
+        {
+          "hora": 9,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.097480111887967,
+            "A": 0.097480111887967,
+            "B": 0.22521705318094865,
+            "C": 0.613556459500766,
+            "D": 0.6189826590438177
+          },
+          "nivel_mais_provavel": 2,
+          "vento_kt": 4.092701432211109,
+          "rajada_kt": 10.061877636538954,
+          "nuvem_baixa": 40.0,
+          "chuva_mm": 0.0,
+          "temp": 20.424555435503088,
+          "camada_baixa": true
+        },
+        {
+          "hora": 10,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.028132559947065674,
+            "A": 0.028132559947065674,
+            "B": 0.06417936419594536,
+            "C": 0.1556318421166871,
+            "D": 0.15700822633936318
+          },
+          "nivel_mais_provavel": 0,
+          "vento_kt": 4.004925588926426,
+          "rajada_kt": 10.860125122167759,
+          "nuvem_baixa": 48.0,
+          "chuva_mm": 0.3,
+          "temp": 21.202021877776485,
+          "camada_baixa": true
+        },
+        {
+          "hora": 11,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.2046578304449259,
+            "A": 0.2046578304449259,
+            "B": 0.42530093833994187,
+            "C": 0.6534211683937551,
+            "D": 0.6591999253287621
+          },
+          "nivel_mais_provavel": 0,
+          "vento_kt": 3.995846460738348,
+          "rajada_kt": 11.565848094537401,
+          "nuvem_baixa": 59.0,
+          "chuva_mm": 0.3,
+          "temp": 22.361574811148163,
+          "camada_baixa": true
+        },
+        {
+          "hora": 12,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.2107766831369662,
+            "A": 0.2107766831369662,
+            "B": 0.41558195876558923,
+            "C": 0.6265074976095292,
+            "D": 0.6320482341539922
+          },
+          "nivel_mais_provavel": 0,
+          "vento_kt": 4.581539371029202,
+          "rajada_kt": 12.390246578080042,
+          "nuvem_baixa": 65.0,
+          "chuva_mm": 0.3,
+          "temp": 23.03482609882343,
+          "camada_baixa": true
+        },
+        {
+          "hora": 13,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.24974286894670208,
+            "A": 0.24974286894670208,
+            "B": 0.5323494372448545,
+            "C": 0.6730778097383505,
+            "D": 0.6790304070048061
+          },
+          "nivel_mais_provavel": 0,
+          "vento_kt": 4.74037827629477,
+          "rajada_kt": 13.462166413429726,
+          "nuvem_baixa": 60.0,
+          "chuva_mm": 2.7,
+          "temp": 22.77373811865854,
+          "camada_baixa": true
+        },
+        {
+          "hora": 14,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.13985291933132904,
+            "A": 0.13985291933132904,
+            "B": 0.2688843389728742,
+            "C": 0.4218242518845942,
+            "D": 0.4255548010905902
+          },
+          "nivel_mais_provavel": 0,
+          "vento_kt": 4.835614055488574,
+          "rajada_kt": 14.53957086012468,
+          "nuvem_baixa": 49.0,
+          "chuva_mm": 2.7,
+          "temp": 22.166527531244125,
+          "camada_baixa": true
+        },
+        {
+          "hora": 15,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.06198547877796272,
+            "A": 0.06198547877796272,
+            "B": 0.11519527144145783,
+            "C": 0.40899547626460464,
+            "D": 0.4126125697399516
+          },
+          "nivel_mais_provavel": 0,
+          "vento_kt": 4.4953831815422225,
+          "rajada_kt": 14.019688019668186,
+          "nuvem_baixa": 41.0,
+          "chuva_mm": 2.7,
+          "temp": 21.572709497735094,
+          "camada_baixa": true
+        },
+        {
+          "hora": 16,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.09313774125265879,
+            "A": 0.09313774125265879,
+            "B": 0.16212667014949542,
+            "C": 0.42560877216942256,
+            "D": 0.4293727910943372
+          },
+          "nivel_mais_provavel": 0,
+          "vento_kt": 3.911254116978677,
+          "rajada_kt": 11.850547308369089,
+          "nuvem_baixa": 39.0,
+          "chuva_mm": 0.9,
+          "temp": 21.005226767730292,
+          "camada_baixa": true
+        },
+        {
+          "hora": 17,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.0799091351616897,
+            "A": 0.0799091351616897,
+            "B": 0.15081123090927664,
+            "C": 0.38362955242325036,
+            "D": 0.41228852825263673
+          },
+          "nivel_mais_provavel": 0,
+          "vento_kt": 3.3121905449550257,
+          "rajada_kt": 9.305935775583563,
+          "nuvem_baixa": 40.0,
+          "chuva_mm": 0.9,
+          "temp": 20.339844200189376,
+          "camada_baixa": true
+        },
+        {
+          "hora": 18,
+          "operacao": false,
+          "prob_por_categoria": {
+            "AI": 0.07488524527820255,
+            "A": 0.07488524527820255,
+            "B": 0.1586753540143913,
+            "C": 0.3562344394381525,
+            "D": 0.38169763782497235
+          },
+          "nivel_mais_provavel": 0,
+          "vento_kt": 2.742917670808683,
+          "rajada_kt": 7.303024808737527,
+          "nuvem_baixa": 42.0,
+          "chuva_mm": 0.9,
+          "temp": 19.69674219872021,
+          "camada_baixa": true
+        }
+      ]
+    },
+    {
+      "data": "2026-10-07",
+      "prob_niveis": [
+        0.4197426109147001,
+        0.012914153777494112,
+        0.26091735015950224,
+        0.1638718127394858,
+        0.14255407240881784
+      ],
+      "nivel_mais_provavel": 0,
+      "nivel_mais_provavel_texto": "fechado",
+      "prob_por_categoria": {
+        "AI": 0.14255407240881784,
+        "A": 0.14255407240881784,
+        "B": 0.30642588514830366,
+        "C": 0.5673432353078058,
+        "D": 0.5802573890853
+      },
+      "tempo": {
+        "vento_kt_med": 2.6981729202520706,
+        "vento_kt_max": 3.648260973890573,
+        "rajada_kt_max": 9.422464681882703,
+        "frac_horas_camada_baixa": 1.0,
+        "chuva_mm_total": 1.5,
+        "prob_chuva_max": 40.04566966723017,
+        "nuvem_baixa_med": 58.7,
+        "temp_med": 24.309610686212885
+      },
+      "horas_consideradas": 10,
+      "dias_a_frente": 1,
+      "validado": true,
+      "confianca": "alta",
+      "horas": [
+        {
+          "hora": 7,
+          "operacao": false,
+          "prob_por_categoria": {
+            "AI": 0.11573164632246348,
+            "A": 0.11573164632246348,
+            "B": 0.24298961439227484,
+            "C": 0.6102840153191472,
+            "D": 0.615681273866064
+          },
+          "nivel_mais_provavel": 0,
+          "vento_kt": 2.1036798041150617,
+          "rajada_kt": 4.2467306399969305,
+          "nuvem_baixa": 67.0,
+          "chuva_mm": 0.1,
+          "temp": 18.97972526774524,
+          "camada_baixa": true
+        },
+        {
+          "hora": 8,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.12962062931356202,
+            "A": 0.12962062931356202,
+            "B": 0.27533831550895005,
+            "C": 0.7110074181937234,
+            "D": 0.7172954591196526
+          },
+          "nivel_mais_provavel": 2,
+          "vento_kt": 2.1990288887757226,
+          "rajada_kt": 5.648458828899663,
+          "nuvem_baixa": 60.0,
+          "chuva_mm": 0.1,
+          "temp": 20.069630248839566,
+          "camada_baixa": true
+        },
+        {
+          "hora": 9,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.12451671820714448,
+            "A": 0.12451671820714448,
+            "B": 0.27237132570254646,
+            "C": 0.7198580873287942,
+            "D": 0.7262244022196908
+          },
+          "nivel_mais_provavel": 2,
+          "vento_kt": 2.477008499225911,
+          "rajada_kt": 6.862429519849176,
+          "nuvem_baixa": 57.0,
+          "chuva_mm": 0.1,
+          "temp": 21.22788515150977,
+          "camada_baixa": true
+        },
+        {
+          "hora": 10,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.09854099933695232,
+            "A": 0.09854099933695232,
+            "B": 0.22632817797206053,
+            "C": 0.5889616671690763,
+            "D": 0.5941703541281675
+          },
+          "nivel_mais_provavel": 0,
+          "vento_kt": 2.509855011805596,
+          "rajada_kt": 8.232205018741922,
+          "nuvem_baixa": 64.0,
+          "chuva_mm": 0.2,
+          "temp": 22.47077020536841,
+          "camada_baixa": true
+        },
+        {
+          "hora": 11,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.10342760461097493,
+            "A": 0.10342760461097493,
+            "B": 0.23539860818189934,
+            "C": 0.3610251464906454,
+            "D": 0.3642179977019449
+          },
+          "nivel_mais_provavel": 0,
+          "vento_kt": 2.387132831224708,
+          "rajada_kt": 8.827845352335935,
+          "nuvem_baixa": 75.0,
+          "chuva_mm": 0.2,
+          "temp": 23.900423309499185,
+          "camada_baixa": true
+        },
+        {
+          "hora": 12,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.11436259811010421,
+            "A": 0.11436259811010421,
+            "B": 0.27377456689669344,
+            "C": 0.35263800140325796,
+            "D": 0.3557566779854162
+          },
+          "nivel_mais_provavel": 0,
+          "vento_kt": 2.4079683501808726,
+          "rajada_kt": 9.390107852657595,
+          "nuvem_baixa": 79.0,
+          "chuva_mm": 0.2,
+          "temp": 25.28932908553078,
+          "camada_baixa": true
+        },
+        {
+          "hora": 13,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.04633538736263476,
+            "A": 0.04633538736263476,
+            "B": 0.11309163431525203,
+            "C": 0.1384569313757344,
+            "D": 0.13968142331307729
+          },
+          "nivel_mais_provavel": 0,
+          "vento_kt": 2.585276888321072,
+          "rajada_kt": 9.422464681882703,
+          "nuvem_baixa": 69.0,
+          "chuva_mm": 0.1,
+          "temp": 26.333449689288756,
+          "camada_baixa": true
+        },
+        {
+          "hora": 14,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.14428338225555037,
+            "A": 0.14428338225555037,
+            "B": 0.3147834837571345,
+            "C": 0.3872454629328113,
+            "D": 0.390670202614836
+          },
+          "nivel_mais_provavel": 0,
+          "vento_kt": 2.9831999032395617,
+          "rajada_kt": 9.3679656452155,
+          "nuvem_baixa": 52.0,
+          "chuva_mm": 0.1,
+          "temp": 26.655135349027386,
+          "camada_baixa": true
+        },
+        {
+          "hora": 15,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.17220568164559855,
+            "A": 0.17220568164559855,
+            "B": 0.3973547315698932,
+            "C": 0.6458560552202472,
+            "D": 0.6818899353712111
+          },
+          "nivel_mais_provavel": 0,
+          "vento_kt": 3.1293486567378648,
+          "rajada_kt": 9.178951230093015,
+          "nuvem_baixa": 41.0,
+          "chuva_mm": 0.1,
+          "temp": 26.523954145423176,
+          "camada_baixa": true
+        },
+        {
+          "hora": 16,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.20560062064042384,
+            "A": 0.20560062064042384,
+            "B": 0.415806773146633,
+            "C": 0.9527112553326548,
+            "D": 0.9611368880487582
+          },
+          "nivel_mais_provavel": 2,
+          "vento_kt": 2.6546491991188246,
+          "rajada_kt": 8.252403359793403,
+          "nuvem_baixa": 42.0,
+          "chuva_mm": 0.2,
+          "temp": 25.854438560489903,
+          "camada_baixa": true
+        },
+        {
+          "hora": 17,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.2866471026052331,
+            "A": 0.2866471026052331,
+            "B": 0.5400112344319741,
+            "C": 0.8156723276311142,
+            "D": 0.8715305503502457
+          },
+          "nivel_mais_provavel": 4,
+          "vento_kt": 3.648260973890573,
+          "rajada_kt": 7.330028966592091,
+          "nuvem_baixa": 48.0,
+          "chuva_mm": 0.2,
+          "temp": 24.77109111715191,
+          "camada_baixa": true
+        },
+        {
+          "hora": 18,
+          "operacao": false,
+          "prob_por_categoria": {
+            "AI": 0.24666901594161758,
+            "A": 0.24666901594161758,
+            "B": 0.4571431629211369,
+            "C": 0.7132318580232896,
+            "D": 0.7627636782001064
+          },
+          "nivel_mais_provavel": 2,
+          "vento_kt": 4.812373618639039,
+          "rajada_kt": 7.592757840789588,
+          "nuvem_baixa": 51.0,
+          "chuva_mm": 0.2,
+          "temp": 23.23173882626987,
+          "camada_baixa": true
+        }
+      ]
+    },
+    {
+      "data": "2026-10-08",
+      "prob_niveis": [
+        0.04290026170584717,
+        0.013731560775246565,
+        0.10029045991705177,
+        0.10479527966162297,
+        0.7382824379402315
+      ],
+      "nivel_mais_provavel": 4,
+      "nivel_mais_provavel_texto": "todas (incl. A/AI)",
+      "prob_por_categoria": {
+        "AI": 0.7382824379402315,
+        "A": 0.7382824379402315,
+        "B": 0.8430777176018545,
+        "C": 0.9433681775189062,
+        "D": 0.9570997382941528
+      },
+      "tempo": {
+        "vento_kt_med": 2.8087034343267705,
+        "vento_kt_max": 3.4061197965492167,
+        "rajada_kt_max": 9.28703790329428,
+        "frac_horas_camada_baixa": 0.2,
+        "chuva_mm_total": 0.0,
+        "prob_chuva_max": 10.429258698463896,
+        "nuvem_baixa_med": 6.2389403256860865,
+        "temp_med": 27.239747812522193
+      },
+      "horas_consideradas": 10,
+      "dias_a_frente": 2,
+      "validado": true,
+      "confianca": "alta",
+      "horas": [
+        {
+          "hora": 7,
+          "operacao": false,
+          "prob_por_categoria": {
+            "AI": 0.5130556360531644,
+            "A": 0.5130556360531644,
+            "B": 0.5623056055222628,
+            "C": 0.6400367509181499,
+            "D": 0.6472618333877485
+          },
+          "nivel_mais_provavel": 4,
+          "vento_kt": 2.814885659669665,
+          "rajada_kt": 5.507393161004381,
+          "nuvem_baixa": 26.690699856025923,
+          "chuva_mm": 0.0,
+          "temp": 18.284670130033806,
+          "camada_baixa": true
+        },
+        {
+          "hora": 8,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.6879252253344306,
+            "A": 0.6879252253344306,
+            "B": 0.8235827151669879,
+            "C": 0.9276674487909764,
+            "D": 0.9386975689583505
+          },
+          "nivel_mais_provavel": 4,
+          "vento_kt": 2.632387081780368,
+          "rajada_kt": 6.963925797166422,
+          "nuvem_baixa": 19.682647691647873,
+          "chuva_mm": 0.0,
+          "temp": 20.63151830482185,
+          "camada_baixa": true
+        },
+        {
+          "hora": 9,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.6326541213152266,
+            "A": 0.6326541213152266,
+            "B": 0.7499379831616146,
+            "C": 0.844243212834052,
+            "D": 0.85413670133018
+          },
+          "nivel_mais_provavel": 4,
+          "vento_kt": 2.687251725875325,
+          "rajada_kt": 8.189129958147781,
+          "nuvem_baixa": 13.414991752741855,
+          "chuva_mm": 0.0,
+          "temp": 22.96294505364764,
+          "camada_baixa": true
+        },
+        {
+          "hora": 10,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.7644553644074439,
+            "A": 0.7644553644074439,
+            "B": 0.8523928386008145,
+            "C": 0.9608139215951936,
+            "D": 0.9717664386950555
+          },
+          "nivel_mais_provavel": 4,
+          "vento_kt": 2.4403822299980864,
+          "rajada_kt": 8.505244805481821,
+          "nuvem_baixa": 8.269133601249592,
+          "chuva_mm": 0.0,
+          "temp": 24.983946857889084,
+          "camada_baixa": false
+        },
+        {
+          "hora": 11,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.8069199875204758,
+            "A": 0.8069199875204758,
+            "B": 0.9085211408506078,
+            "C": 0.9740487168136263,
+            "D": 0.9842313604741301
+          },
+          "nivel_mais_provavel": 4,
+          "vento_kt": 2.455616270392873,
+          "rajada_kt": 8.563399050569497,
+          "nuvem_baixa": 5.194228475163118,
+          "chuva_mm": 0.0,
+          "temp": 26.95632513852816,
+          "camada_baixa": false
+        },
+        {
+          "hora": 12,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.8141427938251802,
+            "A": 0.8141427938251802,
+            "B": 0.9163300174867122,
+            "C": 0.9787734597661245,
+            "D": 0.9885165586662583
+          },
+          "nivel_mais_provavel": 4,
+          "vento_kt": 2.9702363155959137,
+          "rajada_kt": 8.753336711773516,
+          "nuvem_baixa": 2.928217480521466,
+          "chuva_mm": 0.0,
+          "temp": 28.531486924213095,
+          "camada_baixa": false
+        },
+        {
+          "hora": 13,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.8347003641139579,
+            "A": 0.8347003641139579,
+            "B": 0.9220197839251415,
+            "C": 0.975378559121384,
+            "D": 0.9861170671718612
+          },
+          "nivel_mais_provavel": 4,
+          "vento_kt": 3.3207910032333126,
+          "rajada_kt": 8.912204948020083,
+          "nuvem_baixa": 2.6876227271822186,
+          "chuva_mm": 0.0,
+          "temp": 29.746114701906546,
+          "camada_baixa": false
+        },
+        {
+          "hora": 14,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.8134634024561421,
+            "A": 0.8134634024561421,
+            "B": 0.8978750883584159,
+            "C": 0.9473682548901897,
+            "D": 0.9568132735728654
+          },
+          "nivel_mais_provavel": 4,
+          "vento_kt": 3.3927099915875454,
+          "rajada_kt": 9.28703790329428,
+          "nuvem_baixa": 2.5786889369709933,
+          "chuva_mm": 0.0,
+          "temp": 30.423229259337504,
+          "camada_baixa": false
+        },
+        {
+          "hora": 15,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.7509744892720083,
+            "A": 0.7509744892720083,
+            "B": 0.8611829695978757,
+            "C": 0.9601447930441624,
+            "D": 0.9713989831506067
+          },
+          "nivel_mais_provavel": 4,
+          "vento_kt": 3.4061197965492167,
+          "rajada_kt": 9.091528456534189,
+          "nuvem_baixa": 2.578702080940924,
+          "chuva_mm": 0.0,
+          "temp": 30.355997143259454,
+          "camada_baixa": false
+        },
+        {
+          "hora": 16,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.7133032593058146,
+            "A": 0.7133032593058146,
+            "B": 0.8114895577678596,
+            "C": 0.9481363267166605,
+            "D": 0.9587353495295441
+          },
+          "nivel_mais_provavel": 4,
+          "vento_kt": 2.6960011378577837,
+          "rajada_kt": 8.064204731034451,
+          "nuvem_baixa": 2.5638206996403703,
+          "chuva_mm": 0.0,
+          "temp": 29.531113086507844,
+          "camada_baixa": false
+        },
+        {
+          "hora": 17,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.5642853718516353,
+            "A": 0.5642853718516353,
+            "B": 0.6874450811025153,
+            "C": 0.9171070816166933,
+            "D": 0.9605840813926765
+          },
+          "nivel_mais_provavel": 4,
+          "vento_kt": 2.0855387903972846,
+          "rajada_kt": 6.288233049830233,
+          "nuvem_baixa": 2.491349810802453,
+          "chuva_mm": 0.0,
+          "temp": 28.27480165511076,
+          "camada_baixa": false
+        },
+        {
+          "hora": 18,
+          "operacao": false,
+          "prob_por_categoria": {
+            "AI": 0.5026465682323886,
+            "A": 0.5026465682323886,
+            "B": 0.6323494261431464,
+            "C": 0.9134272194210097,
+            "D": 0.9496112287732559
+          },
+          "nivel_mais_provavel": 4,
+          "vento_kt": 2.2016902606800013,
+          "rajada_kt": 4.885538272232666,
+          "nuvem_baixa": 2.491279478357297,
+          "chuva_mm": 0.0,
+          "temp": 26.678885499403258,
+          "camada_baixa": false
+        }
+      ]
+    },
+    {
+      "data": "2026-10-09",
+      "prob_niveis": [
+        0.08725053076286601,
+        0.018738848541063217,
+        0.1161675131902004,
+        0.16457586483141778,
+        0.6132672426744525
+      ],
+      "nivel_mais_provavel": 4,
+      "nivel_mais_provavel_texto": "todas (incl. A/AI)",
+      "prob_por_categoria": {
+        "AI": 0.6132672426744525,
+        "A": 0.6132672426744525,
+        "B": 0.7778431075058703,
+        "C": 0.8940106206960707,
+        "D": 0.912749469237134
+      },
+      "tempo": {
+        "vento_kt_med": 3.7977596332950405,
+        "vento_kt_max": 4.16765898012366,
+        "rajada_kt_max": 10.936068288162932,
+        "frac_horas_camada_baixa": 0.0,
+        "chuva_mm_total": 0.0,
+        "prob_chuva_max": 37.157879622206835,
+        "nuvem_baixa_med": 3.780143661644535,
+        "temp_med": 27.66239100098391
+      },
+      "horas_consideradas": 10,
+      "dias_a_frente": 3,
+      "validado": true,
+      "confianca": "alta",
+      "horas": [
+        {
+          "hora": 7,
+          "operacao": false,
+          "prob_por_categoria": {
+            "AI": 0.3686636182753108,
+            "A": 0.3686636182753108,
+            "B": 0.5053853604733957,
+            "C": 0.641009545182994,
+            "D": 0.6621197051973037
+          },
+          "nivel_mais_provavel": 4,
+          "vento_kt": 3.1618579678995014,
+          "rajada_kt": 6.77252384953451,
+          "nuvem_baixa": 18.837007802247143,
+          "chuva_mm": 0.0,
+          "temp": 20.446286291630184,
+          "camada_baixa": false
+        },
+        {
+          "hora": 8,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.49140930440541564,
+            "A": 0.49140930440541564,
+            "B": 0.686891649890953,
+            "C": 0.8978125482868718,
+            "D": 0.9213126589159729
+          },
+          "nivel_mais_provavel": 4,
+          "vento_kt": 3.4095078397276266,
+          "rajada_kt": 8.558981330116465,
+          "nuvem_baixa": 10.688878677149741,
+          "chuva_mm": 0.0,
+          "temp": 22.494724727489032,
+          "camada_baixa": false
+        },
+        {
+          "hora": 9,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.6554605274682876,
+            "A": 0.6554605274682876,
+            "B": 0.8192445644281554,
+            "C": 0.9550898784543808,
+            "D": 0.9806858854246658
+          },
+          "nivel_mais_provavel": 4,
+          "vento_kt": 3.618865368192119,
+          "rajada_kt": 9.890370290581128,
+          "nuvem_baixa": 3.4462823822711752,
+          "chuva_mm": 0.0,
+          "temp": 24.581344857774145,
+          "camada_baixa": false
+        },
+        {
+          "hora": 10,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.643020003885245,
+            "A": 0.643020003885245,
+            "B": 0.8038993663145617,
+            "C": 0.9652357399241012,
+            "D": 0.9825983372430658
+          },
+          "nivel_mais_provavel": 4,
+          "vento_kt": 3.9505982417933896,
+          "rajada_kt": 10.418532190279114,
+          "nuvem_baixa": 3.5753762905993485,
+          "chuva_mm": 0.0,
+          "temp": 26.407014647275506,
+          "camada_baixa": false
+        },
+        {
+          "hora": 11,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.742733420881459,
+            "A": 0.742733420881459,
+            "B": 0.8803102849644486,
+            "C": 0.9484263244311616,
+            "D": 0.958577523411424
+          },
+          "nivel_mais_provavel": 4,
+          "vento_kt": 4.16765898012366,
+          "rajada_kt": 10.905068593144366,
+          "nuvem_baixa": 3.4395363831097368,
+          "chuva_mm": 0.0,
+          "temp": 27.828791014422627,
+          "camada_baixa": false
+        },
+        {
+          "hora": 12,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.65090193973808,
+            "A": 0.65090193973808,
+            "B": 0.8606040569706377,
+            "C": 0.9220956216643197,
+            "D": 0.9321801313095622
+          },
+          "nivel_mais_provavel": 4,
+          "vento_kt": 4.164587312687088,
+          "rajada_kt": 10.936068288162932,
+          "nuvem_baixa": 3.2991695401574344,
+          "chuva_mm": 0.0,
+          "temp": 29.084054546411085,
+          "camada_baixa": false
+        },
+        {
+          "hora": 13,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.7277467211473336,
+            "A": 0.7277467211473336,
+            "B": 0.8876171170836721,
+            "C": 0.9200727896200942,
+            "D": 0.9302428797933728
+          },
+          "nivel_mais_provavel": 4,
+          "vento_kt": 4.16370851525969,
+          "rajada_kt": 10.647285752411625,
+          "nuvem_baixa": 2.614606525670183,
+          "chuva_mm": 0.0,
+          "temp": 29.854218877011448,
+          "camada_baixa": false
+        },
+        {
+          "hora": 14,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.7124295663584179,
+            "A": 0.7124295663584179,
+            "B": 0.8621414619336882,
+            "C": 0.8939920232360298,
+            "D": 0.90393840391063
+          },
+          "nivel_mais_provavel": 4,
+          "vento_kt": 4.048784341437254,
+          "rajada_kt": 10.087343609398799,
+          "nuvem_baixa": 2.5807654492273286,
+          "chuva_mm": 0.0,
+          "temp": 30.200813364754037,
+          "camada_baixa": false
+        },
+        {
+          "hora": 15,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.6278927529141971,
+            "A": 0.6278927529141971,
+            "B": 0.7787062956731496,
+            "C": 0.9117696648533167,
+            "D": 0.9278908536183614
+          },
+          "nivel_mais_provavel": 4,
+          "vento_kt": 3.475004569787591,
+          "rajada_kt": 9.60264314533985,
+          "nuvem_baixa": 2.6082688875695546,
+          "chuva_mm": 0.0,
+          "temp": 29.941882191369288,
+          "camada_baixa": false
+        },
+        {
+          "hora": 16,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.48595316498164987,
+            "A": 0.48595316498164987,
+            "B": 0.6321911933421045,
+            "C": 0.8063327049985002,
+            "D": 0.8295210667440139
+          },
+          "nivel_mais_provavel": 4,
+          "vento_kt": 3.1988080959044503,
+          "rajada_kt": 8.726047857657274,
+          "nuvem_baixa": 2.6996334066525547,
+          "chuva_mm": 0.0,
+          "temp": 28.86890225311691,
+          "camada_baixa": false
+        },
+        {
+          "hora": 17,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.3951250249644397,
+            "A": 0.3951250249644397,
+            "B": 0.5668250844573328,
+            "C": 0.7192789114919317,
+            "D": 0.760546952000271
+          },
+          "nivel_mais_provavel": 4,
+          "vento_kt": 3.7800730680375305,
+          "rajada_kt": 7.158879123891781,
+          "nuvem_baixa": 2.8489190740383026,
+          "chuva_mm": 0.0,
+          "temp": 27.36216353021499,
+          "camada_baixa": false
+        },
+        {
+          "hora": 18,
+          "operacao": false,
+          "prob_por_categoria": {
+            "AI": 0.2600882446971104,
+            "A": 0.2600882446971104,
+            "B": 0.4467270683313711,
+            "C": 0.7504176860195493,
+            "D": 0.7947929255228219
+          },
+          "nivel_mais_provavel": 2,
+          "vento_kt": 4.579125725749285,
+          "rajada_kt": 7.098209681781253,
+          "nuvem_baixa": 3.344824207655735,
+          "chuva_mm": 0.0,
+          "temp": 25.44259093854871,
+          "camada_baixa": false
+        }
+      ]
+    },
+    {
+      "data": "2026-10-10",
+      "prob_niveis": [
+        0.26747942787556483,
+        0.01634799025465637,
+        0.12063591309539598,
+        0.15184691161679048,
+        0.44368975715759235
+      ],
+      "nivel_mais_provavel": 4,
+      "nivel_mais_provavel_texto": "todas (incl. A/AI)",
+      "prob_por_categoria": {
+        "AI": 0.44368975715759235,
+        "A": 0.44368975715759235,
+        "B": 0.5955366687743828,
+        "C": 0.7161725818697788,
+        "D": 0.7325205721244352
+      },
+      "tempo": {
+        "vento_kt_med": 4.197431343019886,
+        "vento_kt_max": 5.113007219093408,
+        "rajada_kt_max": 15.598474278375503,
+        "frac_horas_camada_baixa": 0.0,
+        "chuva_mm_total": 6.8999999999999995,
+        "prob_chuva_max": 56.102344023395176,
+        "nuvem_baixa_med": 8.099743932589943,
+        "temp_med": 25.88550096356139
+      },
+      "horas_consideradas": 10,
+      "dias_a_frente": 4,
+      "validado": true,
+      "confianca": "alta",
+      "horas": [
+        {
+          "hora": 7,
+          "operacao": false,
+          "prob_por_categoria": {
+            "AI": 0.28164236290837064,
+            "A": 0.28164236290837064,
+            "B": 0.4561209975809992,
+            "C": 0.5626161065275485,
+            "D": 0.5690324967556322
+          },
+          "nivel_mais_provavel": 0,
+          "vento_kt": 3.913565585431907,
+          "rajada_kt": 7.9192941746462076,
+          "nuvem_baixa": 28.253369412079344,
+          "chuva_mm": 0.0,
+          "temp": 20.325509927246813,
+          "camada_baixa": false
+        },
+        {
+          "hora": 8,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.4494674113684728,
+            "A": 0.4494674113684728,
+            "B": 0.6217131091698576,
+            "C": 0.7674913622733038,
+            "D": 0.7765368119408621
+          },
+          "nivel_mais_provavel": 4,
+          "vento_kt": 3.6938670164005782,
+          "rajada_kt": 9.789417336894205,
+          "nuvem_baixa": 14.997332179148923,
+          "chuva_mm": 0.0,
+          "temp": 21.76423818520183,
+          "camada_baixa": false
+        },
+        {
+          "hora": 9,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.46099175799361025,
+            "A": 0.46099175799361025,
+            "B": 0.6025961586537174,
+            "C": 0.7609713079584164,
+            "D": 0.7696697675156725
+          },
+          "nivel_mais_provavel": 4,
+          "vento_kt": 3.466092367399754,
+          "rajada_kt": 11.57767381224495,
+          "nuvem_baixa": 7.635360349846064,
+          "chuva_mm": 0.0,
+          "temp": 23.681721656310287,
+          "camada_baixa": false
+        },
+        {
+          "hora": 10,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.42053573237358244,
+            "A": 0.42053573237358244,
+            "B": 0.487372365749616,
+            "C": 0.55449933785566,
+            "D": 0.5621429913306758
+          },
+          "nivel_mais_provavel": 0,
+          "vento_kt": 3.1963815146477756,
+          "rajada_kt": 12.69676244011462,
+          "nuvem_baixa": 7.084441427548979,
+          "chuva_mm": 0.0,
+          "temp": 25.251341720559918,
+          "camada_baixa": false
+        },
+        {
+          "hora": 11,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.5014993091032041,
+            "A": 0.5014993091032041,
+            "B": 0.5991199575265567,
+            "C": 0.6781082411315237,
+            "D": 0.686652549721653
+          },
+          "nivel_mais_provavel": 4,
+          "vento_kt": 3.72580445377259,
+          "rajada_kt": 13.561350357232415,
+          "nuvem_baixa": 9.744925380768493,
+          "chuva_mm": 0.0,
+          "temp": 26.92708618873464,
+          "camada_baixa": false
+        },
+        {
+          "hora": 12,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.42072962096464045,
+            "A": 0.42072962096464045,
+            "B": 0.5832007643712693,
+            "C": 0.6417814929666978,
+            "D": 0.6546362241673873
+          },
+          "nivel_mais_provavel": 4,
+          "vento_kt": 3.910035964697284,
+          "rajada_kt": 14.121245490117955,
+          "nuvem_baixa": 8.720491539119445,
+          "chuva_mm": 0.0,
+          "temp": 28.08072199741677,
+          "camada_baixa": false
+        },
+        {
+          "hora": 13,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.4079860028639248,
+            "A": 0.4079860028639248,
+            "B": 0.540445810319404,
+            "C": 0.6167834631493494,
+            "D": 0.6375152713702615
+          },
+          "nivel_mais_provavel": 4,
+          "vento_kt": 4.948150523153781,
+          "rajada_kt": 15.598474278375503,
+          "nuvem_baixa": 5.260775618946921,
+          "chuva_mm": 0.1,
+          "temp": 28.181061149143034,
+          "camada_baixa": false
+        },
+        {
+          "hora": 14,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.4976991413942301,
+            "A": 0.4976991413942301,
+            "B": 0.6596805656877774,
+            "C": 0.7266841728286435,
+            "D": 0.7466919299521391
+          },
+          "nivel_mais_provavel": 4,
+          "vento_kt": 5.113007219093408,
+          "rajada_kt": 15.569706525492114,
+          "nuvem_baixa": 3.9572207720765262,
+          "chuva_mm": 0.1,
+          "temp": 27.97775554959426,
+          "camada_baixa": false
+        },
+        {
+          "hora": 15,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.4378215167057058,
+            "A": 0.4378215167057058,
+            "B": 0.6302006686333912,
+            "C": 0.7608695242693883,
+            "D": 0.7738736052713896
+          },
+          "nivel_mais_provavel": 4,
+          "vento_kt": 5.006640112448879,
+          "rajada_kt": 15.05719090177971,
+          "nuvem_baixa": 4.470074930945189,
+          "chuva_mm": 0.1,
+          "temp": 27.12425290276876,
+          "camada_baixa": false
+        },
+        {
+          "hora": 16,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.4716406603883594,
+            "A": 0.4716406603883594,
+            "B": 0.6303742486898789,
+            "C": 0.8477319379100956,
+            "D": 0.8688399432407506
+          },
+          "nivel_mais_provavel": 4,
+          "vento_kt": 4.593079335896784,
+          "rajada_kt": 14.391560094958727,
+          "nuvem_baixa": 8.464794157594682,
+          "chuva_mm": 3.3,
+          "temp": 25.585839505132125,
+          "camada_baixa": false
+        },
+        {
+          "hora": 17,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.36852641842019357,
+            "A": 0.36852641842019357,
+            "B": 0.60066303894236,
+            "C": 0.80680497835471,
+            "D": 0.8486466267335604
+          },
+          "nivel_mais_provavel": 4,
+          "vento_kt": 4.321254922688032,
+          "rajada_kt": 13.070348529781878,
+          "nuvem_baixa": 10.66202296990421,
+          "chuva_mm": 3.3,
+          "temp": 24.280990780752283,
+          "camada_baixa": false
+        },
+        {
+          "hora": 18,
+          "operacao": false,
+          "prob_por_categoria": {
+            "AI": 0.31609832390576503,
+            "A": 0.31609832390576503,
+            "B": 0.5722071088375705,
+            "C": 0.7698908191107479,
+            "D": 0.8116993582820347
+          },
+          "nivel_mais_provavel": 4,
+          "vento_kt": 4.419433307081674,
+          "rajada_kt": 11.303417037339713,
+          "nuvem_baixa": 13.532071289388083,
+          "chuva_mm": 3.3,
+          "temp": 22.787235362408214,
+          "camada_baixa": false
+        }
+      ]
+    },
+    {
+      "data": "2026-10-11",
+      "prob_niveis": [
+        0.3086835939866736,
+        0.02365731129632851,
+        0.24648530552059406,
+        0.21171630393607307,
+        0.20945748526033073
+      ],
+      "nivel_mais_provavel": 0,
+      "nivel_mais_provavel_texto": "fechado",
+      "prob_por_categoria": {
+        "AI": 0.20945748526033073,
+        "A": 0.20945748526033073,
+        "B": 0.4211737891964038,
+        "C": 0.6676590947169978,
+        "D": 0.6913164060133263
+      },
+      "tempo": {
+        "vento_kt_med": 4.2353626311072095,
+        "vento_kt_max": 5.370953792644597,
+        "rajada_kt_max": 14.955147996838644,
+        "frac_horas_camada_baixa": 0.7,
+        "chuva_mm_total": 3.5,
+        "prob_chuva_max": 53.01105640100326,
+        "nuvem_baixa_med": 17.567609926684916,
+        "temp_med": 23.48738391954734
+      },
+      "horas_consideradas": 10,
+      "dias_a_frente": 5,
+      "validado": true,
+      "confianca": "media",
+      "horas": [
+        {
+          "hora": 7,
+          "operacao": false,
+          "prob_por_categoria": {
+            "AI": 0.14575514236942946,
+            "A": 0.14575514236942946,
+            "B": 0.29476189408865,
+            "C": 0.41060033248808225,
+            "D": 0.4200128572040107
+          },
+          "nivel_mais_provavel": 0,
+          "vento_kt": 3.2392982270445487,
+          "rajada_kt": 7.711812958030166,
+          "nuvem_baixa": 40.77249955876092,
+          "chuva_mm": 0.0,
+          "temp": 19.63767503950753,
+          "camada_baixa": true
+        },
+        {
+          "hora": 8,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.18492085470736552,
+            "A": 0.18492085470736552,
+            "B": 0.4028307255198874,
+            "C": 0.6864949682734107,
+            "D": 0.699516721346289
+          },
+          "nivel_mais_provavel": 0,
+          "vento_kt": 3.232381023925443,
+          "rajada_kt": 9.633612863484023,
+          "nuvem_baixa": 34.35799260118884,
+          "chuva_mm": 0.0,
+          "temp": 20.403869847116034,
+          "camada_baixa": true
+        },
+        {
+          "hora": 9,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.20198404806192918,
+            "A": 0.20198404806192918,
+            "B": 0.4086427398222616,
+            "C": 0.7044727066841218,
+            "D": 0.7188226984372111
+          },
+          "nivel_mais_provavel": 2,
+          "vento_kt": 3.3330046250903584,
+          "rajada_kt": 11.469035635384621,
+          "nuvem_baixa": 25.217861079832577,
+          "chuva_mm": 0.0,
+          "temp": 21.201314975089062,
+          "camada_baixa": true
+        },
+        {
+          "hora": 10,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.1937974517806475,
+            "A": 0.1937974517806475,
+            "B": 0.31113284195971896,
+            "C": 0.39940597629487,
+            "D": 0.41177663323621355
+          },
+          "nivel_mais_provavel": 0,
+          "vento_kt": 3.4201917291395203,
+          "rajada_kt": 12.822895445012744,
+          "nuvem_baixa": 19.034370299410302,
+          "chuva_mm": 0.0,
+          "temp": 22.36773805530931,
+          "camada_baixa": true
+        },
+        {
+          "hora": 11,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.4201165588180954,
+            "A": 0.4201165588180954,
+            "B": 0.5570651942852269,
+            "C": 0.7548690975485449,
+            "D": 0.7728901249571036
+          },
+          "nivel_mais_provavel": 4,
+          "vento_kt": 3.5518839736448835,
+          "rajada_kt": 13.730979212623868,
+          "nuvem_baixa": 11.571159358478118,
+          "chuva_mm": 0.0,
+          "temp": 23.833535276845055,
+          "camada_baixa": false
+        },
+        {
+          "hora": 12,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.2947816303089399,
+            "A": 0.2947816303089399,
+            "B": 0.4782993960496875,
+            "C": 0.654371956044836,
+            "D": 0.6723894442286975
+          },
+          "nivel_mais_provavel": 0,
+          "vento_kt": 4.001969592956566,
+          "rajada_kt": 14.65582696825628,
+          "nuvem_baixa": 7.638608879947787,
+          "chuva_mm": 0.0,
+          "temp": 24.824742514003404,
+          "camada_baixa": false
+        },
+        {
+          "hora": 13,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.22327801699241437,
+            "A": 0.22327801699241437,
+            "B": 0.48348799434105183,
+            "C": 0.6495911222087007,
+            "D": 0.6768525738991017
+          },
+          "nivel_mais_provavel": 0,
+          "vento_kt": 4.8387806504279105,
+          "rajada_kt": 14.831383908093182,
+          "nuvem_baixa": 9.434058418698989,
+          "chuva_mm": 0.1,
+          "temp": 25.402454072510793,
+          "camada_baixa": false
+        },
+        {
+          "hora": 14,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.18952955138874833,
+            "A": 0.18952955138874833,
+            "B": 0.48135546838497206,
+            "C": 0.6634717779263004,
+            "D": 0.697677485136261
+          },
+          "nivel_mais_provavel": 0,
+          "vento_kt": 4.950440380109891,
+          "rajada_kt": 14.955147996838644,
+          "nuvem_baixa": 11.265776745800652,
+          "chuva_mm": 0.1,
+          "temp": 25.350775654018857,
+          "camada_baixa": true
+        },
+        {
+          "hora": 15,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.16867989474736378,
+            "A": 0.16867989474736378,
+            "B": 0.5176721290491977,
+            "C": 0.745740656738433,
+            "D": 0.775989309520973
+          },
+          "nivel_mais_provavel": 3,
+          "vento_kt": 5.370953792644597,
+          "rajada_kt": 14.659906029935327,
+          "nuvem_baixa": 12.860019617175434,
+          "chuva_mm": 0.1,
+          "temp": 25.061904030787893,
+          "camada_baixa": true
+        },
+        {
+          "hora": 16,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.11643439479667575,
+            "A": 0.11643439479667575,
+            "B": 0.31070014221624476,
+            "C": 0.7387007375784022,
+            "D": 0.7654951350751859
+          },
+          "nivel_mais_provavel": 2,
+          "vento_kt": 5.097995045492854,
+          "rajada_kt": 13.945134978706578,
+          "nuvem_baixa": 18.9953095935913,
+          "chuva_mm": 1.6,
+          "temp": 23.936190158110836,
+          "camada_baixa": true
+        },
+        {
+          "hora": 17,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.10105245100112759,
+            "A": 0.10105245100112759,
+            "B": 0.2605512603357892,
+            "C": 0.6794719478723591,
+            "D": 0.7217539342962275
+          },
+          "nivel_mais_provavel": 2,
+          "vento_kt": 4.556025497640071,
+          "rajada_kt": 12.417492303765975,
+          "nuvem_baixa": 25.300942672725185,
+          "chuva_mm": 1.6,
+          "temp": 22.49131461168219,
+          "camada_baixa": true
+        },
+        {
+          "hora": 18,
+          "operacao": false,
+          "prob_por_categoria": {
+            "AI": 0.19437914359233568,
+            "A": 0.19437914359233568,
+            "B": 0.32337487598878323,
+            "C": 0.5737247331176492,
+            "D": 0.598902076310915
+          },
+          "nivel_mais_provavel": 0,
+          "vento_kt": 4.545249690175919,
+          "rajada_kt": 11.761229686365414,
+          "nuvem_baixa": 30.71623918166977,
+          "chuva_mm": 1.6,
+          "temp": 21.5940800685574,
+          "camada_baixa": true
+        }
+      ]
+    },
+    {
+      "data": "2026-10-12",
+      "prob_niveis": [
+        0.24044592181059316,
+        0.02108983405109129,
+        0.15353395053451138,
+        0.1886380954713332,
+        0.396292198132471
+      ],
+      "nivel_mais_provavel": 4,
+      "nivel_mais_provavel_texto": "todas (incl. A/AI)",
+      "prob_por_categoria": {
+        "AI": 0.396292198132471,
+        "A": 0.396292198132471,
+        "B": 0.5849302936038042,
+        "C": 0.7384642441383156,
+        "D": 0.7595540781894069
+      },
+      "tempo": {
+        "vento_kt_med": 4.911863381953754,
+        "vento_kt_max": 5.669098482954104,
+        "rajada_kt_max": 14.007761352232347,
+        "frac_horas_camada_baixa": 0.2,
+        "chuva_mm_total": 5.2,
+        "prob_chuva_max": 57.42502693294003,
+        "nuvem_baixa_med": 8.985911161087495,
+        "temp_med": 24.97339438166521
+      },
+      "horas_consideradas": 10,
+      "dias_a_frente": 6,
+      "validado": true,
+      "confianca": "media",
+      "horas": [
+        {
+          "hora": 7,
+          "operacao": false,
+          "prob_por_categoria": {
+            "AI": 0.285389190135127,
+            "A": 0.285389190135127,
+            "B": 0.4020750100773973,
+            "C": 0.6761886911160652,
+            "D": 0.6868585633766584
+          },
+          "nivel_mais_provavel": 0,
+          "vento_kt": 4.163152002777566,
+          "rajada_kt": 7.40469767169205,
+          "nuvem_baixa": 20.299657799095897,
+          "chuva_mm": 0.1,
+          "temp": 20.05671681805283,
+          "camada_baixa": true
+        },
+        {
+          "hora": 8,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.4832025292930442,
+            "A": 0.4832025292930442,
+            "B": 0.7141802806859805,
+            "C": 0.8441782536080596,
+            "D": 0.856679167738768
+          },
+          "nivel_mais_provavel": 4,
+          "vento_kt": 4.368175899247794,
+          "rajada_kt": 9.563638147026216,
+          "nuvem_baixa": 17.39187104424011,
+          "chuva_mm": 0.1,
+          "temp": 21.53320281760281,
+          "camada_baixa": true
+        },
+        {
+          "hora": 9,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.49885265975491205,
+            "A": 0.49885265975491205,
+            "B": 0.7347858382397092,
+            "C": 0.9057568817950026,
+            "D": 0.9192263033314818
+          },
+          "nivel_mais_provavel": 4,
+          "vento_kt": 4.582624680358381,
+          "rajada_kt": 11.574661577131705,
+          "nuvem_baixa": 13.511959794073638,
+          "chuva_mm": 0.1,
+          "temp": 23.04882018442756,
+          "camada_baixa": true
+        },
+        {
+          "hora": 10,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.4360104092569102,
+            "A": 0.4360104092569102,
+            "B": 0.5927400338714202,
+            "C": 0.6586668834503345,
+            "D": 0.6704451509169869
+          },
+          "nivel_mais_provavel": 4,
+          "vento_kt": 4.141967331964567,
+          "rajada_kt": 12.35705376676656,
+          "nuvem_baixa": 11.437973130750738,
+          "chuva_mm": 0.7,
+          "temp": 24.296946978040218,
+          "camada_baixa": false
+        },
+        {
+          "hora": 11,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.5156902140397689,
+            "A": 0.5156902140397689,
+            "B": 0.6918881062987496,
+            "C": 0.7591974088988136,
+            "D": 0.7717129282112379
+          },
+          "nivel_mais_provavel": 4,
+          "vento_kt": 4.452525044872902,
+          "rajada_kt": 13.096492824450968,
+          "nuvem_baixa": 8.290595725677852,
+          "chuva_mm": 0.7,
+          "temp": 25.761846290765078,
+          "camada_baixa": false
+        },
+        {
+          "hora": 12,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.41443826147122814,
+            "A": 0.41443826147122814,
+            "B": 0.566609584006267,
+            "C": 0.6480399589903065,
+            "D": 0.6594635979565134
+          },
+          "nivel_mais_provavel": 4,
+          "vento_kt": 4.880359753368441,
+          "rajada_kt": 13.354938798949105,
+          "nuvem_baixa": 6.835162855537183,
+          "chuva_mm": 0.7,
+          "temp": 26.446832525785624,
+          "camada_baixa": false
+        },
+        {
+          "hora": 13,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.35676395443686726,
+            "A": 0.35676395443686726,
+            "B": 0.5438197605428385,
+            "C": 0.6204843591624839,
+            "D": 0.6315582061190583
+          },
+          "nivel_mais_provavel": 0,
+          "vento_kt": 4.975437954001524,
+          "rajada_kt": 13.552994327960306,
+          "nuvem_baixa": 5.723806412209097,
+          "chuva_mm": 0.7,
+          "temp": 26.87014784143645,
+          "camada_baixa": false
+        },
+        {
+          "hora": 14,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.40093181191041116,
+            "A": 0.40093181191041116,
+            "B": 0.639857223536879,
+            "C": 0.7283185569766863,
+            "D": 0.7577076034401737
+          },
+          "nivel_mais_provavel": 4,
+          "vento_kt": 5.463484187256337,
+          "rajada_kt": 14.007761352232347,
+          "nuvem_baixa": 3.9701465539089167,
+          "chuva_mm": 0.7,
+          "temp": 26.712408844263717,
+          "camada_baixa": false
+        },
+        {
+          "hora": 15,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.36072501029250414,
+            "A": 0.36072501029250414,
+            "B": 0.5907496783870915,
+            "C": 0.742669323309156,
+            "D": 0.7713314087282428
+          },
+          "nivel_mais_provavel": 4,
+          "vento_kt": 5.669098482954104,
+          "rajada_kt": 13.359800571135434,
+          "nuvem_baixa": 4.194646329995296,
+          "chuva_mm": 0.7,
+          "temp": 26.225811027466193,
+          "camada_baixa": false
+        },
+        {
+          "hora": 16,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.2564253737897877,
+            "A": 0.2564253737897877,
+            "B": 0.38791361900191373,
+            "C": 0.7646195267219291,
+            "D": 0.7951615049692536
+          },
+          "nivel_mais_provavel": 2,
+          "vento_kt": 5.341793326786586,
+          "rajada_kt": 12.631855366514449,
+          "nuvem_baixa": 7.403870204518719,
+          "chuva_mm": 0.4,
+          "temp": 25.236712367701305,
+          "camada_baixa": false
+        },
+        {
+          "hora": 17,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.23988175707927617,
+            "A": 0.23988175707927617,
+            "B": 0.3867588114671926,
+            "C": 0.7127112884703835,
+            "D": 0.7622549104823517
+          },
+          "nivel_mais_provavel": 2,
+          "vento_kt": 5.243167158726903,
+          "rajada_kt": 11.848788930753267,
+          "nuvem_baixa": 11.099079559963396,
+          "chuva_mm": 0.4,
+          "temp": 23.60121493916313,
+          "camada_baixa": false
+        },
+        {
+          "hora": 18,
+          "operacao": false,
+          "prob_por_categoria": {
+            "AI": 0.18142277125365971,
+            "A": 0.18142277125365971,
+            "B": 0.30630386057254844,
+            "C": 0.6148401131570524,
+            "D": 0.6559220148784535
+          },
+          "nivel_mais_provavel": 0,
+          "vento_kt": 4.810963050265648,
+          "rajada_kt": 11.4826178720394,
+          "nuvem_baixa": 15.094702632123685,
+          "chuva_mm": 0.4,
+          "temp": 22.219541039525577,
+          "camada_baixa": false
+        }
+      ]
+    },
+    {
+      "data": "2026-10-13",
+      "prob_niveis": [
+        0.22258412692038773,
+        0.012316584391020848,
+        0.15287222599460232,
+        0.2079541773186701,
+        0.40427288537531914
+      ],
+      "nivel_mais_provavel": 4,
+      "nivel_mais_provavel_texto": "todas (incl. A/AI)",
+      "prob_por_categoria": {
+        "AI": 0.40427288537531914,
+        "A": 0.40427288537531914,
+        "B": 0.6122270626939892,
+        "C": 0.7650992886885916,
+        "D": 0.7774158730796124
+      },
+      "tempo": {
+        "vento_kt_med": 5.3305758126748195,
+        "vento_kt_max": 5.983708541178491,
+        "rajada_kt_max": 15.890549242928042,
+        "frac_horas_camada_baixa": 0.0,
+        "chuva_mm_total": 6.2,
+        "prob_chuva_max": 52.63105766870433,
+        "nuvem_baixa_med": 7.064036146571323,
+        "temp_med": 25.28100384636435
+      },
+      "horas_consideradas": 10,
+      "dias_a_frente": 7,
+      "validado": true,
+      "confianca": "media",
+      "horas": [
+        {
+          "hora": 7,
+          "operacao": false,
+          "prob_por_categoria": {
+            "AI": 0.2934371869269108,
+            "A": 0.2934371869269108,
+            "B": 0.4797522429526342,
+            "C": 0.675401762221885,
+            "D": 0.6824241283971059
+          },
+          "nivel_mais_provavel": 0,
+          "vento_kt": 4.713031246426601,
+          "rajada_kt": 8.141021669191936,
+          "nuvem_baixa": 14.580947737898706,
+          "chuva_mm": 0.0,
+          "temp": 20.198249970806575,
+          "camada_baixa": false
+        },
+        {
+          "hora": 8,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.4330853580865922,
+            "A": 0.4330853580865922,
+            "B": 0.6705041285758934,
+            "C": 0.9180843468638304,
+            "D": 0.9273397000937798
+          },
+          "nivel_mais_provavel": 4,
+          "vento_kt": 4.917760885582208,
+          "rajada_kt": 10.231343050597914,
+          "nuvem_baixa": 9.281596521309293,
+          "chuva_mm": 0.0,
+          "temp": 21.484151455458804,
+          "camada_baixa": false
+        },
+        {
+          "hora": 9,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.517312453676005,
+            "A": 0.517312453676005,
+            "B": 0.7379329204361645,
+            "C": 0.8545547603303018,
+            "D": 0.8605765101799369
+          },
+          "nivel_mais_provavel": 4,
+          "vento_kt": 4.923481571703262,
+          "rajada_kt": 11.861899793453851,
+          "nuvem_baixa": 5.949399905740298,
+          "chuva_mm": 0.0,
+          "temp": 22.89513013420969,
+          "camada_baixa": false
+        },
+        {
+          "hora": 10,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.29712479107844725,
+            "A": 0.29712479107844725,
+            "B": 0.4245906112207687,
+            "C": 0.5321958587523626,
+            "D": 0.5386052822421488
+          },
+          "nivel_mais_provavel": 0,
+          "vento_kt": 5.053578094852525,
+          "rajada_kt": 12.755860202782701,
+          "nuvem_baixa": 7.481072777257497,
+          "chuva_mm": 0.2,
+          "temp": 23.90476040080185,
+          "camada_baixa": false
+        },
+        {
+          "hora": 11,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.408027714582484,
+            "A": 0.408027714582484,
+            "B": 0.6446275599043064,
+            "C": 0.7769107523969834,
+            "D": 0.7869310921442831
+          },
+          "nivel_mais_provavel": 4,
+          "vento_kt": 5.361113916524192,
+          "rajada_kt": 13.73410436075145,
+          "nuvem_baixa": 9.555892021553896,
+          "chuva_mm": 0.2,
+          "temp": 25.185635419429435,
+          "camada_baixa": false
+        },
+        {
+          "hora": 12,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.3721790846970198,
+            "A": 0.3721790846970198,
+            "B": 0.6175685550494081,
+            "C": 0.7786904759090187,
+            "D": 0.7900326552561951
+          },
+          "nivel_mais_provavel": 4,
+          "vento_kt": 5.714197415715545,
+          "rajada_kt": 14.437191190094667,
+          "nuvem_baixa": 10.377107989617832,
+          "chuva_mm": 0.2,
+          "temp": 26.03382621900723,
+          "camada_baixa": false
+        },
+        {
+          "hora": 13,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.38670260458262906,
+            "A": 0.38670260458262906,
+            "B": 0.6199682107353027,
+            "C": 0.758374009219558,
+            "D": 0.7680318322562134
+          },
+          "nivel_mais_provavel": 4,
+          "vento_kt": 5.797478974044289,
+          "rajada_kt": 14.946224842901279,
+          "nuvem_baixa": 8.500576674879978,
+          "chuva_mm": 0.2,
+          "temp": 26.891753630289585,
+          "camada_baixa": false
+        },
+        {
+          "hora": 14,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.44289183865707377,
+            "A": 0.44289183865707377,
+            "B": 0.6188424515971866,
+            "C": 0.7453749538584507,
+            "D": 0.7598119785054231
+          },
+          "nivel_mais_provavel": 4,
+          "vento_kt": 5.983708541178491,
+          "rajada_kt": 15.620016909253941,
+          "nuvem_baixa": 5.27184163358854,
+          "chuva_mm": 0.2,
+          "temp": 27.41331356868648,
+          "camada_baixa": false
+        },
+        {
+          "hora": 15,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.439710937329456,
+            "A": 0.439710937329456,
+            "B": 0.6433747679872299,
+            "C": 0.7429380494595874,
+            "D": 0.7558383908838224
+          },
+          "nivel_mais_provavel": 4,
+          "vento_kt": 5.832250157161471,
+          "rajada_kt": 15.890549242928042,
+          "nuvem_baixa": 3.0572301571321563,
+          "chuva_mm": 0.2,
+          "temp": 27.299607713389744,
+          "camada_baixa": false
+        },
+        {
+          "hora": 16,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.4113816638787162,
+            "A": 0.4113816638787162,
+            "B": 0.6180517398834724,
+            "C": 0.825159657501356,
+            "D": 0.8351363632813932
+          },
+          "nivel_mais_provavel": 4,
+          "vento_kt": 5.310624819700444,
+          "rajada_kt": 14.043638616142337,
+          "nuvem_baixa": 4.159983879127163,
+          "chuva_mm": 2.5,
+          "temp": 26.585175164857368,
+          "camada_baixa": false
+        },
+        {
+          "hora": 17,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.3343124071847673,
+            "A": 0.3343124071847673,
+            "B": 0.5268096815501586,
+            "C": 0.7187100225944653,
+            "D": 0.7518549259529269
+          },
+          "nivel_mais_provavel": 4,
+          "vento_kt": 4.411563750285767,
+          "rajada_kt": 12.442146616944889,
+          "nuvem_baixa": 7.005659905506562,
+          "chuva_mm": 2.5,
+          "temp": 25.11668475751332,
+          "camada_baixa": false
+        },
+        {
+          "hora": 18,
+          "operacao": false,
+          "prob_por_categoria": {
+            "AI": 0.2843090287007783,
+            "A": 0.2843090287007783,
+            "B": 0.4608546110892379,
+            "C": 0.6424185472803642,
+            "D": 0.6945624447002243
+          },
+          "nivel_mais_provavel": 0,
+          "vento_kt": 3.9004045947598613,
+          "rajada_kt": 11.58988266551289,
+          "nuvem_baixa": 9.306978961963587,
+          "chuva_mm": 2.5,
+          "temp": 23.678777828271638,
+          "camada_baixa": false
+        }
+      ]
+    },
+    {
+      "data": "2026-10-14",
+      "prob_niveis": [
+        0.3380883008859819,
+        0.04013952422411802,
+        0.1870981489080541,
+        0.22996113509227584,
+        0.20471289088957012
+      ],
+      "nivel_mais_provavel": 0,
+      "nivel_mais_provavel_texto": "fechado",
+      "prob_por_categoria": {
+        "AI": 0.20471289088957012,
+        "A": 0.20471289088957012,
+        "B": 0.43467402598184596,
+        "C": 0.6217721748899001,
+        "D": 0.661911699114018
+      },
+      "tempo": {
+        "vento_kt_med": 5.898697413151131,
+        "vento_kt_max": 6.188344342448997,
+        "rajada_kt_max": 13.903200066283421,
+        "frac_horas_camada_baixa": 1.0,
+        "chuva_mm_total": 1.0,
+        "prob_chuva_max": 64.64771062461536,
+        "nuvem_baixa_med": 18.272223480914345,
+        "temp_med": 24.27492439700015
+      },
+      "horas_consideradas": 10,
+      "dias_a_frente": 8,
+      "validado": false,
+      "confianca": "baixa",
+      "horas": [
+        {
+          "hora": 7,
+          "operacao": false,
+          "prob_por_categoria": {
+            "AI": 0.0018328616539944741,
+            "A": 0.0018328616539944741,
+            "B": 0.44430988157708234,
+            "C": 0.489021248335311,
+            "D": 0.4910974045142265
+          },
+          "nivel_mais_provavel": 0,
+          "vento_kt": 5.37899080856221,
+          "rajada_kt": 8.746541837074775,
+          "nuvem_baixa": 25.960100750316613,
+          "chuva_mm": 0.0,
+          "temp": 19.55527278936543,
+          "camada_baixa": true
+        },
+        {
+          "hora": 8,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.004792716825165876,
+            "A": 0.004792716825165876,
+            "B": 0.420458635894344,
+            "C": 0.6927902265211315,
+            "D": 0.6942540379844149
+          },
+          "nivel_mais_provavel": 3,
+          "vento_kt": 5.682790175905693,
+          "rajada_kt": 10.596113869208697,
+          "nuvem_baixa": 22.765712719246388,
+          "chuva_mm": 0.0,
+          "temp": 20.715593868752443,
+          "camada_baixa": true
+        },
+        {
+          "hora": 9,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.08508098633857872,
+            "A": 0.08508098633857872,
+            "B": 0.30407818047065605,
+            "C": 0.43784677982360054,
+            "D": 0.4382626271716611
+          },
+          "nivel_mais_provavel": 0,
+          "vento_kt": 6.119778809951919,
+          "rajada_kt": 12.309140768498802,
+          "nuvem_baixa": 17.05839854929006,
+          "chuva_mm": 0.0,
+          "temp": 22.059006883231245,
+          "camada_baixa": true
+        },
+        {
+          "hora": 10,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.12240069273034294,
+            "A": 0.12240069273034294,
+            "B": 0.3605105492973038,
+            "C": 0.5212977054535175,
+            "D": 0.5225981072115349
+          },
+          "nivel_mais_provavel": 0,
+          "vento_kt": 6.147862084159351,
+          "rajada_kt": 13.079843349437288,
+          "nuvem_baixa": 14.61825371137255,
+          "chuva_mm": 0.1,
+          "temp": 23.53373090295237,
+          "camada_baixa": true
+        },
+        {
+          "hora": 11,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.1773570763853307,
+            "A": 0.1773570763853307,
+            "B": 0.5111905241787253,
+            "C": 0.6239541432540245,
+            "D": 0.6576998930887173
+          },
+          "nivel_mais_provavel": 0,
+          "vento_kt": 6.159600497825712,
+          "rajada_kt": 13.531614612469497,
+          "nuvem_baixa": 15.0604322754794,
+          "chuva_mm": 0.1,
+          "temp": 24.906262233579838,
+          "camada_baixa": true
+        },
+        {
+          "hora": 12,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.17462030159017977,
+            "A": 0.17462030159017977,
+            "B": 0.4762423029059429,
+            "C": 0.5592194400581021,
+            "D": 0.6282159909200487
+          },
+          "nivel_mais_provavel": 0,
+          "vento_kt": 5.949247252299686,
+          "rajada_kt": 13.731897384566013,
+          "nuvem_baixa": 14.211988845658276,
+          "chuva_mm": 0.1,
+          "temp": 25.640443388695232,
+          "camada_baixa": true
+        },
+        {
+          "hora": 13,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.27507887470188064,
+            "A": 0.27507887470188064,
+            "B": 0.5145364341630296,
+            "C": 0.5568007937891366,
+            "D": 0.6413732864681324
+          },
+          "nivel_mais_provavel": 0,
+          "vento_kt": 5.976213498857797,
+          "rajada_kt": 13.783739827134598,
+          "nuvem_baixa": 15.466555299485735,
+          "chuva_mm": 0.1,
+          "temp": 26.002742786344612,
+          "camada_baixa": true
+        },
+        {
+          "hora": 14,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.3610473768713255,
+            "A": 0.3610473768713255,
+            "B": 0.4797969948804618,
+            "C": 0.5571421441791411,
+            "D": 0.6458689314434606
+          },
+          "nivel_mais_provavel": 4,
+          "vento_kt": 6.188344342448997,
+          "rajada_kt": 13.903200066283421,
+          "nuvem_baixa": 18.116072094139966,
+          "chuva_mm": 0.1,
+          "temp": 26.255931979268485,
+          "camada_baixa": true
+        },
+        {
+          "hora": 15,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.3802168573736793,
+            "A": 0.3802168573736793,
+            "B": 0.5389003249464396,
+            "C": 0.7432981254136681,
+            "D": 0.7576266937885632
+          },
+          "nivel_mais_provavel": 4,
+          "vento_kt": 5.9751093567039595,
+          "rajada_kt": 13.512856090165277,
+          "nuvem_baixa": 20.16247081657376,
+          "chuva_mm": 0.1,
+          "temp": 25.827646121553062,
+          "camada_baixa": true
+        },
+        {
+          "hora": 16,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.2817959482884295,
+            "A": 0.2817959482884295,
+            "B": 0.4155896045040103,
+            "C": 0.8155622743148736,
+            "D": 0.8184334574442633
+          },
+          "nivel_mais_provavel": 2,
+          "vento_kt": 5.650417034471237,
+          "rajada_kt": 12.97758933884069,
+          "nuvem_baixa": 21.543007442696595,
+          "chuva_mm": 0.2,
+          "temp": 24.719072819424238,
+          "camada_baixa": true
+        },
+        {
+          "hora": 17,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.1847380777907885,
+            "A": 0.1847380777907885,
+            "B": 0.32543670857754625,
+            "C": 0.7098101160918051,
+            "D": 0.8147839656193847
+          },
+          "nivel_mais_provavel": 2,
+          "vento_kt": 5.137611078886964,
+          "rajada_kt": 12.122204916480477,
+          "nuvem_baixa": 23.71934305520075,
+          "chuva_mm": 0.2,
+          "temp": 23.08881298619996,
+          "camada_baixa": true
+        },
+        {
+          "hora": 18,
+          "operacao": false,
+          "prob_por_categoria": {
+            "AI": 0.05170063579738575,
+            "A": 0.05170063579738575,
+            "B": 0.10862198730028624,
+            "C": 0.26403279777168726,
+            "D": 0.28236908619303536
+          },
+          "nivel_mais_provavel": 0,
+          "vento_kt": 4.976853485008333,
+          "rajada_kt": 11.833833924284491,
+          "nuvem_baixa": 25.397124978276455,
+          "chuva_mm": 0.2,
+          "temp": 21.73379554833339,
+          "camada_baixa": true
+        }
+      ]
+    },
+    {
+      "data": "2026-10-15",
+      "prob_niveis": [
+        0.34360491046016667,
+        0.04007743344927249,
+        0.177537220354688,
+        0.22491587561532964,
+        0.21386456012054317
+      ],
+      "nivel_mais_provavel": 0,
+      "nivel_mais_provavel_texto": "fechado",
+      "prob_por_categoria": {
+        "AI": 0.21386456012054317,
+        "A": 0.21386456012054317,
+        "B": 0.4387804357358728,
+        "C": 0.6163176560905608,
+        "D": 0.6563950895398334
+      },
+      "tempo": {
+        "vento_kt_med": 5.055227101129153,
+        "vento_kt_max": 5.316999003369355,
+        "rajada_kt_max": 13.662489398125762,
+        "frac_horas_camada_baixa": 1.0,
+        "chuva_mm_total": 0.6000000000000001,
+        "prob_chuva_max": 63.14616981462516,
+        "nuvem_baixa_med": 33.43982617079668,
+        "temp_med": 23.894712192169724
+      },
+      "horas_consideradas": 10,
+      "dias_a_frente": 9,
+      "validado": false,
+      "confianca": "baixa",
+      "horas": [
+        {
+          "hora": 7,
+          "operacao": false,
+          "prob_por_categoria": {
+            "AI": 0.03033920330489728,
+            "A": 0.03033920330489728,
+            "B": 0.4978541362548255,
+            "C": 0.5875722850385673,
+            "D": 0.5889784643091903
+          },
+          "nivel_mais_provavel": 3,
+          "vento_kt": 4.38839513478643,
+          "rajada_kt": 8.168490094851236,
+          "nuvem_baixa": 42.1613599526963,
+          "chuva_mm": 0.0,
+          "temp": 19.49217552914537,
+          "camada_baixa": true
+        },
+        {
+          "hora": 8,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.050407103761085904,
+            "A": 0.050407103761085904,
+            "B": 0.4888011432152044,
+            "C": 0.8048195067123313,
+            "D": 0.8072740880054629
+          },
+          "nivel_mais_provavel": 3,
+          "vento_kt": 4.6876068049052,
+          "rajada_kt": 10.437948509660385,
+          "nuvem_baixa": 40.23920151921866,
+          "chuva_mm": 0.0,
+          "temp": 20.78298197439424,
+          "camada_baixa": true
+        },
+        {
+          "hora": 9,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.10469061419090288,
+            "A": 0.10469061419090288,
+            "B": 0.3410521880684401,
+            "C": 0.5320719046930584,
+            "D": 0.5333210646427443
+          },
+          "nivel_mais_provavel": 0,
+          "vento_kt": 4.795992328072807,
+          "rajada_kt": 11.898441913513834,
+          "nuvem_baixa": 38.09157872485272,
+          "chuva_mm": 0.0,
+          "temp": 21.906124855710985,
+          "camada_baixa": true
+        },
+        {
+          "hora": 10,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.10835535094166121,
+            "A": 0.10835535094166121,
+            "B": 0.32444696785136695,
+            "C": 0.4338312888640377,
+            "D": 0.43435815100335984
+          },
+          "nivel_mais_provavel": 0,
+          "vento_kt": 4.960580114217627,
+          "rajada_kt": 12.68716714792662,
+          "nuvem_baixa": 36.03781762383055,
+          "chuva_mm": 0.1,
+          "temp": 23.100763011934895,
+          "camada_baixa": true
+        },
+        {
+          "hora": 11,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.15350081533032037,
+            "A": 0.15350081533032037,
+            "B": 0.449585000650745,
+            "C": 0.5295349144483802,
+            "D": 0.5624456350559056
+          },
+          "nivel_mais_provavel": 0,
+          "vento_kt": 5.1229518821324564,
+          "rajada_kt": 13.146376832044677,
+          "nuvem_baixa": 34.18450571453833,
+          "chuva_mm": 0.1,
+          "temp": 24.19822913882527,
+          "camada_baixa": true
+        },
+        {
+          "hora": 12,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.18824289525522991,
+            "A": 0.18824289525522991,
+            "B": 0.46339927626903094,
+            "C": 0.5360437291201505,
+            "D": 0.60483531753707
+          },
+          "nivel_mais_provavel": 0,
+          "vento_kt": 5.087728486097533,
+          "rajada_kt": 13.399954847243968,
+          "nuvem_baixa": 32.56698478513044,
+          "chuva_mm": 0.1,
+          "temp": 24.760724959318274,
+          "camada_baixa": true
+        },
+        {
+          "hora": 13,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.2734511173047628,
+            "A": 0.2734511173047628,
+            "B": 0.5046501458650892,
+            "C": 0.5410070864276069,
+            "D": 0.6254399019728343
+          },
+          "nivel_mais_provavel": 0,
+          "vento_kt": 5.208580620620588,
+          "rajada_kt": 13.662489398125762,
+          "nuvem_baixa": 32.493576714857674,
+          "chuva_mm": 0.1,
+          "temp": 25.463236142161833,
+          "camada_baixa": true
+        },
+        {
+          "hora": 14,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.36932975082082975,
+            "A": 0.36932975082082975,
+            "B": 0.4848953082407568,
+            "C": 0.5426405985440668,
+            "D": 0.631239136355414
+          },
+          "nivel_mais_provavel": 4,
+          "vento_kt": 5.230355553411144,
+          "rajada_kt": 13.486612612920132,
+          "nuvem_baixa": 31.191280025977292,
+          "chuva_mm": 0.1,
+          "temp": 25.761624785029735,
+          "camada_baixa": true
+        },
+        {
+          "hora": 15,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.4086248473334359,
+            "A": 0.4086248473334359,
+            "B": 0.5889938385938256,
+            "C": 0.7533986762613287,
+            "D": 0.7678165723640071
+          },
+          "nivel_mais_provavel": 4,
+          "vento_kt": 5.316999003369355,
+          "rajada_kt": 13.170583440364185,
+          "nuvem_baixa": 32.29482457782716,
+          "chuva_mm": 0.1,
+          "temp": 25.32787488261237,
+          "camada_baixa": true
+        },
+        {
+          "hora": 16,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.28769783471273325,
+            "A": 0.28769783471273325,
+            "B": 0.40975158920717913,
+            "C": 0.7823414188755873,
+            "D": 0.7849188018374242
+          },
+          "nivel_mais_provavel": 2,
+          "vento_kt": 5.12185055435197,
+          "rajada_kt": 12.683436327380466,
+          "nuvem_baixa": 30.707220029210767,
+          "chuva_mm": 0.0,
+          "temp": 24.548989987967712,
+          "camada_baixa": true
+        },
+        {
+          "hora": 17,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.1943452715544695,
+            "A": 0.1943452715544695,
+            "B": 0.3322288993970902,
+            "C": 0.7074874369590602,
+            "D": 0.8123022266241107
+          },
+          "nivel_mais_provavel": 2,
+          "vento_kt": 5.019625664112849,
+          "rajada_kt": 12.059113064541618,
+          "nuvem_baixa": 26.59127199252317,
+          "chuva_mm": 0.0,
+          "temp": 23.096572183741944,
+          "camada_baixa": true
+        },
+        {
+          "hora": 18,
+          "operacao": false,
+          "prob_por_categoria": {
+            "AI": 0.052923540559852336,
+            "A": 0.052923540559852336,
+            "B": 0.09899912532486797,
+            "C": 0.25719102028719276,
+            "D": 0.28534146000632465
+          },
+          "nivel_mais_provavel": 0,
+          "vento_kt": 5.0114513961601235,
+          "rajada_kt": 11.423089871699814,
+          "nuvem_baixa": 25.54574982955149,
+          "chuva_mm": 0.0,
+          "temp": 21.825709793679366,
+          "camada_baixa": true
+        }
+      ]
+    },
+    {
+      "data": "2026-10-16",
+      "prob_niveis": [
+        0.3190866512348965,
+        0.040155557213175486,
+        0.19656646700887087,
+        0.22931061468599623,
+        0.21488070985706095
+      ],
+      "nivel_mais_provavel": 0,
+      "nivel_mais_provavel_texto": "fechado",
+      "prob_por_categoria": {
+        "AI": 0.21488070985706095,
+        "A": 0.21488070985706095,
+        "B": 0.4441913245430572,
+        "C": 0.640757791551928,
+        "D": 0.6809133487651036
+      },
+      "tempo": {
+        "vento_kt_med": 4.953760495348351,
+        "vento_kt_max": 5.7562112609820515,
+        "rajada_kt_max": 13.973166512998208,
+        "frac_horas_camada_baixa": 1.0,
+        "chuva_mm_total": 10.2,
+        "prob_chuva_max": 72.14842284038812,
+        "nuvem_baixa_med": 33.24028109761862,
+        "temp_med": 22.329304532504516
+      },
+      "horas_consideradas": 10,
+      "dias_a_frente": 10,
+      "validado": false,
+      "confianca": "baixa",
+      "horas": [
+        {
+          "hora": 7,
+          "operacao": false,
+          "prob_por_categoria": {
+            "AI": 0.05426815325806973,
+            "A": 0.05426815325806973,
+            "B": 0.541110767375739,
+            "C": 0.6823581306235407,
+            "D": 0.6846025814240884
+          },
+          "nivel_mais_provavel": 3,
+          "vento_kt": 3.9799560327014465,
+          "rajada_kt": 7.890744000457945,
+          "nuvem_baixa": 33.531718039694866,
+          "chuva_mm": 0.0,
+          "temp": 18.982079026435926,
+          "camada_baixa": true
+        },
+        {
+          "hora": 8,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.05867517023346933,
+            "A": 0.05867517023346933,
+            "B": 0.5032107583606023,
+            "C": 0.8217117850637253,
+            "D": 0.8243157590845385
+          },
+          "nivel_mais_provavel": 3,
+          "vento_kt": 4.3259914543456865,
+          "rajada_kt": 9.487718839540733,
+          "nuvem_baixa": 32.56920134999472,
+          "chuva_mm": 0.0,
+          "temp": 20.20862665003002,
+          "camada_baixa": true
+        },
+        {
+          "hora": 9,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.1319240469004912,
+            "A": 0.1319240469004912,
+            "B": 0.4063081944985795,
+            "C": 0.6657781130565973,
+            "D": 0.6682097502754749
+          },
+          "nivel_mais_provavel": 0,
+          "vento_kt": 4.505274293281034,
+          "rajada_kt": 10.968322456173881,
+          "nuvem_baixa": 30.517798961832845,
+          "chuva_mm": 0.0,
+          "temp": 21.289266489912748,
+          "camada_baixa": true
+        },
+        {
+          "hora": 10,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.10613984869466814,
+            "A": 0.10613984869466814,
+            "B": 0.32110414334959064,
+            "C": 0.4290232059616401,
+            "D": 0.42950754615070985
+          },
+          "nivel_mais_provavel": 0,
+          "vento_kt": 4.639110926438513,
+          "rajada_kt": 11.716387185239986,
+          "nuvem_baixa": 31.048867425146845,
+          "chuva_mm": 1.2,
+          "temp": 22.46009022910051,
+          "camada_baixa": true
+        },
+        {
+          "hora": 11,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.14997804105583934,
+            "A": 0.14997804105583934,
+            "B": 0.4362766835649717,
+            "C": 0.5246600129930896,
+            "D": 0.5575276207172943
+          },
+          "nivel_mais_provavel": 0,
+          "vento_kt": 4.125183362770583,
+          "rajada_kt": 12.71326368864168,
+          "nuvem_baixa": 31.96718338487751,
+          "chuva_mm": 1.2,
+          "temp": 23.176033737661555,
+          "camada_baixa": true
+        },
+        {
+          "hora": 12,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.18330636520911964,
+            "A": 0.18330636520911964,
+            "B": 0.4557831904264414,
+            "C": 0.5521523320513846,
+            "D": 0.621086382490358
+          },
+          "nivel_mais_provavel": 0,
+          "vento_kt": 4.761531635420998,
+          "rajada_kt": 13.375083364434502,
+          "nuvem_baixa": 33.19562187435187,
+          "chuva_mm": 1.2,
+          "temp": 23.325321412483312,
+          "camada_baixa": true
+        },
+        {
+          "hora": 13,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.2752519087674318,
+            "A": 0.2752519087674318,
+            "B": 0.5092209962028993,
+            "C": 0.5522962679338899,
+            "D": 0.6368289232747584
+          },
+          "nivel_mais_provavel": 0,
+          "vento_kt": 5.236983837365243,
+          "rajada_kt": 13.973166512998208,
+          "nuvem_baixa": 34.32932896423482,
+          "chuva_mm": 1.2,
+          "temp": 23.456194555094207,
+          "camada_baixa": true
+        },
+        {
+          "hora": 14,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.4001821732536601,
+            "A": 0.4001821732536601,
+            "B": 0.5557891738761165,
+            "C": 0.6340274754250614,
+            "D": 0.7234342248066626
+          },
+          "nivel_mais_provavel": 4,
+          "vento_kt": 5.593244516917447,
+          "rajada_kt": 13.856031690855161,
+          "nuvem_baixa": 34.47699927937372,
+          "chuva_mm": 1.2,
+          "temp": 23.115502698555535,
+          "camada_baixa": true
+        },
+        {
+          "hora": 15,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.3824462325059196,
+            "A": 0.3824462325059196,
+            "B": 0.5418242711277457,
+            "C": 0.7523349777968636,
+            "D": 0.7667434667129134
+          },
+          "nivel_mais_provavel": 4,
+          "vento_kt": 5.7562112609820515,
+          "rajada_kt": 13.662754102410123,
+          "nuvem_baixa": 33.358655624866515,
+          "chuva_mm": 1.2,
+          "temp": 22.79620567134914,
+          "camada_baixa": true
+        },
+        {
+          "hora": 16,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.2775041796355576,
+            "A": 0.2775041796355576,
+            "B": 0.3985443994198753,
+            "C": 0.7912496980255473,
+            "D": 0.7939058644465173
+          },
+          "nivel_mais_provavel": 2,
+          "vento_kt": 5.5241074470978955,
+          "rajada_kt": 12.977772539922187,
+          "nuvem_baixa": 35.04998909276999,
+          "chuva_mm": 1.5,
+          "temp": 22.137525134922484,
+          "camada_baixa": true
+        },
+        {
+          "hora": 17,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.18339913231445273,
+            "A": 0.18339913231445273,
+            "B": 0.31385143460374954,
+            "C": 0.6843440472114815,
+            "D": 0.7875739496918085
+          },
+          "nivel_mais_provavel": 2,
+          "vento_kt": 5.069966218864062,
+          "rajada_kt": 12.075835846305765,
+          "nuvem_baixa": 35.88916501873738,
+          "chuva_mm": 1.5,
+          "temp": 21.32827874593566,
+          "camada_baixa": true
+        },
+        {
+          "hora": 18,
+          "operacao": false,
+          "prob_por_categoria": {
+            "AI": 0.04718458286214511,
+            "A": 0.04718458286214511,
+            "B": 0.08970084159028188,
+            "C": 0.23130858462435439,
+            "D": 0.2473722742788249
+          },
+          "nivel_mais_provavel": 0,
+          "vento_kt": 4.628917857157414,
+          "rajada_kt": 11.473425905574272,
+          "nuvem_baixa": 36.47874356622052,
+          "chuva_mm": 1.5,
+          "temp": 20.797825985271828,
+          "camada_baixa": true
+        }
+      ]
+    },
+    {
+      "data": "2026-10-17",
+      "prob_niveis": [
+        0.2716960311461268,
+        0.05078956228331759,
+        0.18177733286053818,
+        0.25849516866086514,
+        0.23724190504915238
+      ],
+      "nivel_mais_provavel": 0,
+      "nivel_mais_provavel_texto": "fechado",
+      "prob_por_categoria": {
+        "AI": 0.23724190504915238,
+        "A": 0.23724190504915238,
+        "B": 0.4957370737100175,
+        "C": 0.6775144065705556,
+        "D": 0.7283039688538733
+      },
+      "tempo": {
+        "vento_kt_med": 5.561055743360162,
+        "vento_kt_max": 6.192791168643249,
+        "rajada_kt_max": 14.504322155308586,
+        "frac_horas_camada_baixa": 1.0,
+        "chuva_mm_total": 7.800000000000001,
+        "prob_chuva_max": 49.2548717289666,
+        "nuvem_baixa_med": 30.524537379377545,
+        "temp_med": 22.901211270106
+      },
+      "horas_consideradas": 10,
+      "dias_a_frente": 11,
+      "validado": false,
+      "confianca": "climatologia",
+      "horas": [
+        {
+          "hora": 7,
+          "operacao": false,
+          "prob_por_categoria": {
+            "AI": 0.009706060139561087,
+            "A": 0.009706060139561087,
+            "B": 0.6032664573656495,
+            "C": 0.7109890725712925,
+            "D": 0.7122233243109692
+          },
+          "nivel_mais_provavel": 3,
+          "vento_kt": 4.766639101288425,
+          "rajada_kt": 9.1061180440434,
+          "nuvem_baixa": 37.330446360015614,
+          "chuva_mm": 1.1,
+          "temp": 18.794146966568825,
+          "camada_baixa": true
+        },
+        {
+          "hora": 8,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.019638383861487585,
+            "A": 0.019638383861487585,
+            "B": 0.5736174253053763,
+            "C": 0.8749584087593489,
+            "D": 0.876478914646458
+          },
+          "nivel_mais_provavel": 3,
+          "vento_kt": 5.035840777753327,
+          "rajada_kt": 10.654482073080718,
+          "nuvem_baixa": 35.88495151304514,
+          "chuva_mm": 1.1,
+          "temp": 19.92599968990592,
+          "camada_baixa": true
+        },
+        {
+          "hora": 9,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.12669941832917114,
+            "A": 0.12669941832917114,
+            "B": 0.43247009804955844,
+            "C": 0.6553233051895833,
+            "D": 0.6565103474704428
+          },
+          "nivel_mais_provavel": 0,
+          "vento_kt": 5.202602958415083,
+          "rajada_kt": 12.166264383869118,
+          "nuvem_baixa": 33.91466129321832,
+          "chuva_mm": 1.1,
+          "temp": 21.102891265467544,
+          "camada_baixa": true
+        },
+        {
+          "hora": 10,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.13198992624254902,
+            "A": 0.13198992624254902,
+            "B": 0.40693792189311323,
+            "C": 0.5279921542475152,
+            "D": 0.5282484688652603
+          },
+          "nivel_mais_provavel": 0,
+          "vento_kt": 5.212621083246953,
+          "rajada_kt": 13.41373062489255,
+          "nuvem_baixa": 33.046080585567694,
+          "chuva_mm": 0.6,
+          "temp": 22.093298358494916,
+          "camada_baixa": true
+        },
+        {
+          "hora": 11,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.16925850321127486,
+            "A": 0.16925850321127486,
+            "B": 0.5275048757600169,
+            "C": 0.6224378924706324,
+            "D": 0.6655794310704486
+          },
+          "nivel_mais_provavel": 3,
+          "vento_kt": 5.094558435061194,
+          "rajada_kt": 13.840800558980106,
+          "nuvem_baixa": 32.44880906684848,
+          "chuva_mm": 0.6,
+          "temp": 23.005395780563774,
+          "camada_baixa": true
+        },
+        {
+          "hora": 12,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.19781912888404374,
+            "A": 0.19781912888404374,
+            "B": 0.515621380843305,
+            "C": 0.6022776228730092,
+            "D": 0.6930052735932056
+          },
+          "nivel_mais_provavel": 3,
+          "vento_kt": 5.545433115651192,
+          "rajada_kt": 14.265383825914531,
+          "nuvem_baixa": 31.48685176787341,
+          "chuva_mm": 0.6,
+          "temp": 23.705915227668456,
+          "camada_baixa": true
+        },
+        {
+          "hora": 13,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.3110546101518942,
+            "A": 0.3110546101518942,
+            "B": 0.5668009568960886,
+            "C": 0.5930266585270831,
+            "D": 0.7044689377392563
+          },
+          "nivel_mais_provavel": 4,
+          "vento_kt": 5.727356080692346,
+          "rajada_kt": 14.504322155308586,
+          "nuvem_baixa": 29.570406087510733,
+          "chuva_mm": 0.6,
+          "temp": 24.262163961063337,
+          "camada_baixa": true
+        },
+        {
+          "hora": 14,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.4397304705713089,
+            "A": 0.4397304705713089,
+            "B": 0.5451367475074271,
+            "C": 0.6033442227100821,
+            "D": 0.7204127831956736
+          },
+          "nivel_mais_provavel": 4,
+          "vento_kt": 6.124142581318209,
+          "rajada_kt": 14.322786615075815,
+          "nuvem_baixa": 27.87327226538749,
+          "chuva_mm": 0.6,
+          "temp": 24.499416459391927,
+          "camada_baixa": true
+        },
+        {
+          "hora": 15,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.4553979800860658,
+            "A": 0.4553979800860658,
+            "B": 0.609080252905732,
+            "C": 0.766695557127456,
+            "D": 0.7838160332687243
+          },
+          "nivel_mais_provavel": 4,
+          "vento_kt": 6.192791168643249,
+          "rajada_kt": 13.959814899994116,
+          "nuvem_baixa": 26.813739134510506,
+          "chuva_mm": 0.6,
+          "temp": 24.277072613028064,
+          "camada_baixa": true
+        },
+        {
+          "hora": 16,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.31702757031589457,
+            "A": 0.31702757031589457,
+            "B": 0.435276662346414,
+            "C": 0.8157210402906585,
+            "D": 0.8171464525345999
+          },
+          "nivel_mais_provavel": 2,
+          "vento_kt": 5.713358812858647,
+          "rajada_kt": 13.598063050254634,
+          "nuvem_baixa": 26.821296872923227,
+          "chuva_mm": 1.0,
+          "temp": 23.593045556952443,
+          "camada_baixa": true
+        },
+        {
+          "hora": 17,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.20380305883783384,
+            "A": 0.20380305883783384,
+            "B": 0.34492441559314313,
+            "C": 0.7133672035101879,
+            "D": 0.8373730461546631
+          },
+          "nivel_mais_provavel": 2,
+          "vento_kt": 5.761852419961423,
+          "rajada_kt": 12.859377105937007,
+          "nuvem_baixa": 27.385305206890422,
+          "chuva_mm": 1.0,
+          "temp": 22.546913788523625,
+          "camada_baixa": true
+        },
+        {
+          "hora": 18,
+          "operacao": false,
+          "prob_por_categoria": {
+            "AI": 0.025875685521534825,
+            "A": 0.025875685521534825,
+            "B": 0.05237574043734187,
+            "C": 0.13023448483535846,
+            "D": 0.14420230748995141
+          },
+          "nivel_mais_provavel": 0,
+          "vento_kt": 5.753832400367166,
+          "rajada_kt": 12.440677631608198,
+          "nuvem_baixa": 27.798214666866155,
+          "chuva_mm": 1.0,
+          "temp": 21.456242411531008,
+          "camada_baixa": true
+        }
+      ]
+    },
+    {
+      "data": "2026-10-18",
+      "prob_niveis": [
+        0.2851350659569299,
+        0.05147865864139868,
+        0.1719984723507142,
+        0.25627571663353965,
+        0.23511208641741765
+      ],
+      "nivel_mais_provavel": 0,
+      "nivel_mais_provavel_texto": "fechado",
+      "prob_por_categoria": {
+        "AI": 0.23511208641741765,
+        "A": 0.23511208641741765,
+        "B": 0.4913878030509573,
+        "C": 0.6633862754016715,
+        "D": 0.7148649340430702
+      },
+      "tempo": {
+        "vento_kt_med": 5.59532913617916,
+        "vento_kt_max": 5.868812491029512,
+        "rajada_kt_max": 14.36599157508117,
+        "frac_horas_camada_baixa": 1.0,
+        "chuva_mm_total": 5.2,
+        "prob_chuva_max": 58.781719060760025,
+        "nuvem_baixa_med": 33.044972915443154,
+        "temp_med": 22.412498150861772
+      },
+      "horas_consideradas": 10,
+      "dias_a_frente": 12,
+      "validado": false,
+      "confianca": "climatologia",
+      "horas": [
+        {
+          "hora": 7,
+          "operacao": false,
+          "prob_por_categoria": {
+            "AI": 0.003265050293611533,
+            "A": 0.003265050293611533,
+            "B": 0.6011737042740917,
+            "C": 0.6526769476223813,
+            "D": 0.6552577623527859
+          },
+          "nivel_mais_provavel": 3,
+          "vento_kt": 4.863929454580274,
+          "rajada_kt": 9.69449099238192,
+          "nuvem_baixa": 41.13228918560866,
+          "chuva_mm": 0.1,
+          "temp": 18.201450167195055,
+          "camada_baixa": true
+        },
+        {
+          "hora": 8,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.003291244951143846,
+            "A": 0.003291244951143846,
+            "B": 0.541806570242434,
+            "C": 0.8458252664811425,
+            "D": 0.8503610783012142
+          },
+          "nivel_mais_provavel": 3,
+          "vento_kt": 5.1709411083296235,
+          "rajada_kt": 10.925638487190188,
+          "nuvem_baixa": 40.01808870824931,
+          "chuva_mm": 0.1,
+          "temp": 19.206932818539507,
+          "camada_baixa": true
+        },
+        {
+          "hora": 9,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.10410498343084676,
+            "A": 0.10410498343084676,
+            "B": 0.3931895192666055,
+            "C": 0.5523201632072017,
+            "D": 0.5525962614448472
+          },
+          "nivel_mais_provavel": 0,
+          "vento_kt": 5.369233125372207,
+          "rajada_kt": 12.037623670304093,
+          "nuvem_baixa": 39.31221610397191,
+          "chuva_mm": 0.1,
+          "temp": 20.334693781918517,
+          "camada_baixa": true
+        },
+        {
+          "hora": 10,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.1322446624862629,
+            "A": 0.1322446624862629,
+            "B": 0.40754570432195025,
+            "C": 0.5277560526838516,
+            "D": 0.5280102792554568
+          },
+          "nivel_mais_provavel": 0,
+          "vento_kt": 5.4619171838451255,
+          "rajada_kt": 13.089669891805327,
+          "nuvem_baixa": 37.7965138626334,
+          "chuva_mm": 0.7,
+          "temp": 21.43324846612026,
+          "camada_baixa": true
+        },
+        {
+          "hora": 11,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.1671693131038378,
+            "A": 0.1671693131038378,
+            "B": 0.5294363096915328,
+            "C": 0.6224507565077407,
+            "D": 0.6655924088751348
+          },
+          "nivel_mais_provavel": 3,
+          "vento_kt": 5.548413095045411,
+          "rajada_kt": 13.896271696388697,
+          "nuvem_baixa": 35.802303769887025,
+          "chuva_mm": 0.7,
+          "temp": 22.40927337494707,
+          "camada_baixa": true
+        },
+        {
+          "hora": 12,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.19751547184853813,
+            "A": 0.19751547184853813,
+            "B": 0.5141503925666818,
+            "C": 0.5995747260401179,
+            "D": 0.6902784727538738
+          },
+          "nivel_mais_provavel": 3,
+          "vento_kt": 5.625517259163826,
+          "rajada_kt": 14.278881731485482,
+          "nuvem_baixa": 33.677795608523525,
+          "chuva_mm": 0.7,
+          "temp": 23.30594532292702,
+          "camada_baixa": true
+        },
+        {
+          "hora": 13,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.3129069962166261,
+            "A": 0.3129069962166261,
+            "B": 0.5696481996166677,
+            "C": 0.5955386235179149,
+            "D": 0.7070031181645022
+          },
+          "nivel_mais_provavel": 4,
+          "vento_kt": 5.625691754260243,
+          "rajada_kt": 14.36599157508117,
+          "nuvem_baixa": 31.312678715042694,
+          "chuva_mm": 0.7,
+          "temp": 23.82939311026149,
+          "camada_baixa": true
+        },
+        {
+          "hora": 14,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.44139882720211804,
+            "A": 0.44139882720211804,
+            "B": 0.5493416926768327,
+            "C": 0.6073810998192063,
+            "D": 0.7244853618288966
+          },
+          "nivel_mais_provavel": 4,
+          "vento_kt": 5.706436146805798,
+          "rajada_kt": 14.364556757936631,
+          "nuvem_baixa": 29.228457990856885,
+          "chuva_mm": 0.7,
+          "temp": 24.061592597371067,
+          "camada_baixa": true
+        },
+        {
+          "hora": 15,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.46229401040604556,
+            "A": 0.46229401040604556,
+            "B": 0.6173291241353717,
+            "C": 0.7674519742773345,
+            "D": 0.7845791400562547
+          },
+          "nivel_mais_provavel": 4,
+          "vento_kt": 5.7933122564580355,
+          "rajada_kt": 13.955889899315157,
+          "nuvem_baixa": 28.02529727204023,
+          "chuva_mm": 0.7,
+          "temp": 23.945874536895477,
+          "camada_baixa": true
+        },
+        {
+          "hora": 16,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.32850264203666224,
+            "A": 0.32850264203666224,
+            "B": 0.45056870038578295,
+            "C": 0.808870659879584,
+            "D": 0.8102354884062802
+          },
+          "nivel_mais_provavel": 2,
+          "vento_kt": 5.783016941481826,
+          "rajada_kt": 13.29621094327293,
+          "nuvem_baixa": 27.656559445115636,
+          "chuva_mm": 0.4,
+          "temp": 23.253275981000836,
+          "camada_baixa": true
+        },
+        {
+          "hora": 17,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.20169271249209508,
+            "A": 0.20169271249209508,
+            "B": 0.34086181760571377,
+            "C": 0.7066934316026208,
+            "D": 0.835507731344241
+          },
+          "nivel_mais_provavel": 2,
+          "vento_kt": 5.868812491029512,
+          "rajada_kt": 12.549315773574643,
+          "nuvem_baixa": 27.61981767811099,
+          "chuva_mm": 0.4,
+          "temp": 22.344751518636492,
+          "camada_baixa": true
+        },
+        {
+          "hora": 18,
+          "operacao": false,
+          "prob_por_categoria": {
+            "AI": 0.02720439631430213,
+            "A": 0.02720439631430213,
+            "B": 0.0533757890493484,
+            "C": 0.12957606795819107,
+            "D": 0.14375861323533978
+          },
+          "nivel_mais_provavel": 0,
+          "vento_kt": 5.903620363050154,
+          "rajada_kt": 12.003058694151873,
+          "nuvem_baixa": 28.523870781355242,
+          "chuva_mm": 0.4,
+          "temp": 21.44488960648454,
+          "camada_baixa": true
+        }
+      ]
+    },
+    {
+      "data": "2026-10-19",
+      "prob_niveis": [
+        0.28898152323491944,
+        0.051036306395729314,
+        0.17409379222856577,
+        0.25508175385744075,
+        0.23080662428334478
+      ],
+      "nivel_mais_provavel": 0,
+      "nivel_mais_provavel_texto": "fechado",
+      "prob_por_categoria": {
+        "AI": 0.23080662428334478,
+        "A": 0.23080662428334478,
+        "B": 0.48588837814078556,
+        "C": 0.6599821703693513,
+        "D": 0.7110184767650806
+      },
+      "tempo": {
+        "vento_kt_med": 5.701168550387393,
+        "vento_kt_max": 5.919344945219194,
+        "rajada_kt_max": 14.655140063998363,
+        "frac_horas_camada_baixa": 1.0,
+        "chuva_mm_total": 11.8,
+        "prob_chuva_max": 55.551901208140094,
+        "nuvem_baixa_med": 30.108327057914643,
+        "temp_med": 23.23264801494244
+      },
+      "horas_consideradas": 10,
+      "dias_a_frente": 13,
+      "validado": false,
+      "confianca": "climatologia",
+      "horas": [
+        {
+          "hora": 7,
+          "operacao": false,
+          "prob_por_categoria": {
+            "AI": 0.0036005797149630484,
+            "A": 0.0036005797149630484,
+            "B": 0.6017034381683669,
+            "C": 0.6953684104892153,
+            "D": 0.6996251388580448
+          },
+          "nivel_mais_provavel": 3,
+          "vento_kt": 5.041223524621319,
+          "rajada_kt": 9.555319208138135,
+          "nuvem_baixa": 30.45841400289766,
+          "chuva_mm": 0.1,
+          "temp": 18.80014972097138,
+          "camada_baixa": true
+        },
+        {
+          "hora": 8,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.004159894515266906,
+            "A": 0.004159894515266906,
+            "B": 0.5412672448965122,
+            "C": 0.8463933580742299,
+            "D": 0.847661239019372
+          },
+          "nivel_mais_provavel": 3,
+          "vento_kt": 5.337453639429011,
+          "rajada_kt": 10.918677706776547,
+          "nuvem_baixa": 30.531100241830135,
+          "chuva_mm": 0.1,
+          "temp": 19.921208806210323,
+          "camada_baixa": true
+        },
+        {
+          "hora": 9,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.10609761700847754,
+            "A": 0.10609761700847754,
+            "B": 0.38916479713762037,
+            "C": 0.551784070659437,
+            "D": 0.5520554277765342
+          },
+          "nivel_mais_provavel": 0,
+          "vento_kt": 5.614068126536901,
+          "rajada_kt": 12.407074727157077,
+          "nuvem_baixa": 30.898501720935187,
+          "chuva_mm": 0.1,
+          "temp": 21.130264996061957,
+          "camada_baixa": true
+        },
+        {
+          "hora": 10,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.13187949030720872,
+            "A": 0.13187949030720872,
+            "B": 0.40771189040975553,
+            "C": 0.5281520122639917,
+            "D": 0.5284097406415995
+          },
+          "nivel_mais_provavel": 0,
+          "vento_kt": 5.745536986518985,
+          "rajada_kt": 13.556843475692272,
+          "nuvem_baixa": 30.49974421853717,
+          "chuva_mm": 1.1,
+          "temp": 22.451963134129855,
+          "camada_baixa": true
+        },
+        {
+          "hora": 11,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.1552417532097428,
+            "A": 0.1552417532097428,
+            "B": 0.5052986538953843,
+            "C": 0.5891934669390222,
+            "D": 0.6320409969209918
+          },
+          "nivel_mais_provavel": 0,
+          "vento_kt": 5.8077307915216085,
+          "rajada_kt": 13.93041492191641,
+          "nuvem_baixa": 30.270467307960654,
+          "chuva_mm": 1.1,
+          "temp": 23.656172433139783,
+          "camada_baixa": true
+        },
+        {
+          "hora": 12,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.19105966837865268,
+            "A": 0.19105966837865268,
+            "B": 0.5160251205966095,
+            "C": 0.6036020065747885,
+            "D": 0.6943413699420056
+          },
+          "nivel_mais_provavel": 3,
+          "vento_kt": 5.620077200435881,
+          "rajada_kt": 14.377396726584742,
+          "nuvem_baixa": 30.22963636251083,
+          "chuva_mm": 1.1,
+          "temp": 24.36080839879214,
+          "camada_baixa": true
+        },
+        {
+          "hora": 13,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.306855833665436,
+            "A": 0.306855833665436,
+            "B": 0.5628378053477536,
+            "C": 0.5903899778294983,
+            "D": 0.7018089386406101
+          },
+          "nivel_mais_provavel": 4,
+          "vento_kt": 5.7475398633272805,
+          "rajada_kt": 14.655140063998363,
+          "nuvem_baixa": 29.96159739616069,
+          "chuva_mm": 1.1,
+          "temp": 24.783548080615734,
+          "camada_baixa": true
+        },
+        {
+          "hora": 14,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.43811058679430376,
+            "A": 0.43811058679430376,
+            "B": 0.545275133489702,
+            "C": 0.6045542043087269,
+            "D": 0.7216334656866257
+          },
+          "nivel_mais_provavel": 4,
+          "vento_kt": 5.800027496783749,
+          "rajada_kt": 14.559219511177243,
+          "nuvem_baixa": 29.900843325135966,
+          "chuva_mm": 1.1,
+          "temp": 24.876135646561018,
+          "camada_baixa": true
+        },
+        {
+          "hora": 15,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.45777265896199104,
+            "A": 0.45777265896199104,
+            "B": 0.616092786001307,
+            "C": 0.7626580828299416,
+            "D": 0.7797428521656682
+          },
+          "nivel_mais_provavel": 4,
+          "vento_kt": 5.919344945219194,
+          "rajada_kt": 14.191308445737542,
+          "nuvem_baixa": 29.651632488132556,
+          "chuva_mm": 1.1,
+          "temp": 24.61494733048718,
+          "camada_baixa": true
+        },
+        {
+          "hora": 16,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.31851664690733184,
+            "A": 0.31851664690733184,
+            "B": 0.43765939994672076,
+            "C": 0.8162594429956493,
+            "D": 0.8176896167908163
+          },
+          "nivel_mais_provavel": 2,
+          "vento_kt": 5.701733774548879,
+          "rajada_kt": 13.601339783661656,
+          "nuvem_baixa": 29.529642006305863,
+          "chuva_mm": 2.5,
+          "temp": 23.817654750030965,
+          "camada_baixa": true
+        },
+        {
+          "hora": 17,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.19837209308503645,
+            "A": 0.19837209308503645,
+            "B": 0.3375509496864899,
+            "C": 0.7068350812182279,
+            "D": 0.8348011200665828
+          },
+          "nivel_mais_provavel": 2,
+          "vento_kt": 5.718172679552441,
+          "rajada_kt": 12.676364657679521,
+          "nuvem_baixa": 29.61010551163733,
+          "chuva_mm": 2.5,
+          "temp": 22.713776573395492,
+          "camada_baixa": true
+        },
+        {
+          "hora": 18,
+          "operacao": false,
+          "prob_por_categoria": {
+            "AI": 0.02414366986669551,
+            "A": 0.02414366986669551,
+            "B": 0.049789587677808764,
+            "C": 0.12808153199866493,
+            "D": 0.14126183822712687
+          },
+          "nivel_mais_provavel": 0,
+          "vento_kt": 5.710537972431986,
+          "rajada_kt": 12.228981400218577,
+          "nuvem_baixa": 29.47875044499394,
+          "chuva_mm": 2.5,
+          "temp": 21.728861444125243,
+          "camada_baixa": true
+        }
+      ]
+    },
+    {
+      "data": "2026-10-20",
+      "prob_niveis": [
+        0.2802372550730839,
+        0.050867297937621334,
+        0.1731320878501577,
+        0.2608166488109698,
+        0.23494671032816736
+      ],
+      "nivel_mais_provavel": 0,
+      "nivel_mais_provavel_texto": "fechado",
+      "prob_por_categoria": {
+        "AI": 0.23494671032816736,
+        "A": 0.23494671032816736,
+        "B": 0.49576335913913716,
+        "C": 0.6688954469892948,
+        "D": 0.7197627449269162
+      },
+      "tempo": {
+        "vento_kt_med": 5.689893817763745,
+        "vento_kt_max": 5.902507631461659,
+        "rajada_kt_max": 15.07564560158914,
+        "frac_horas_camada_baixa": 1.0,
+        "chuva_mm_total": 4.0,
+        "prob_chuva_max": 57.781058890860756,
+        "nuvem_baixa_med": 23.068684012227937,
+        "temp_med": 24.13748959053515
+      },
+      "horas_consideradas": 10,
+      "dias_a_frente": 14,
+      "validado": false,
+      "confianca": "climatologia",
+      "horas": [
+        {
+          "hora": 7,
+          "operacao": false,
+          "prob_por_categoria": {
+            "AI": 0.004542111190862524,
+            "A": 0.004542111190862524,
+            "B": 0.6053654940955542,
+            "C": 0.7066638252055369,
+            "D": 0.7113084959230501
+          },
+          "nivel_mais_provavel": 3,
+          "vento_kt": 5.029779621165811,
+          "rajada_kt": 9.221555657806515,
+          "nuvem_baixa": 26.750791457833262,
+          "chuva_mm": 0.0,
+          "temp": 19.586693469849155,
+          "camada_baixa": true
+        },
+        {
+          "hora": 8,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.01849185320161429,
+            "A": 0.01849185320161429,
+            "B": 0.554850336804273,
+            "C": 0.8614098865184937,
+            "D": 0.8628105713458551
+          },
+          "nivel_mais_provavel": 3,
+          "vento_kt": 5.287747290067048,
+          "rajada_kt": 11.084345991263739,
+          "nuvem_baixa": 26.536334955345172,
+          "chuva_mm": 0.0,
+          "temp": 20.911444444900127,
+          "camada_baixa": true
+        },
+        {
+          "hora": 9,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.10588966411944477,
+            "A": 0.10588966411944477,
+            "B": 0.3885152815967553,
+            "C": 0.5492926379526043,
+            "D": 0.5495419612196686
+          },
+          "nivel_mais_provavel": 0,
+          "vento_kt": 5.487723687581676,
+          "rajada_kt": 12.482533840191907,
+          "nuvem_baixa": 25.74013127439239,
+          "chuva_mm": 0.0,
+          "temp": 22.10385167392325,
+          "camada_baixa": true
+        },
+        {
+          "hora": 10,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.13187597199971907,
+            "A": 0.13187597199971907,
+            "B": 0.40757721171045574,
+            "C": 0.5279756417746608,
+            "D": 0.5282318103586201
+          },
+          "nivel_mais_provavel": 0,
+          "vento_kt": 5.690416842556187,
+          "rajada_kt": 13.499757105153716,
+          "nuvem_baixa": 25.275032614282043,
+          "chuva_mm": 0.6,
+          "temp": 23.543929227962174,
+          "camada_baixa": true
+        },
+        {
+          "hora": 11,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.1552166427129143,
+            "A": 0.1552166427129143,
+            "B": 0.5293912891978126,
+            "C": 0.6227374930088203,
+            "D": 0.665881681230001
+          },
+          "nivel_mais_provavel": 3,
+          "vento_kt": 5.874635138438608,
+          "rajada_kt": 14.41070820267673,
+          "nuvem_baixa": 25.03004661841549,
+          "chuva_mm": 0.6,
+          "temp": 24.7784496803627,
+          "camada_baixa": true
+        },
+        {
+          "hora": 12,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.20025230818270692,
+            "A": 0.20025230818270692,
+            "B": 0.5463397329138777,
+            "C": 0.6426240787660161,
+            "D": 0.733708547374999
+          },
+          "nivel_mais_provavel": 3,
+          "vento_kt": 5.695021947864908,
+          "rajada_kt": 15.046952970486561,
+          "nuvem_baixa": 24.521611006768616,
+          "chuva_mm": 0.6,
+          "temp": 25.51283457416206,
+          "camada_baixa": true
+        },
+        {
+          "hora": 13,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.31179213537911876,
+            "A": 0.31179213537911876,
+            "B": 0.5709191307448036,
+            "C": 0.5978001939889989,
+            "D": 0.7110769693347525
+          },
+          "nivel_mais_provavel": 4,
+          "vento_kt": 5.620072489508076,
+          "rajada_kt": 15.07564560158914,
+          "nuvem_baixa": 23.106412275784514,
+          "chuva_mm": 0.6,
+          "temp": 25.827989688226264,
+          "camada_baixa": true
+        },
+        {
+          "hora": 14,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.45277834871168376,
+            "A": 0.45277834871168376,
+            "B": 0.5773305601953921,
+            "C": 0.6431756748827242,
+            "D": 0.7605964986429197
+          },
+          "nivel_mais_provavel": 4,
+          "vento_kt": 5.754493309174423,
+          "rajada_kt": 14.983306336593307,
+          "nuvem_baixa": 21.769152347779215,
+          "chuva_mm": 0.6,
+          "temp": 25.803241538116747,
+          "camada_baixa": true
+        },
+        {
+          "hora": 15,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.44953817523057116,
+            "A": 0.44953817523057116,
+            "B": 0.5959993989635772,
+            "C": 0.7248849912354175,
+            "D": 0.7416357011228635
+          },
+          "nivel_mais_provavel": 4,
+          "vento_kt": 5.80075339989813,
+          "rajada_kt": 14.404151995923897,
+          "nuvem_baixa": 20.480941802519638,
+          "chuva_mm": 0.6,
+          "temp": 25.363214677934838,
+          "camada_baixa": true
+        },
+        {
+          "hora": 16,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.32362793031792514,
+            "A": 0.32362793031792514,
+            "B": 0.4457594592345094,
+            "C": 0.8099235354937662,
+            "D": 0.8112976754914576
+          },
+          "nivel_mais_provavel": 2,
+          "vento_kt": 5.785566441086735,
+          "rajada_kt": 13.875505373198422,
+          "nuvem_baixa": 19.502682108444823,
+          "chuva_mm": 0.2,
+          "temp": 24.39829613178018,
+          "camada_baixa": true
+        },
+        {
+          "hora": 17,
+          "operacao": true,
+          "prob_por_categoria": {
+            "AI": 0.2000040734259752,
+            "A": 0.2000040734259752,
+            "B": 0.3409511900299148,
+            "C": 0.7091303362714465,
+            "D": 0.8328460331480245
+          },
+          "nivel_mais_provavel": 2,
+          "vento_kt": 5.902507631461659,
+          "rajada_kt": 13.181144499124041,
+          "nuvem_baixa": 18.724495118547484,
+          "chuva_mm": 0.2,
+          "temp": 23.131644267983184,
+          "camada_baixa": true
+        },
+        {
+          "hora": 18,
+          "operacao": false,
+          "prob_por_categoria": {
+            "AI": 0.026371402225673975,
+            "A": 0.026371402225673975,
+            "B": 0.0537074479748195,
+            "C": 0.12554663196869015,
+            "D": 0.13928814164981423
+          },
+          "nivel_mais_provavel": 0,
+          "vento_kt": 5.878753771155553,
+          "rajada_kt": 12.77278861065282,
+          "nuvem_baixa": 18.714847597313074,
+          "chuva_mm": 0.2,
+          "temp": 22.08874006354264,
+          "camada_baixa": true
+        }
+      ]
+    }
+  ]
+}
