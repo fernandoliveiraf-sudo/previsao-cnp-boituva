@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-13T20:00:42+00:00",
+  "gerado_em": "2026-10-13T22:59:05+00:00",
   "local": {
     "nome": "CNP Boituva (SDOI)",
     "lat": -23.2983,
@@ -45,6 +45,16 @@
   },
   "limite_vento_camada_kmh": 60.0,
   "vies_teto_aplicado_ft": 4585.117016622921,
+  "aviso_rta": "A previsão é um apoio informativo. A decisão de abertura e fechamento da área é sempre e exclusivamente do RTA.",
+  "confianca_por_dia": {
+    "1": 0.18,
+    "2": 0.17,
+    "3": 0.15,
+    "4": 0.14,
+    "5": 0.12,
+    "6": 0.09,
+    "7": 0.1
+  },
   "dias": [
     {
       "data": "2026-10-13",
@@ -81,6 +91,7 @@
       "dias_a_frente": 0,
       "validado": true,
       "confianca": "alta",
+      "skill_medido": null,
       "horas": [
         {
           "hora": 13,
@@ -245,6 +256,7 @@
       "dias_a_frente": 1,
       "validado": true,
       "confianca": "alta",
+      "skill_medido": 0.18,
       "horas": [
         {
           "hora": 7,
@@ -535,6 +547,7 @@
       "dias_a_frente": 2,
       "validado": true,
       "confianca": "alta",
+      "skill_medido": 0.17,
       "horas": [
         {
           "hora": 7,
@@ -825,6 +838,7 @@
       "dias_a_frente": 3,
       "validado": true,
       "confianca": "alta",
+      "skill_medido": 0.15,
       "horas": [
         {
           "hora": 7,
@@ -1114,7 +1128,8 @@
       "horas_consideradas": 10,
       "dias_a_frente": 4,
       "validado": true,
-      "confianca": "alta",
+      "confianca": "media",
+      "skill_medido": 0.14,
       "horas": [
         {
           "hora": 7,
@@ -1405,6 +1420,7 @@
       "dias_a_frente": 5,
       "validado": true,
       "confianca": "media",
+      "skill_medido": 0.12,
       "horas": [
         {
           "hora": 7,
@@ -1695,6 +1711,7 @@
       "dias_a_frente": 6,
       "validado": true,
       "confianca": "media",
+      "skill_medido": 0.09,
       "horas": [
         {
           "hora": 7,
@@ -1985,6 +2002,7 @@
       "dias_a_frente": 7,
       "validado": true,
       "confianca": "media",
+      "skill_medido": 0.1,
       "horas": [
         {
           "hora": 7,
@@ -2274,7 +2292,8 @@
       "horas_consideradas": 10,
       "dias_a_frente": 8,
       "validado": false,
-      "confianca": "baixa",
+      "confianca": "climatologia",
+      "skill_medido": null,
       "horas": [
         {
           "hora": 7,
@@ -2564,7 +2583,8 @@
       "horas_consideradas": 10,
       "dias_a_frente": 9,
       "validado": false,
-      "confianca": "baixa",
+      "confianca": "climatologia",
+      "skill_medido": null,
       "horas": [
         {
           "hora": 7,
@@ -2854,7 +2874,8 @@
       "horas_consideradas": 10,
       "dias_a_frente": 10,
       "validado": false,
-      "confianca": "baixa",
+      "confianca": "climatologia",
+      "skill_medido": null,
       "horas": [
         {
           "hora": 7,
@@ -3145,6 +3166,7 @@
       "dias_a_frente": 11,
       "validado": false,
       "confianca": "climatologia",
+      "skill_medido": null,
       "horas": [
         {
           "hora": 7,
@@ -3435,6 +3457,7 @@
       "dias_a_frente": 12,
       "validado": false,
       "confianca": "climatologia",
+      "skill_medido": null,
       "horas": [
         {
           "hora": 7,
@@ -3725,6 +3748,7 @@
       "dias_a_frente": 13,
       "validado": false,
       "confianca": "climatologia",
+      "skill_medido": null,
       "horas": [
         {
           "hora": 7,
@@ -4015,6 +4039,7 @@
       "dias_a_frente": 14,
       "validado": false,
       "confianca": "climatologia",
+      "skill_medido": null,
       "horas": [
         {
           "hora": 7,
@@ -4305,6 +4330,7 @@
       "dias_a_frente": 15,
       "validado": false,
       "confianca": "climatologia",
+      "skill_medido": null,
       "horas": [
         {
           "hora": 7,
@@ -4371,5 +4397,19 @@
         }
       ]
     }
-  ]
+  ],
+  "rajada": {
+    "aviso": "A previsão é um apoio informativo. A decisão de abertura e fechamento da área é sempre e exclusivamente do RTA.",
+    "regua_kmh": {
+      "IA/A (rodovia)": 22,
+      "IA/A (matos)": 26,
+      "B (rodovia)": 26,
+      "B (matos)": 29,
+      "C": 31,
+      "D": 35
+    },
+    "unidade": "km/h",
+    "status": "indisponivel",
+    "motivo": "sem token da API do INMET (variavel INMET_TOKEN)"
+  }
 }
