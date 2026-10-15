@@ -4439,13 +4439,13 @@
     "estacao_nome": "Sorocaba",
     "km_cnp": 17.9,
     "modelo": "satelite_metar",
-    "base_utc": "2026-10-15 10:00:00+00:00",
-    "metar_ultimo_utc": "2026-10-15 10:00:00+00:00",
+    "base_utc": "2026-10-15 11:00:00+00:00",
+    "metar_ultimo_utc": "2026-10-15 11:00:00+00:00",
     "previsoes": [
       {
         "h": 1,
-        "ts_alvo_utc": "2026-10-15 11:00:00+00:00",
-        "rajada_kmh": 7.1,
+        "ts_alvo_utc": "2026-10-15 12:00:00+00:00",
+        "rajada_kmh": 11.4,
         "faixa": {
           "acima_de": [],
           "dentro_de": [
@@ -4485,8 +4485,8 @@
       },
       {
         "h": 2,
-        "ts_alvo_utc": "2026-10-15 12:00:00+00:00",
-        "rajada_kmh": 12.4,
+        "ts_alvo_utc": "2026-10-15 13:00:00+00:00",
+        "rajada_kmh": 14.7,
         "faixa": {
           "acima_de": [],
           "dentro_de": [
@@ -4526,8 +4526,8 @@
       },
       {
         "h": 3,
-        "ts_alvo_utc": "2026-10-15 13:00:00+00:00",
-        "rajada_kmh": 15.1,
+        "ts_alvo_utc": "2026-10-15 14:00:00+00:00",
+        "rajada_kmh": 18.6,
         "faixa": {
           "acima_de": [],
           "dentro_de": [
@@ -4570,9 +4570,43 @@
     "motivo_inmet": "sem token da API do INMET (variavel INMET_TOKEN)"
   },
   "satelite": {
-    "status": "fora_do_horario",
-    "ts_utc": "2026-10-15T10:00:00+00:00",
-    "fim_utc": "2026-10-15T10:15:00+00:00",
-    "gerado_utc": "2026-10-15T10:00:18+00:00"
+    "status": "ok",
+    "ts_utc": "2026-10-15T11:00:00+00:00",
+    "fim_utc": "2026-10-15T11:15:00+00:00",
+    "gerado_utc": "2026-10-15T11:00:18+00:00",
+    "modelo": "goes_msg",
+    "prob_niveis": [
+      0.2925541125219353,
+      0.005263268243924979,
+      0.18843808408795204,
+      0.3471815009856139,
+      0.16656303416057378
+    ],
+    "nivel_mais_provavel": 3,
+    "prob_por_categoria": {
+      "D": 0.7074458874780647,
+      "C": 0.7021826192341396,
+      "B": 0.5137445351461877,
+      "A": 0.16656303416057378,
+      "AI": 0.16656303416057378
+    },
+    "sem_satelite": {
+      "D": 0.7264703630672315,
+      "C": 0.7217819040963289,
+      "B": 0.5800169263008357,
+      "A": 0.1715208965148193,
+      "AI": 0.1715208965148193
+    },
+    "goes": {
+      "satelite": "G19",
+      "fim_varredura_utc": "2026-10-15T10:49:51+00:00",
+      "idade_min": 10.15,
+      "frac_nuvem_10km": 1.0,
+      "frac_baixa_10km": 0.0
+    },
+    "msg": {
+      "carimbo_utc": "2026-10-15T09:00:00+00:00"
+    },
+    "ganho_medido": 0.059
   }
 }
