@@ -4415,13 +4415,13 @@
     "estacao_nome": "Sorocaba",
     "km_cnp": 17.9,
     "modelo": "satelite_metar",
-    "base_utc": "2026-10-22 01:00:00+00:00",
-    "metar_ultimo_utc": "2026-10-22 01:00:00+00:00",
+    "base_utc": "2026-10-22 02:00:00+00:00",
+    "metar_ultimo_utc": "2026-10-22 02:00:00+00:00",
     "previsoes": [
       {
         "h": 1,
-        "ts_alvo_utc": "2026-10-22 02:00:00+00:00",
-        "rajada_kmh": 21.2,
+        "ts_alvo_utc": "2026-10-22 03:00:00+00:00",
+        "rajada_kmh": 20.4,
         "faixa": {
           "acima_de": [],
           "dentro_de": [
@@ -4439,7 +4439,7 @@
           {
             "limite_kmh": 26,
             "categorias": "IA/A (matos) e B (rodovia)",
-            "alerta": true,
+            "alerta": false,
             "precisao": 0.5606060606060606,
             "sensibilidade": 0.8254593175853019
           },
@@ -4461,20 +4461,19 @@
       },
       {
         "h": 2,
-        "ts_alvo_utc": "2026-10-22 03:00:00+00:00",
-        "rajada_kmh": 22.5,
+        "ts_alvo_utc": "2026-10-22 04:00:00+00:00",
+        "rajada_kmh": 21.7,
         "faixa": {
-          "acima_de": [
-            "IA/A (rodovia)"
-          ],
+          "acima_de": [],
           "dentro_de": [
+            "IA/A (rodovia)",
             "IA/A (matos)",
             "B (rodovia)",
             "B (matos)",
             "C",
             "D"
           ],
-          "texto": "acima do limite de IA/A (rodovia)"
+          "texto": "abaixo do limite de todas as categorias"
         },
         "mae_kmh": 4.927187310374151,
         "alertas": [
@@ -4488,7 +4487,7 @@
           {
             "limite_kmh": 31,
             "categorias": "C",
-            "alerta": true,
+            "alerta": false,
             "precisao": 0.374578177727784,
             "sensibilidade": 0.7966507177033493
           },
@@ -4503,8 +4502,8 @@
       },
       {
         "h": 3,
-        "ts_alvo_utc": "2026-10-22 04:00:00+00:00",
-        "rajada_kmh": 16.7,
+        "ts_alvo_utc": "2026-10-22 05:00:00+00:00",
+        "rajada_kmh": 19.6,
         "faixa": {
           "acima_de": [],
           "dentro_de": [
@@ -4522,7 +4521,7 @@
           {
             "limite_kmh": 26,
             "categorias": "IA/A (matos) e B (rodovia)",
-            "alerta": false,
+            "alerta": true,
             "precisao": 0.46097738876732314,
             "sensibilidade": 0.8293963254593176
           },
@@ -4548,8 +4547,8 @@
   },
   "satelite": {
     "status": "fora_do_horario",
-    "ts_utc": "2026-10-22T01:45:00+00:00",
-    "fim_utc": "2026-10-22T02:00:00+00:00",
-    "gerado_utc": "2026-10-22T01:43:52+00:00"
+    "ts_utc": "2026-10-22T02:45:00+00:00",
+    "fim_utc": "2026-10-22T03:00:00+00:00",
+    "gerado_utc": "2026-10-22T02:41:32+00:00"
   }
 }
