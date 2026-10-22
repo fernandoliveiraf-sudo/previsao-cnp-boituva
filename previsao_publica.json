@@ -4445,7 +4445,7 @@
       {
         "h": 1,
         "ts_alvo_utc": "2026-10-22 11:00:00+00:00",
-        "rajada_kmh": 12.9,
+        "rajada_kmh": 12.7,
         "faixa": {
           "acima_de": [],
           "dentro_de": [
@@ -4486,7 +4486,7 @@
       {
         "h": 2,
         "ts_alvo_utc": "2026-10-22 12:00:00+00:00",
-        "rajada_kmh": 17.6,
+        "rajada_kmh": 17.3,
         "faixa": {
           "acima_de": [],
           "dentro_de": [
@@ -4527,7 +4527,7 @@
       {
         "h": 3,
         "ts_alvo_utc": "2026-10-22 13:00:00+00:00",
-        "rajada_kmh": 15.9,
+        "rajada_kmh": 15.6,
         "faixa": {
           "acima_de": [],
           "dentro_de": [
@@ -4571,8 +4571,8 @@
   },
   "satelite": {
     "status": "fora_do_horario",
-    "ts_utc": "2026-10-22T10:00:00+00:00",
-    "fim_utc": "2026-10-22T10:15:00+00:00",
-    "gerado_utc": "2026-10-22T10:02:02+00:00"
+    "ts_utc": "2026-10-22T10:30:00+00:00",
+    "fim_utc": "2026-10-22T10:45:00+00:00",
+    "gerado_utc": "2026-10-22T10:39:44+00:00"
   }
 }
