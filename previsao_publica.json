@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-24T23:25:17+00:00",
+  "gerado_em": "2026-10-25T00:09:54+00:00",
   "local": {
     "nome": "CNP Boituva (SDOI)",
     "lat": -23.2983,
@@ -4415,13 +4415,13 @@
     "estacao_nome": "Sorocaba",
     "km_cnp": 17.9,
     "modelo": "satelite_metar",
-    "base_utc": "2026-10-24 23:00:00+00:00",
-    "metar_ultimo_utc": "2026-10-24 23:00:00+00:00",
+    "base_utc": "2026-10-25 00:00:00+00:00",
+    "metar_ultimo_utc": "2026-10-25 00:00:00+00:00",
     "previsoes": [
       {
         "h": 1,
-        "ts_alvo_utc": "2026-10-25 00:00:00+00:00",
-        "rajada_kmh": 15.4,
+        "ts_alvo_utc": "2026-10-25 01:00:00+00:00",
+        "rajada_kmh": 16.5,
         "faixa": {
           "acima_de": [],
           "dentro_de": [
@@ -4461,8 +4461,8 @@
       },
       {
         "h": 2,
-        "ts_alvo_utc": "2026-10-25 01:00:00+00:00",
-        "rajada_kmh": 14.5,
+        "ts_alvo_utc": "2026-10-25 02:00:00+00:00",
+        "rajada_kmh": 13.6,
         "faixa": {
           "acima_de": [],
           "dentro_de": [
@@ -4502,8 +4502,8 @@
       },
       {
         "h": 3,
-        "ts_alvo_utc": "2026-10-25 02:00:00+00:00",
-        "rajada_kmh": 16.7,
+        "ts_alvo_utc": "2026-10-25 03:00:00+00:00",
+        "rajada_kmh": 16.9,
         "faixa": {
           "acima_de": [],
           "dentro_de": [
@@ -4547,8 +4547,8 @@
   },
   "satelite": {
     "status": "fora_do_horario",
-    "ts_utc": "2026-10-24T23:30:00+00:00",
-    "fim_utc": "2026-10-24T23:45:00+00:00",
-    "gerado_utc": "2026-10-24T23:25:27+00:00"
+    "ts_utc": "2026-10-25T00:15:00+00:00",
+    "fim_utc": "2026-10-25T00:30:00+00:00",
+    "gerado_utc": "2026-10-25T00:10:05+00:00"
   }
 }
