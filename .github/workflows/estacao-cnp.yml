@@ -5,7 +5,8 @@ name: Coleta da estacao do CNP
 # "estacao-cnp" (nao mexe na pagina nem dispara a publicacao dela).
 on:
   schedule:
-    - cron: "7 * * * *"
+    - cron: "7,27,47 * * * *"
+    - cron: "55 2 * * *"
   workflow_dispatch:
 
 permissions:
