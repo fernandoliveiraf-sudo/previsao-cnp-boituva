@@ -1,0 +1,48 @@
+name: Coleta da estacao do CNP
+
+# De hora em hora, 24 h por dia: o Klimadata so guarda o vento de 5 min do dia
+# corrente, entao o que nao for coletado se perde. Os dados vao para o branch
+# "estacao-cnp" (nao mexe na pagina nem dispara a publicacao dela).
+on:
+  schedule:
+    - cron: "7 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: estacao-cnp
+  cancel-in-progress: false
+
+jobs:
+  coletar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Codigo da coleta
+        uses: actions/checkout@v4
+        with:
+          path: codigo
+
+      - name: Branch de dados
+        uses: actions/checkout@v4
+        with:
+          ref: estacao-cnp
+          path: dados
+
+      - name: Coletar
+        run: python3 codigo/coleta/coletar_estacao.py dados
+
+      - name: Guardar
+        working-directory: dados
+        run: |
+          git config user.name "coleta-estacao"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "nada novo"
+          else
+            git commit -q -m "estacao do CNP $(date -u +%Y-%m-%dT%H:%MZ)"
+            git push -q origin HEAD:estacao-cnp
+          fi
