@@ -4439,25 +4439,25 @@
     "estacao_nome": "Sorocaba",
     "km_cnp": 17.9,
     "modelo": "satelite_metar",
-    "base_utc": "2026-10-26 10:00:00+00:00",
-    "metar_ultimo_utc": "2026-10-26 10:00:00+00:00",
+    "base_utc": "2026-10-26 11:00:00+00:00",
+    "metar_ultimo_utc": "2026-10-26 11:00:00+00:00",
     "previsoes": [
       {
         "h": 1,
-        "ts_alvo_utc": "2026-10-26 11:00:00+00:00",
-        "rajada_kmh": 26.8,
+        "ts_alvo_utc": "2026-10-26 12:00:00+00:00",
+        "rajada_kmh": 24.5,
         "faixa": {
           "acima_de": [
-            "IA/A (rodovia)",
-            "IA/A (matos)",
-            "B (rodovia)"
+            "IA/A (rodovia)"
           ],
           "dentro_de": [
+            "IA/A (matos)",
+            "B (rodovia)",
             "B (matos)",
             "C",
             "D"
           ],
-          "texto": "acima do limite de IA/A (rodovia), IA/A (matos), B (rodovia)"
+          "texto": "acima do limite de IA/A (rodovia)"
         },
         "mae_kmh": 4.420721198794744,
         "alertas": [
@@ -4471,7 +4471,7 @@
           {
             "limite_kmh": 31,
             "categorias": "C",
-            "alerta": true,
+            "alerta": false,
             "precisao": 0.49028400597907323,
             "sensibilidade": 0.784688995215311
           },
@@ -4486,20 +4486,20 @@
       },
       {
         "h": 2,
-        "ts_alvo_utc": "2026-10-26 12:00:00+00:00",
-        "rajada_kmh": 31.4,
+        "ts_alvo_utc": "2026-10-26 13:00:00+00:00",
+        "rajada_kmh": 28.4,
         "faixa": {
           "acima_de": [
             "IA/A (rodovia)",
             "IA/A (matos)",
-            "B (rodovia)",
-            "B (matos)",
-            "C"
+            "B (rodovia)"
           ],
           "dentro_de": [
+            "B (matos)",
+            "C",
             "D"
           ],
-          "texto": "acima do limite de IA/A (rodovia), IA/A (matos), B (rodovia), B (matos), C"
+          "texto": "acima do limite de IA/A (rodovia), IA/A (matos), B (rodovia)"
         },
         "mae_kmh": 4.927187310374151,
         "alertas": [
@@ -4528,20 +4528,20 @@
       },
       {
         "h": 3,
-        "ts_alvo_utc": "2026-10-26 13:00:00+00:00",
-        "rajada_kmh": 31.0,
+        "ts_alvo_utc": "2026-10-26 14:00:00+00:00",
+        "rajada_kmh": 27.4,
         "faixa": {
           "acima_de": [
             "IA/A (rodovia)",
             "IA/A (matos)",
-            "B (rodovia)",
-            "B (matos)"
+            "B (rodovia)"
           ],
           "dentro_de": [
+            "B (matos)",
             "C",
             "D"
           ],
-          "texto": "acima do limite de IA/A (rodovia), IA/A (matos), B (rodovia), B (matos)"
+          "texto": "acima do limite de IA/A (rodovia), IA/A (matos), B (rodovia)"
         },
         "mae_kmh": 4.920294098944679,
         "alertas": [
@@ -4573,9 +4573,66 @@
     "motivo_inmet": "sem token da API do INMET (variavel INMET_TOKEN)"
   },
   "satelite": {
-    "status": "fora_do_horario",
-    "ts_utc": "2026-10-26T10:00:00+00:00",
-    "fim_utc": "2026-10-26T10:15:00+00:00",
-    "gerado_utc": "2026-10-26T10:02:28+00:00"
+    "status": "ok",
+    "ts_utc": "2026-10-26T11:00:00+00:00",
+    "fim_utc": "2026-10-26T11:15:00+00:00",
+    "gerado_utc": "2026-10-26T11:00:51+00:00",
+    "modelo": "goes_msg_metar",
+    "prob_niveis": [
+      0.23100530774476424,
+      0.04044522456301425,
+      0.5785153430704049,
+      0.11154504559635332,
+      0.038489079025463294
+    ],
+    "nivel_mais_provavel": 2,
+    "prob_por_categoria": {
+      "D": 0.7689946922552358,
+      "C": 0.7285494676922215,
+      "B": 0.15003412462181662,
+      "A": 0.038489079025463294,
+      "AI": 0.038489079025463294
+    },
+    "sem_satelite": {
+      "D": 0.49930561722468797,
+      "C": 0.4943969523749295,
+      "B": 0.290635115792615,
+      "A": 0.04117312772668517,
+      "AI": 0.04117312772668517
+    },
+    "goes": {
+      "satelite": "G19",
+      "fim_varredura_utc": "2026-10-26T10:40:22+00:00",
+      "idade_min": 19.633333333333333,
+      "frac_nuvem_10km": 1.0,
+      "frac_baixa_10km": 0.8888888888888888
+    },
+    "msg": {
+      "carimbo_utc": "2026-10-26T09:00:00+00:00"
+    },
+    "metar": {
+      "estacao": "SDCO",
+      "hora_utc": "2026-10-26T10:00:00+00:00",
+      "texto": "SDCO 261000Z 18008KT 150V240 9999 SCT020 BKN040 17/14 Q1015",
+      "chovendo": false,
+      "trovoada": false,
+      "teto_ft": 4000.0
+    },
+    "estacao_cnp": {
+      "base_estimada_m": 250.0,
+      "sol_vs_ceu_limpo": 0.3079822041654364,
+      "sem_estacao": {
+        "D": 0.7989836037472866,
+        "C": 0.7869640908829744,
+        "B": 0.19584568666052726,
+        "A": 0.06360757758702652,
+        "AI": 0.06360757758702652
+      }
+    },
+    "norma": {
+      "estrita": 3,
+      "branda": 3
+    },
+    "ganho_medido": 0.101
   }
 }
