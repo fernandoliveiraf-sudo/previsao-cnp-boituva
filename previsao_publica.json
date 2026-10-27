@@ -4439,25 +4439,25 @@
     "estacao_nome": "Sorocaba",
     "km_cnp": 17.9,
     "modelo": "satelite_metar",
-    "base_utc": "2026-10-27 10:00:00+00:00",
-    "metar_ultimo_utc": "2026-10-27 10:00:00+00:00",
+    "base_utc": "2026-10-27 11:00:00+00:00",
+    "metar_ultimo_utc": "2026-10-27 11:00:00+00:00",
     "previsoes": [
       {
         "h": 1,
-        "ts_alvo_utc": "2026-10-27 11:00:00+00:00",
-        "rajada_kmh": 24.1,
+        "ts_alvo_utc": "2026-10-27 12:00:00+00:00",
+        "rajada_kmh": 30.8,
         "faixa": {
           "acima_de": [
-            "IA/A (rodovia)"
-          ],
-          "dentro_de": [
+            "IA/A (rodovia)",
             "IA/A (matos)",
             "B (rodovia)",
-            "B (matos)",
+            "B (matos)"
+          ],
+          "dentro_de": [
             "C",
             "D"
           ],
-          "texto": "acima do limite de IA/A (rodovia)"
+          "texto": "acima do limite de IA/A (rodovia), IA/A (matos), B (rodovia), B (matos)"
         },
         "mae_kmh": 4.420721198794744,
         "alertas": [
@@ -4471,14 +4471,14 @@
           {
             "limite_kmh": 31,
             "categorias": "C",
-            "alerta": false,
+            "alerta": true,
             "precisao": 0.49028400597907323,
             "sensibilidade": 0.784688995215311
           },
           {
             "limite_kmh": 35,
             "categorias": "D",
-            "alerta": false,
+            "alerta": true,
             "precisao": 0.3721881390593047,
             "sensibilidade": 0.7551867219917012
           }
@@ -4486,8 +4486,8 @@
       },
       {
         "h": 2,
-        "ts_alvo_utc": "2026-10-27 12:00:00+00:00",
-        "rajada_kmh": 32.5,
+        "ts_alvo_utc": "2026-10-27 13:00:00+00:00",
+        "rajada_kmh": 34.9,
         "faixa": {
           "acima_de": [
             "IA/A (rodovia)",
@@ -4528,19 +4528,20 @@
       },
       {
         "h": 3,
-        "ts_alvo_utc": "2026-10-27 13:00:00+00:00",
-        "rajada_kmh": 35.9,
+        "ts_alvo_utc": "2026-10-27 14:00:00+00:00",
+        "rajada_kmh": 33.7,
         "faixa": {
           "acima_de": [
             "IA/A (rodovia)",
             "IA/A (matos)",
             "B (rodovia)",
             "B (matos)",
-            "C",
+            "C"
+          ],
+          "dentro_de": [
             "D"
           ],
-          "dentro_de": [],
-          "texto": "acima do limite de todas as categorias"
+          "texto": "acima do limite de IA/A (rodovia), IA/A (matos), B (rodovia), B (matos), C"
         },
         "mae_kmh": 4.920294098944679,
         "alertas": [
@@ -4572,9 +4573,66 @@
     "motivo_inmet": "sem token da API do INMET (variavel INMET_TOKEN)"
   },
   "satelite": {
-    "status": "fora_do_horario",
-    "ts_utc": "2026-10-27T10:00:00+00:00",
-    "fim_utc": "2026-10-27T10:15:00+00:00",
-    "gerado_utc": "2026-10-27T10:01:49+00:00"
+    "status": "ok",
+    "ts_utc": "2026-10-27T11:00:00+00:00",
+    "fim_utc": "2026-10-27T11:15:00+00:00",
+    "gerado_utc": "2026-10-27T11:00:22+00:00",
+    "modelo": "goes_msg_metar",
+    "prob_niveis": [
+      0.1465137067490334,
+      0.02249986207026622,
+      0.41305289350589214,
+      0.2535828977789242,
+      0.16435063989588408
+    ],
+    "nivel_mais_provavel": 2,
+    "prob_por_categoria": {
+      "D": 0.8534862932509666,
+      "C": 0.8309864311807004,
+      "B": 0.41793353767480823,
+      "A": 0.16435063989588408,
+      "AI": 0.16435063989588408
+    },
+    "sem_satelite": {
+      "D": 0.6097920861910844,
+      "C": 0.604673065479831,
+      "B": 0.45701164272326317,
+      "A": 0.08480044426377785,
+      "AI": 0.08480044426377785
+    },
+    "goes": {
+      "satelite": "G19",
+      "fim_varredura_utc": "2026-10-27T10:49:51+00:00",
+      "idade_min": 10.15,
+      "frac_nuvem_10km": 0.0,
+      "frac_baixa_10km": 0.0
+    },
+    "msg": {
+      "carimbo_utc": "2026-10-27T09:00:00+00:00"
+    },
+    "metar": {
+      "estacao": "SDCO",
+      "hora_utc": "2026-10-27T10:00:00+00:00",
+      "texto": "SDCO 271000Z 10008KT 070V130 9999 FEW020 16/10 Q1021",
+      "chovendo": false,
+      "trovoada": false,
+      "teto_ft": 20000.0
+    },
+    "estacao_cnp": {
+      "base_estimada_m": 475.0000000000001,
+      "sol_vs_ceu_limpo": 0.5875805116983638,
+      "sem_estacao": {
+        "D": 0.8417303175703713,
+        "C": 0.8330382233752262,
+        "B": 0.4495481513579065,
+        "A": 0.18839244127708202,
+        "AI": 0.18839244127708202
+      }
+    },
+    "norma": {
+      "estrita": 4,
+      "branda": 4
+    },
+    "ganho_medido": 0.101
   }
 }
