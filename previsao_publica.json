@@ -4439,13 +4439,13 @@
     "estacao_nome": "Sorocaba",
     "km_cnp": 17.9,
     "modelo": "satelite_metar",
-    "base_utc": "2026-11-02 07:00:00+00:00",
-    "metar_ultimo_utc": "2026-11-02 07:00:00+00:00",
+    "base_utc": "2026-11-02 08:00:00+00:00",
+    "metar_ultimo_utc": "2026-11-02 08:00:00+00:00",
     "previsoes": [
       {
         "h": 1,
-        "ts_alvo_utc": "2026-11-02 08:00:00+00:00",
-        "rajada_kmh": 7.6,
+        "ts_alvo_utc": "2026-11-02 09:00:00+00:00",
+        "rajada_kmh": 7.9,
         "faixa": {
           "acima_de": [],
           "dentro_de": [
@@ -4485,8 +4485,8 @@
       },
       {
         "h": 2,
-        "ts_alvo_utc": "2026-11-02 09:00:00+00:00",
-        "rajada_kmh": 8.1,
+        "ts_alvo_utc": "2026-11-02 10:00:00+00:00",
+        "rajada_kmh": 8.8,
         "faixa": {
           "acima_de": [],
           "dentro_de": [
@@ -4526,8 +4526,8 @@
       },
       {
         "h": 3,
-        "ts_alvo_utc": "2026-11-02 10:00:00+00:00",
-        "rajada_kmh": 9.1,
+        "ts_alvo_utc": "2026-11-02 11:00:00+00:00",
+        "rajada_kmh": 12.0,
         "faixa": {
           "acima_de": [],
           "dentro_de": [
@@ -4571,8 +4571,8 @@
   },
   "satelite": {
     "status": "fora_do_horario",
-    "ts_utc": "2026-11-02T07:15:00+00:00",
-    "fim_utc": "2026-11-02T07:30:00+00:00",
-    "gerado_utc": "2026-11-02T07:12:56+00:00"
+    "ts_utc": "2026-11-02T08:00:00+00:00",
+    "fim_utc": "2026-11-02T08:15:00+00:00",
+    "gerado_utc": "2026-11-02T08:06:28+00:00"
   }
 }
