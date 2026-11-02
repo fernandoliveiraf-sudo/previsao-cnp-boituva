@@ -4433,202 +4433,70 @@
       "D": 35
     },
     "unidade": "km/h",
-    "fonte": "sem_inmet",
-    "status": "ok",
-    "estacao": "A713",
-    "estacao_nome": "Sorocaba",
-    "km_cnp": 17.9,
-    "modelo": "satelite_metar",
-    "base_utc": "2026-11-02 12:00:00+00:00",
-    "metar_ultimo_utc": "2026-11-02 12:00:00+00:00",
-    "previsoes": [
-      {
-        "h": 1,
-        "ts_alvo_utc": "2026-11-02 13:00:00+00:00",
-        "rajada_kmh": 17.7,
-        "faixa": {
-          "acima_de": [],
-          "dentro_de": [
-            "IA/A (rodovia)",
-            "IA/A (matos)",
-            "B (rodovia)",
-            "B (matos)",
-            "C",
-            "D"
-          ],
-          "texto": "abaixo do limite de todas as categorias"
-        },
-        "mae_kmh": 4.420721198794744,
-        "alertas": [
-          {
-            "limite_kmh": 26,
-            "categorias": "IA/A (matos) e B (rodovia)",
-            "alerta": false,
-            "precisao": 0.5606060606060606,
-            "sensibilidade": 0.8254593175853019
-          },
-          {
-            "limite_kmh": 31,
-            "categorias": "C",
-            "alerta": false,
-            "precisao": 0.49028400597907323,
-            "sensibilidade": 0.784688995215311
-          },
-          {
-            "limite_kmh": 35,
-            "categorias": "D",
-            "alerta": false,
-            "precisao": 0.3721881390593047,
-            "sensibilidade": 0.7551867219917012
-          }
-        ]
-      },
-      {
-        "h": 2,
-        "ts_alvo_utc": "2026-11-02 14:00:00+00:00",
-        "rajada_kmh": 17.0,
-        "faixa": {
-          "acima_de": [],
-          "dentro_de": [
-            "IA/A (rodovia)",
-            "IA/A (matos)",
-            "B (rodovia)",
-            "B (matos)",
-            "C",
-            "D"
-          ],
-          "texto": "abaixo do limite de todas as categorias"
-        },
-        "mae_kmh": 4.927187310374151,
-        "alertas": [
-          {
-            "limite_kmh": 26,
-            "categorias": "IA/A (matos) e B (rodovia)",
-            "alerta": false,
-            "precisao": 0.42342931937172773,
-            "sensibilidade": 0.8490813648293963
-          },
-          {
-            "limite_kmh": 31,
-            "categorias": "C",
-            "alerta": false,
-            "precisao": 0.374578177727784,
-            "sensibilidade": 0.7966507177033493
-          },
-          {
-            "limite_kmh": 35,
-            "categorias": "D",
-            "alerta": false,
-            "precisao": 0.29328621908127206,
-            "sensibilidade": 0.6887966804979253
-          }
-        ]
-      },
-      {
-        "h": 3,
-        "ts_alvo_utc": "2026-11-02 15:00:00+00:00",
-        "rajada_kmh": 19.1,
-        "faixa": {
-          "acima_de": [],
-          "dentro_de": [
-            "IA/A (rodovia)",
-            "IA/A (matos)",
-            "B (rodovia)",
-            "B (matos)",
-            "C",
-            "D"
-          ],
-          "texto": "abaixo do limite de todas as categorias"
-        },
-        "mae_kmh": 4.920294098944679,
-        "alertas": [
-          {
-            "limite_kmh": 26,
-            "categorias": "IA/A (matos) e B (rodovia)",
-            "alerta": true,
-            "precisao": 0.46097738876732314,
-            "sensibilidade": 0.8293963254593176
-          },
-          {
-            "limite_kmh": 31,
-            "categorias": "C",
-            "alerta": false,
-            "precisao": 0.3955773955773956,
-            "sensibilidade": 0.7703349282296651
-          },
-          {
-            "limite_kmh": 35,
-            "categorias": "D",
-            "alerta": false,
-            "precisao": 0.3102836879432624,
-            "sensibilidade": 0.7261410788381742
-          }
-        ]
-      }
-    ],
-    "modelo_dados_ate": "2026-09-30 23:00:00+00:00",
-    "motivo_inmet": "sem token da API do INMET (variavel INMET_TOKEN)"
+    "status": "indisponivel",
+    "motivo": "sem token da API do INMET (variavel INMET_TOKEN)",
+    "motivo_sem_inmet": "RuntimeError: sem resposta: https://previous-runs-api.open-meteo.com/v1/forecast"
   },
   "satelite": {
     "status": "ok",
-    "ts_utc": "2026-11-02T12:00:00+00:00",
-    "fim_utc": "2026-11-02T12:15:00+00:00",
-    "gerado_utc": "2026-11-02T12:06:24+00:00",
+    "ts_utc": "2026-11-02T13:15:00+00:00",
+    "fim_utc": "2026-11-02T13:30:00+00:00",
+    "gerado_utc": "2026-11-02T13:16:42+00:00",
     "modelo": "goes_msg_metar",
     "prob_niveis": [
-      0.44384994858571125,
-      0.025522216254717178,
-      0.1853366138564661,
-      0.21598807368542342,
-      0.12930314761768205
+      0.7299751228028786,
+      0.0151112103803559,
+      0.15558725028839848,
+      0.06869975916010439,
+      0.03062665736826267
     ],
     "nivel_mais_provavel": 0,
     "prob_por_categoria": {
-      "D": 0.5561500514142887,
-      "C": 0.5306278351595716,
-      "B": 0.34529122130310547,
-      "A": 0.12930314761768205,
-      "AI": 0.12930314761768205
+      "D": 0.2700248771971214,
+      "C": 0.2549136668167655,
+      "B": 0.09932641652836706,
+      "A": 0.03062665736826267,
+      "AI": 0.03062665736826267
     },
     "sem_satelite": {
-      "D": 0.48334464289654444,
-      "C": 0.48176711025931535,
-      "B": 0.3840444460810053,
-      "A": 0.31098652012675104,
-      "AI": 0.31098652012675104
+      "D": 0.5091386933690274,
+      "C": 0.504248061578768,
+      "B": 0.37110884475957767,
+      "A": 0.31506141678126637,
+      "AI": 0.31506141678126637
     },
     "goes": {
       "satelite": "G19",
-      "fim_varredura_utc": "2026-11-02T11:49:52+00:00",
-      "idade_min": 10.133333333333333,
+      "fim_varredura_utc": "2026-11-02T12:59:52+00:00",
+      "idade_min": 15.133333333333333,
       "frac_nuvem_10km": 1.0,
       "frac_baixa_10km": 0.0
     },
     "msg": {
-      "carimbo_utc": "2026-11-02T10:00:00+00:00"
+      "carimbo_utc": "2026-11-02T11:15:00+00:00"
     },
     "metar": {
       "estacao": "SDCO",
-      "hora_utc": "2026-11-02T11:00:00+00:00",
-      "texto": "SDCO 021100Z 02006KT 9999 FEW040 23/19 Q1016",
-      "chovendo": false,
+      "hora_utc": "2026-11-02T13:00:00+00:00",
+      "texto": "SDCO 021300Z 24004KT 220V290 5000 -RA BR SCT013 OVC028 23/21 Q1019",
+      "chovendo": true,
       "trovoada": false,
-      "teto_ft": 20000.0
+      "teto_ft": 2800.0
     },
     "estacao_cnp": {
-      "base_estimada_m": 250.0,
-      "sol_vs_ceu_limpo": 0.12528707230295488,
+      "base_estimada_m": 212.49999999999991,
+      "sol_vs_ceu_limpo": 0.1519430387589774,
       "sem_estacao": {
-        "D": 0.630863999329813,
-        "C": 0.6242361427153278,
-        "B": 0.43955440235835425,
-        "A": 0.2137086048751348,
-        "AI": 0.2137086048751348
+        "D": 0.33342151444315427,
+        "C": 0.32897603370924067,
+        "B": 0.14910464691584685,
+        "A": 0.06117077705743277,
+        "AI": 0.06117077705743277
       }
     },
     "norma": {
-      "estrita": 4,
-      "branda": 4
+      "estrita": 0,
+      "branda": 0
     },
     "ganho_medido": 0.101
   }
