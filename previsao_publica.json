@@ -4439,13 +4439,13 @@
     "estacao_nome": "Sorocaba",
     "km_cnp": 17.9,
     "modelo": "satelite_metar",
-    "base_utc": "2026-11-03 10:00:00+00:00",
-    "metar_ultimo_utc": "2026-11-03 10:00:00+00:00",
+    "base_utc": "2026-11-03 11:00:00+00:00",
+    "metar_ultimo_utc": "2026-11-03 11:00:00+00:00",
     "previsoes": [
       {
         "h": 1,
-        "ts_alvo_utc": "2026-11-03 11:00:00+00:00",
-        "rajada_kmh": 8.6,
+        "ts_alvo_utc": "2026-11-03 12:00:00+00:00",
+        "rajada_kmh": 8.8,
         "faixa": {
           "acima_de": [],
           "dentro_de": [
@@ -4485,8 +4485,8 @@
       },
       {
         "h": 2,
-        "ts_alvo_utc": "2026-11-03 12:00:00+00:00",
-        "rajada_kmh": 8.9,
+        "ts_alvo_utc": "2026-11-03 13:00:00+00:00",
+        "rajada_kmh": 14.0,
         "faixa": {
           "acima_de": [],
           "dentro_de": [
@@ -4526,8 +4526,8 @@
       },
       {
         "h": 3,
-        "ts_alvo_utc": "2026-11-03 13:00:00+00:00",
-        "rajada_kmh": 14.6,
+        "ts_alvo_utc": "2026-11-03 14:00:00+00:00",
+        "rajada_kmh": 17.3,
         "faixa": {
           "acima_de": [],
           "dentro_de": [
@@ -4570,9 +4570,66 @@
     "motivo_inmet": "sem token da API do INMET (variavel INMET_TOKEN)"
   },
   "satelite": {
-    "status": "fora_do_horario",
-    "ts_utc": "2026-11-03T10:00:00+00:00",
-    "fim_utc": "2026-11-03T10:15:00+00:00",
-    "gerado_utc": "2026-11-03T10:00:27+00:00"
+    "status": "ok",
+    "ts_utc": "2026-11-03T11:00:00+00:00",
+    "fim_utc": "2026-11-03T11:15:00+00:00",
+    "gerado_utc": "2026-11-03T11:00:25+00:00",
+    "modelo": "goes_msg_metar",
+    "prob_niveis": [
+      0.3350496458352329,
+      0.010837270532453314,
+      0.1646220808921724,
+      0.2868488178382342,
+      0.20264218490190722
+    ],
+    "nivel_mais_provavel": 0,
+    "prob_por_categoria": {
+      "D": 0.6649503541647671,
+      "C": 0.6541130836323138,
+      "B": 0.4894910027401414,
+      "A": 0.20264218490190722,
+      "AI": 0.20264218490190722
+    },
+    "sem_satelite": {
+      "D": 0.5054118437004415,
+      "C": 0.5037656505398609,
+      "B": 0.42223718013428957,
+      "A": 0.226263938066749,
+      "AI": 0.226263938066749
+    },
+    "goes": {
+      "satelite": "G19",
+      "fim_varredura_utc": "2026-11-03T10:49:52+00:00",
+      "idade_min": 10.133333333333333,
+      "frac_nuvem_10km": 1.0,
+      "frac_baixa_10km": 1.0
+    },
+    "msg": {
+      "carimbo_utc": "2026-11-03T09:00:00+00:00"
+    },
+    "metar": {
+      "estacao": "SDCO",
+      "hora_utc": "2026-11-03T10:00:00+00:00",
+      "texto": "SDCO 031000Z 04003KT 360V070 CAVOK 20/18 Q1016",
+      "chovendo": false,
+      "trovoada": false,
+      "teto_ft": 20000.0
+    },
+    "estacao_cnp": {
+      "base_estimada_m": 37.500000000000085,
+      "sol_vs_ceu_limpo": 0.43676191984191887,
+      "sem_estacao": {
+        "D": 0.6963707827446336,
+        "C": 0.6926832783321604,
+        "B": 0.5585951482773757,
+        "A": 0.2691192523347555,
+        "AI": 0.2691192523347555
+      }
+    },
+    "norma": {
+      "estrita": 4,
+      "branda": 4
+    },
+    "ganho_medido": 0.101
   }
 }
