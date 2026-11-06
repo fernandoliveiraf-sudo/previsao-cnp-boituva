@@ -12,6 +12,9 @@ Grava no diretorio dado (o branch "estacao-cnp" deste repositorio):
                               orvalho_c, umidade, chuva_mmh, radiacao_wm2,
                               pressao_hpa - um arquivo por mes
   dados/cnp_horario.csv       hora (UTC), ts, vento_kmh, rajada_kmh, direcao
+  dados/agora.json            a ultima leitura (leitura_atual), que a pagina
+                              le pelo raw.githubusercontent.com (o Klimadata
+                              nao deixa o navegador ler direto: sem CORS)
 O valor mais recente de cada instante vence, sem apagar o que ja havia.
 So biblioteca padrao (roda no Python do runner, sem instalar nada).
 
@@ -100,8 +103,56 @@ def horario() -> dict:
     return linhas
 
 
+PONTOS = ["N", "NNE", "NE", "ENE", "L", "ESE", "SE", "SSE", "S", "SSO", "SO", "OSO", "O", "ONO", "NO", "NNO"]
+
+
+def _num(txt) -> float | None:
+    """'23,5' / '201' / 'N/A' -> numero (o weewx_data.json vem formatado em pt-BR)."""
+    try:
+        return float(str(txt).replace(".", "").replace(",", ".")) if str(txt).count(",") else float(txt)
+    except (TypeError, ValueError):
+        return None
+
+
+def leitura_atual(agora_ms: float | None = None) -> dict:
+    """A ultima leitura da estacao do CNP, para a pagina: vento e direcao
+    (de onde vem) da leitura atual (json/weewx_data.json), rajada maxima dos
+    ultimos 30 min e chuva do json/day.json, e a base de nuvem estimada pelo
+    afastamento temperatura - orvalho (125 m por grau, a mesma conta da
+    segunda etapa do Agora; so vale para nuvem de conveccao)."""
+    j = baixar("weewx_data")
+    c = j["current"]
+    ts_ms = float(c["datetime_raw"]) * 1000
+    t, td = _num(c.get("outTemp_formatted")), _num(str(c.get("dewpoint", "")).split(" ")[0])
+    dirg = _num(c.get("winddir_formatted"))
+    vento = _num(c.get("windspeed", "").split(" ")[0])
+    out = {"status": "ok", "ts_utc": iso(ts_ms), "fonte": "estacao automatica do CNP (Klimadata)",
+           "vento_kmh": vento, "rajada_kmh": _num(c.get("windGust_formatted")),
+           "direcao_graus": None if dirg is None or not vento else dirg,
+           "direcao_txt": None if dirg is None or not vento else PONTOS[int((dirg % 360) / 22.5 + 0.5) % 16],
+           "temp_c": t, "orvalho_c": td, "umidade": _num(str(c.get("outHumidity", "")).rstrip("%")),
+           "chuva_mmh": _num(str(c.get("rainRate", "")).split(" ")[0]),
+           "base_estimada_m": None if t is None or td is None else round(max(0.0, 125 * (t - td)) / 10) * 10}
+    try:                                    # rajada maxima e chuva dos ultimos 30 min (5 min)
+        d = baixar("day")
+        ini = ts_ms - 30 * 60 * 1000
+        raj = [p[2] for p in d["chart4"]["series"]["haysChart"]["data"]
+               if ini < p[0] <= ts_ms and p[2] is not None]
+        chv = [p[1] for p in d["chart3"]["series"]["rainRate"]["data"] if ini < p[0] <= ts_ms and p[1] is not None]
+        out["rajada_max_30_kmh"] = round(max(raj), 1) if raj else None
+        out["choveu_30min"] = bool(chv and max(chv) > 0)
+    except Exception:  # noqa: BLE001 - so a leitura atual
+        out["rajada_max_30_kmh"], out["choveu_30min"] = None, None
+    return out
+
+
 def main():
     base = Path(sys.argv[1] if len(sys.argv) > 1 else ".") / "dados"
+    try:
+        base.mkdir(parents=True, exist_ok=True)
+        (base / "agora.json").write_text(json.dumps(leitura_atual(), ensure_ascii=False), encoding="utf-8")
+    except Exception as e:  # noqa: BLE001 - a coleta segue mesmo sem a leitura atual
+        print(f"agora.json nao gravado: {type(e).__name__}: {e}")
     novos = cinco_min()
     por_mes: dict[str, dict] = {}
     for k, r in novos.items():
