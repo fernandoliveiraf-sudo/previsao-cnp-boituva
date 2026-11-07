@@ -1,0 +1,102 @@
+# Gerado a partir de publicar/nuvem/agora.yml no projeto (sincronizar.py) - editar la.
+name: Agora na nuvem
+
+# O Agora (decisao dos proximos 15 min) sem depender do notebook. Disparado
+# a cada 15 min, das 8h as 17h, por um agendador externo que chama a API do
+# GitHub (workflow_dispatch): o cron do proprio GitHub atrasa horas neste
+# repositorio (medido em 07/11/2026), entao ele fica so de reserva.
+# Grava agora.json no branch "agora"; a pagina le de la quando for mais novo
+# que o gravado nela. De carona, coleta a estacao do CNP (branch estacao-cnp).
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "3 11-20 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: agora
+  cancel-in-progress: false
+
+jobs:
+  agora:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Codigo e modelos
+        uses: actions/checkout@v4
+        with:
+          path: codigo
+          sparse-checkout: nuvem
+
+      - name: Branch de saida
+        uses: actions/checkout@v4
+        with:
+          ref: agora
+          path: saida
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: codigo/nuvem/requirements.txt
+
+      - name: Bibliotecas
+        run: pip install -q -r codigo/nuvem/requirements.txt
+
+      - name: Agora
+        env:
+          REDEMET_KEY: ${{ secrets.REDEMET_KEY }}
+        run: python codigo/nuvem/rodar_agora.py saida/agora.json
+
+      - name: Guardar
+        working-directory: saida
+        run: |
+          git config user.name "agora-nuvem"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add agora.json
+          if git diff --cached --quiet; then
+            echo "nada novo"
+          else
+            git commit -q -m "agora $(date -u +%Y-%m-%dT%H:%MZ)"
+            git push -q origin HEAD:agora
+          fi
+
+  estacao:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    concurrency:
+      group: estacao-cnp          # o mesmo grupo do workflow da coleta: nunca os dois juntos
+      cancel-in-progress: false
+    steps:
+      - name: Codigo da coleta
+        uses: actions/checkout@v4
+        with:
+          path: codigo
+          sparse-checkout: coleta
+
+      - name: Branch de dados
+        uses: actions/checkout@v4
+        with:
+          ref: estacao-cnp
+          path: dados
+
+      - name: Coletar
+        run: python3 codigo/coleta/coletar_estacao.py dados
+
+      - name: Guardar
+        working-directory: dados
+        run: |
+          git config user.name "coleta-estacao"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "nada novo"
+          else
+            git commit -q -m "estacao do CNP $(date -u +%Y-%m-%dT%H:%MZ)"
+            for t in 1 2 3; do
+              git pull -q --rebase origin estacao-cnp && git push -q origin HEAD:estacao-cnp && break
+              sleep 5
+            done
+          fi
