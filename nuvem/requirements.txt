@@ -6,3 +6,4 @@ scipy==1.15.2
 h5py==3.14.0
 pyarrow==25.0.1
 requests==2.34.2
+pillow==12.3.0

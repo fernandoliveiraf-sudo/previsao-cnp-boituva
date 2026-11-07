@@ -22,6 +22,17 @@ modulo_satelite/segunda_etapa.py): +0,01 a +0,02 de skill na CV ajustando so com
 o passado (T53; o +0,060 do T41 usava meses posteriores no ajuste).
 Sem leitura da estacao nos ultimos 25 min, vale o modelo sem ela.
 
+TRAVA DE CHUVA (decisao do usuario em 07/11/2026, depois do T61/T62): com
+chuva confirmada em cima do CNP, o Agora publicado e "fechada", 0% em todas
+as categorias; o que o modelo dava fica em `sem_trava`. Confirmada = o
+pluviometro da estacao do CNP marcou chuva nos ultimos 15 min E (o radar de
+Sao Roque tem eco em >=25% do circulo de 10 km OU o METAR de Sorocaba tem
+chuva/trovoada); sem a estacao, radar >=50% E METAR com chuva. No livro (T61),
+com eco em >=50% dos 10 km a area abriu para D em 10% dos intervalos e para
+A/B em 0% (14 dias): a trava aceita esse erro raro em troca de nao mostrar
+"30% aberto" debaixo de temporal. Nao foi medida em CV (o pluviometro so
+existe desde 24/10/2026).
+
 T57/T60: a chance publicada e a MEDIA do intervalo atual com os 2 anteriores
 do mesmo dia (janela de 45 min), cada um com as entradas que existiam na sua
 hora - imita a espera do RTA antes de mudar a decisao. +0,008 de skill na CV
@@ -220,6 +231,7 @@ def prever_agora(agora: pd.Timestamp | None = None, entradas: pd.DataFrame | Non
         atual = _prever_agora(agora, entradas, fontes)
         if atual.get("status") == "ok":
             atual = _suavizar(atual, agora, entradas, fontes)
+            atual = _travar_chuva(atual, agora, fontes)
         return atual
     except Exception as e:  # noqa: BLE001
         return {"status": "indisponivel", "motivo": f"{type(e).__name__}: {e}"[:200]}
@@ -249,6 +261,88 @@ def _suavizar(atual: dict, agora: pd.Timestamp, entradas, fontes: dict) -> dict:
             "prob_por_categoria": _por_categoria(p),
             "sem_suavizar": {"prob_niveis": atual["prob_niveis"], "prob_por_categoria": atual["prob_por_categoria"]},
             "suavizacao": {"janela_min": SUAVIZAR_MIN, "intervalos_utc": usados}}
+
+
+CHUVA_JANELA_MIN = 15          # pluviometro: chuva em algum registro dos ultimos 15 min
+CHUVA_RADAR_FRAC = 0.25        # com o pluviometro: eco em >=25% do circulo de 10 km
+CHUVA_RADAR_FRAC_SEM_EST = 0.50   # sem o pluviometro: eco em >=50% E METAR com chuva
+IDADE_MAX_RADAR_MIN = 40
+
+
+def _baixar_metar(agora_fontes: pd.Timestamp) -> pd.DataFrame:
+    return redemet.metar_iem(redemet.metar(
+        AEROPORTOS_METAR, (agora_fontes - pd.Timedelta(hours=4)).floor("h"), agora_fontes.ceil("h")))
+
+
+def _radar_cnp(agora: pd.Timestamp) -> dict | None:
+    """O ultimo quadro do radar de Sao Roque (ate 40 min), resumido em volta do CNP."""
+    # a consulta da hora H devolve os quadros de ~H:00 em diante: a hora corrente
+    # e a anterior cobrem os ultimos 40 min
+    h = agora.floor("h")
+    q = pd.concat([redemet.radar_quadros(h - pd.Timedelta(hours=1), n=4), redemet.radar_quadros(h, n=4)])
+    if not len(q):
+        return None
+    q = q.drop_duplicates("path")
+    q = q[(q.tempo <= agora) & (q.tempo >= agora - pd.Timedelta(minutes=IDADE_MAX_RADAR_MIN))]
+    q = q.sort_values("tempo").tail(1)
+    if not len(q):
+        return None
+    r = redemet.resumir_quadros(q, [redemet.baixar_imagem(q.path.iloc[0])], redemet.LAT, redemet.LON)
+    if not len(r):
+        return None
+    return {"tempo_utc": pd.Timestamp(r.tempo.iloc[0]).isoformat(),
+            "eco_frac_10km": float(r.rad_frac_0_10km.iloc[0]), "eco_max_10km": float(r.rad_max_0_10km.iloc[0])}
+
+
+def chuva_no_cnp(agora: pd.Timestamp, fontes: dict | None = None) -> dict:
+    """As tres fontes de chuva em cima do CNP e se ela esta confirmada (duas
+    fontes concordando). Nunca levanta excecao: fonte com falha fica None."""
+    out = {"estacao_mmh": None, "radar": None, "metar_sdco": None}
+    try:
+        tab = _fonte(fontes, "estacao", estacao_cnp.carregar_5min)
+        t = tab[(tab.ts > agora - pd.Timedelta(minutes=CHUVA_JANELA_MIN)) & (tab.ts <= agora)].chuva_mmh.dropna()
+        out["estacao_mmh"] = float(t.max()) if len(t) else None
+    except Exception:  # noqa: BLE001
+        pass
+    try:
+        out["radar"] = _fonte(fontes, "radar", lambda: _radar_cnp(agora))
+    except Exception:  # noqa: BLE001
+        pass
+    try:
+        agora_fontes = fontes.get("_agora", agora) if fontes is not None else agora
+        mv = metar_vars(_fonte(fontes, "metar", lambda: _baixar_metar(agora_fontes)))
+        st = AEROPORTOS_METAR[0]
+        m = mv[(mv.station == st) & (pd.to_datetime(mv.valid, utc=True) <= agora)
+               & (pd.to_datetime(mv.valid, utc=True) >= agora - pd.Timedelta(minutes=IDADE_MAX_METAR_MIN))]
+        if len(m):
+            u = m.sort_values("valid").iloc[-1]
+            out["metar_sdco"] = {"hora_utc": pd.Timestamp(u.valid).isoformat(),
+                                 "chuva": bool(u.chovendo == 1 or u.trovoada == 1)}
+    except Exception:  # noqa: BLE001
+        pass
+    est = out["estacao_mmh"]
+    eco = out["radar"]["eco_frac_10km"] if out["radar"] else None
+    met = bool(out["metar_sdco"] and out["metar_sdco"]["chuva"])
+    if est is not None:
+        out["confirmada"] = bool(est > 0 and ((eco is not None and eco >= CHUVA_RADAR_FRAC) or met))
+    else:
+        out["confirmada"] = bool(eco is not None and eco >= CHUVA_RADAR_FRAC_SEM_EST and met)
+    return out
+
+
+def _travar_chuva(atual: dict, agora: pd.Timestamp, fontes: dict) -> dict:
+    c = chuva_no_cnp(agora, fontes)
+    atual = {**atual, "chuva_cnp": c}
+    if not c.get("confirmada"):
+        return atual
+    zero = np.zeros(len(atual["prob_niveis"]))
+    zero[0] = 1.0
+    return {**atual,
+            "sem_trava": {"prob_niveis": atual["prob_niveis"], "prob_por_categoria": atual["prob_por_categoria"]},
+            "trava_chuva": True,
+            "prob_niveis": [float(v) for v in zero],
+            "nivel_mais_provavel": 0,
+            "prob_por_categoria": _por_categoria(zero)}
 
 
 def _pkl(caminho):
@@ -307,8 +401,7 @@ def _prever_agora(agora, entradas, fontes: dict | None = None) -> dict:
     # que nao chegou a tempo e falta que o modelo nao viu - entao vai o reserva
     com_msg = bool(m["t_msg"].notna().iloc[0])
     try:
-        bruto = _fonte(fontes, "metar", lambda: redemet.metar_iem(redemet.metar(
-            AEROPORTOS_METAR, (agora_fontes - pd.Timedelta(hours=4)).floor("h"), agora_fontes.ceil("h"))))
+        bruto = _fonte(fontes, "metar", lambda: _baixar_metar(agora_fontes))
         mt = juntar_metar(pd.Series([ts]), metar_vars(bruto))
         rg = regra_rta.juntar(pd.Series([ts]), regra_rta.da_tabela_metar(bruto))
     except Exception:  # noqa: BLE001 - sem REDEMET, vale o modelo sem METAR
