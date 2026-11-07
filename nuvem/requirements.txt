@@ -1,0 +1,8 @@
+# as mesmas versoes do notebook: os modelos (pickle do scikit-learn) so abrem nelas
+numpy==2.2.3
+pandas==2.2.3
+scikit-learn==1.7.1
+scipy==1.15.2
+h5py==3.14.0
+pyarrow==25.0.1
+requests==2.34.2
