@@ -4439,25 +4439,25 @@
     "estacao_nome": "Sorocaba",
     "km_cnp": 17.9,
     "modelo": "satelite_metar",
-    "base_utc": "2026-11-09 09:00:00+00:00",
-    "metar_ultimo_utc": "2026-11-09 09:00:00+00:00",
+    "base_utc": "2026-11-09 10:00:00+00:00",
+    "metar_ultimo_utc": "2026-11-09 10:00:00+00:00",
     "previsoes": [
       {
         "h": 1,
-        "ts_alvo_utc": "2026-11-09 10:00:00+00:00",
-        "rajada_kmh": 26.9,
+        "ts_alvo_utc": "2026-11-09 11:00:00+00:00",
+        "rajada_kmh": 32.0,
         "faixa": {
           "acima_de": [
             "IA/A (rodovia)",
             "IA/A (matos)",
-            "B (rodovia)"
+            "B (rodovia)",
+            "B (matos)",
+            "C"
           ],
           "dentro_de": [
-            "B (matos)",
-            "C",
             "D"
           ],
-          "texto": "acima do limite de IA/A (rodovia), IA/A (matos), B (rodovia)"
+          "texto": "acima do limite de IA/A (rodovia), IA/A (matos), B (rodovia), B (matos), C"
         },
         "mae_kmh": 4.420721198794744,
         "alertas": [
@@ -4478,7 +4478,7 @@
           {
             "limite_kmh": 35,
             "categorias": "D",
-            "alerta": false,
+            "alerta": true,
             "precisao": 0.3721881390593047,
             "sensibilidade": 0.7551867219917012
           }
@@ -4486,19 +4486,20 @@
       },
       {
         "h": 2,
-        "ts_alvo_utc": "2026-11-09 11:00:00+00:00",
-        "rajada_kmh": 35.3,
+        "ts_alvo_utc": "2026-11-09 12:00:00+00:00",
+        "rajada_kmh": 34.7,
         "faixa": {
           "acima_de": [
             "IA/A (rodovia)",
             "IA/A (matos)",
             "B (rodovia)",
             "B (matos)",
-            "C",
+            "C"
+          ],
+          "dentro_de": [
             "D"
           ],
-          "dentro_de": [],
-          "texto": "acima do limite de todas as categorias"
+          "texto": "acima do limite de IA/A (rodovia), IA/A (matos), B (rodovia), B (matos), C"
         },
         "mae_kmh": 4.927187310374151,
         "alertas": [
@@ -4527,8 +4528,8 @@
       },
       {
         "h": 3,
-        "ts_alvo_utc": "2026-11-09 12:00:00+00:00",
-        "rajada_kmh": 35.9,
+        "ts_alvo_utc": "2026-11-09 13:00:00+00:00",
+        "rajada_kmh": 36.4,
         "faixa": {
           "acima_de": [
             "IA/A (rodovia)",
@@ -4572,24 +4573,24 @@
   },
   "satelite": {
     "status": "fora_do_horario",
-    "ts_utc": "2026-11-09T09:00:00+00:00",
-    "fim_utc": "2026-11-09T09:15:00+00:00",
-    "gerado_utc": "2026-11-09T09:02:15+00:00"
+    "ts_utc": "2026-11-09T10:00:00+00:00",
+    "fim_utc": "2026-11-09T10:15:00+00:00",
+    "gerado_utc": "2026-11-09T10:00:51+00:00"
   },
   "estacao": {
     "status": "ok",
-    "ts_utc": "2026-11-09T08:55:00+00:00",
+    "ts_utc": "2026-11-09T09:55:00+00:00",
     "fonte": "estacao automatica do CNP (Klimadata)",
-    "vento_kmh": 10.0,
-    "rajada_kmh": 13.0,
-    "direcao_graus": 159.0,
-    "direcao_txt": "SSE",
-    "temp_c": 14.3,
-    "orvalho_c": 12.5,
-    "umidade": 89.0,
+    "vento_kmh": 19.0,
+    "rajada_kmh": 22.0,
+    "direcao_graus": 181.0,
+    "direcao_txt": "S",
+    "temp_c": 15.7,
+    "orvalho_c": 12.8,
+    "umidade": 83.0,
     "chuva_mmh": 0.0,
-    "base_estimada_m": 230,
-    "rajada_max_30_kmh": 14.8,
+    "base_estimada_m": 360,
+    "rajada_max_30_kmh": 23.8,
     "choveu_30min": false
   }
 }
