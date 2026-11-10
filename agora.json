@@ -2,7 +2,7 @@
  "status": "ok",
  "ts_utc": "2026-11-10T18:30:00+00:00",
  "fim_utc": "2026-11-10T18:45:00+00:00",
- "gerado_utc": "2026-11-10T18:31:27+00:00",
+ "gerado_utc": "2026-11-10T18:36:09+00:00",
  "modelo": "goes_msg_metar",
  "prob_niveis": [
   0.2185219091716655,
@@ -77,7 +77,7 @@
  "chuva_cnp": {
   "estacao_mmh": null,
   "radar": {
-   "tempo_utc": "2026-11-10T18:16:39+00:00",
+   "tempo_utc": "2026-11-10T18:26:33+00:00",
    "eco_frac_10km": 0.0,
    "eco_max_10km": 0.0
   },
