@@ -6,14 +6,23 @@ https://klimadata.com/wx/boituva/  (-23,299121; -47,691638; 624 m)
 
 COLETA. O site so deixa no ar:
   - json/day.json   so o dia corrente: vento medio e rajada a cada 5 min
-                    (chart4 "haysChart": [t, vento, rajada], km/h), chuva
-                    (taxa, 5 min), temperatura, ponto de orvalho, umidade,
+                    (chart4 "haysChart": [t, vento, rajada], km/h), chuva e
+                    indice UV (5 min), temperatura, ponto de orvalho, umidade,
                     radiacao e pressao (10 min);
-  - json/week.json  vento, rajada e direcao por hora, ultimos 7 dias;
-  - json/year.json  um valor por dia desde 01/01/2026 (o maximo do dia).
+  - json/week.json  vento, rajada, direcao e chuva por hora, ultimos 7 dias;
+  - json/year.json  um valor por dia desde 01/01/2026 (o maximo do dia; a
+                    chuva, o total) e o termo/radiacao de 10 min.
 Entao a serie de 5 min so existe se for guardada todo dia: coletar() e
 chamada pela atualizacao da pagina (de hora em hora, 06-17 h) e acrescenta o
 que for novo, sem duplicar. Falha aqui nunca impede a pagina.
+
+O SITE TROCA NOMES DE SERIE SEM AVISO. Em 07/11/2026 a pressao "barometer"
+virou "altimeter" (QNH, ~3 hPa acima) e a chuva "rainRate" (taxa, mm/h) virou
+"rain" (mm no intervalo de 5 min, carimbado em :02, :07...). Como cada serie
+era obrigatoria, a coleta inteira caiu (inclusive o vento) de 07/11 16h20 a
+15/11, aqui e no GitHub Actions. Agora cada serie tem alternativas
+(SERIES_DIA), a que faltar fica vazia e o resto e gravado, e as essenciais
+ausentes aparecem no log da pagina ("series_ausentes").
 
 HISTORICO. Se o Klimadata mandar o arquivo da estacao (pedido por e-mail),
 basta po-lo em dados/estacao_cnp/historico/: o banco do WeeWX (.sdb/.sqlite,
@@ -29,8 +38,8 @@ ceu limpo (Haurwitz). Leitura com mais de IDADE_MAX_MIN fica vazia.
 
 Saidas (dados/estacao_cnp/, fora do git):
   cnp_5min.parquet     ts (UTC) + COLUNAS
-  cnp_horario.parquet  hora, ts (UTC, fim da hora agregada), vento_kmh, rajada_kmh, direcao
-  cnp_diario.parquet   dia, vento_max_kmh, rajada_max_kmh, direcao (do year.json)
+  cnp_horario.parquet  hora, ts (UTC, fim da hora agregada), vento_kmh, rajada_kmh, direcao, chuva_mm
+  cnp_diario.parquet   dia, vento_max_kmh, rajada_max_kmh, direcao, chuva_mm (do year.json)
 
 Uso:  python modulo_rajada/estacao_cnp.py          # coleta agora
 """
@@ -61,7 +70,23 @@ ARQ_HORA = PASTA / "cnp_horario.parquet"
 ARQ_DIA = PASTA / "cnp_diario.parquet"
 ARQ_TERMO_ANO = PASTA / "cnp_termo_ano.parquet"     # 10 min do year.json: temperatura, orvalho, umidade, radiacao
 LAT, LON, ALT_M = -23.299121, -47.691638, 624
-COLUNAS = ["vento_kmh", "rajada_kmh", "temp_c", "orvalho_c", "umidade", "chuva_mmh", "radiacao_wm2", "pressao_hpa"]
+COLUNAS = ["vento_kmh", "rajada_kmh", "temp_c", "orvalho_c", "umidade", "chuva_mmh", "radiacao_wm2", "pressao_hpa",
+           "qnh_hpa", "uv"]
+# day.json -> COLUNAS: (colunas, alternativas [(grafico, serie, fator)], essencial). Vale a primeira
+# alternativa que o site publicar. "rain" e mm em 5 min: x12 da a taxa media (mm/h), a mesma unidade do
+# antigo "rainRate" (o que se usa adiante e so se choveu). barometer (pressao ao nivel do mar) e
+# altimeter (QNH) ficam em colunas separadas: nao sao a mesma grandeza.
+SERIES_DIA = [
+    (["vento_kmh", "rajada_kmh"], [("chart4", "haysChart", 1)], True),
+    (["chuva_mmh"], [("chart3", "rainRate", 1), ("chart3", "rain", 12)], True),
+    (["temp_c"], [("chart1", "outTemp", 1)], True),
+    (["orvalho_c"], [("chart1", "dewpoint", 1)], True),
+    (["umidade"], [("chart2", "outHumidity", 1)], False),
+    (["radiacao_wm2"], [("chart6", "radiation", 1)], True),
+    (["uv"], [("chart6", "UV", 1)], False),
+    (["pressao_hpa"], [("chart7", "barometer", 1)], False),
+    (["qnh_hpa"], [("chart7", "altimeter", 1)], False),
+]
 
 ATRASO_MIN = 5            # como o METAR no "Agora": so o que existia 5 min antes do intervalo
 IDADE_MAX_MIN = 15        # leitura mais velha que isso nao vale
@@ -77,47 +102,68 @@ def _baixar(nome: str) -> dict:
         return json.load(r)
 
 
-def _serie(j: dict, grafico: str, nome: str, colunas: list[str]) -> pd.DataFrame:
-    d = pd.DataFrame(j[grafico]["series"][nome]["data"], columns=["ts", *colunas])
+def _serie(j: dict, grafico: str, nome: str, colunas: list[str], fator: float = 1) -> pd.DataFrame | None:
+    """Uma serie de um grafico do site, ou None se ele nao a publica mais."""
+    try:
+        dados = j[grafico]["series"][nome]["data"]
+    except (KeyError, TypeError):
+        return None
+    d = pd.DataFrame(dados, columns=["ts", *colunas])
     d["ts"] = pd.to_datetime(d.ts, unit="ms", utc=True)
+    if fator != 1:
+        d[colunas] = d[colunas] * fator
     return d.dropna(subset=colunas, how="all")
 
 
-def cinco_min() -> pd.DataFrame:
-    j = _baixar("day")
-    partes = [_serie(j, "chart4", "haysChart", ["vento_kmh", "rajada_kmh"]),
-              _serie(j, "chart3", "rainRate", ["chuva_mmh"]),
-              _serie(j, "chart1", "outTemp", ["temp_c"]),
-              _serie(j, "chart1", "dewpoint", ["orvalho_c"]),
-              _serie(j, "chart2", "outHumidity", ["umidade"]),
-              _serie(j, "chart6", "radiation", ["radiacao_wm2"]),
-              _serie(j, "chart7", "barometer", ["pressao_hpa"])]
+def _juntar(partes: list[pd.DataFrame | None], colunas: list[str]) -> pd.DataFrame:
+    partes = [p for p in partes if p is not None]
+    if not partes:
+        return pd.DataFrame(columns=["ts", *colunas])
     d = partes[0]
     for p in partes[1:]:
         d = d.merge(p, on="ts", how="outer")
+    for c in colunas:
+        if c not in d:
+            d[c] = np.nan
     return d.sort_values("ts").reset_index(drop=True)
+
+
+def cinco_min() -> pd.DataFrame:
+    """O day.json em ts + COLUNAS (todas, mesmo as que o site nao publica mais);
+    d.attrs["ausentes"] lista as series essenciais que nao vieram."""
+    j = _baixar("day")
+    partes, ausentes = [], []
+    for cols, alternativas, essencial in SERIES_DIA:
+        s = next((x for x in (_serie(j, g, n, cols, f) for g, n, f in alternativas) if x is not None), None)
+        if s is None:
+            if essencial:
+                ausentes.append("/".join(n for _, n, _ in alternativas))
+            continue
+        s["ts"] = s.ts.dt.floor("5min")                 # a chuva vem carimbada em :02, :07...
+        partes.append(s.groupby("ts", as_index=False)[cols].max())
+    d = _juntar(partes, COLUNAS)[["ts", *COLUNAS]]
+    d.attrs["ausentes"] = ausentes
+    return d
 
 
 def horario() -> pd.DataFrame:
     j = _baixar("week")
-    v = _serie(j, "chart5", "windSpeed", ["vento_kmh"])
-    g = _serie(j, "chart5", "windGust", ["rajada_kmh"])
-    dr = _serie(j, "chart5", "windDir", ["direcao"])
-    d = v.merge(g, on="ts", how="outer").merge(dr, on="ts", how="outer")
+    d = _juntar([_serie(j, "chart5", "windSpeed", ["vento_kmh"]), _serie(j, "chart5", "windGust", ["rajada_kmh"]),
+                 _serie(j, "chart5", "windDir", ["direcao"]), _serie(j, "chart3", "rain", ["chuva_mm"])],
+                ["vento_kmh", "rajada_kmh", "direcao", "chuva_mm"])
     # o site agrega horas que terminam no minuto em que gerou o arquivo (:25, :35...):
     # uma linha por hora cheia, a da coleta mais recente
-    d.insert(0, "hora", d.ts.dt.floor("h"))
+    d.insert(0, "hora", pd.to_datetime(d.ts, utc=True).dt.floor("h"))
     return d
 
 
 def diario(j: dict | None = None) -> pd.DataFrame:
     j = j or _baixar("year")
-    v = _serie(j, "chart5", "windSpeed", ["vento_max_kmh"])
-    g = _serie(j, "chart5", "windGust", ["rajada_max_kmh"])
-    dr = _serie(j, "chart5", "windDir", ["direcao"])
-    d = v.merge(g, on="ts", how="outer").merge(dr, on="ts", how="outer")
+    d = _juntar([_serie(j, "chart5", "windSpeed", ["vento_max_kmh"]), _serie(j, "chart5", "windGust", ["rajada_max_kmh"]),
+                 _serie(j, "chart5", "windDir", ["direcao"]), _serie(j, "chart3", "rain", ["chuva_mm"])],
+                ["vento_max_kmh", "rajada_max_kmh", "direcao", "chuva_mm"])
     # o ponto do dia vem carimbado no meio do dia local
-    d.insert(0, "dia", d.ts.dt.tz_convert("America/Sao_Paulo").dt.date.astype(str))
+    d.insert(0, "dia", pd.to_datetime(d.ts, utc=True).dt.tz_convert("America/Sao_Paulo").dt.date.astype(str))
     return d.drop(columns="ts")
 
 
@@ -162,19 +208,35 @@ def importar_github() -> dict:
 
 
 def coletar() -> dict:
-    """Acrescenta o que houver de novo; devolve quantas linhas novas por arquivo."""
+    """Acrescenta o que houver de novo; devolve quantas linhas novas por arquivo.
+    Cada parte e independente: a falha de uma (site fora, serie trocada) nao
+    impede as outras de gravar."""
     PASTA.mkdir(parents=True, exist_ok=True)
-    try:
-        gh = importar_github()
-    except Exception:  # noqa: BLE001
-        gh = {}
-    out = {"github": gh, "5min": _acrescentar(ARQ_5MIN, cinco_min(), "ts"),
-           "horario": _acrescentar(ARQ_HORA, horario(), "hora")}
+    out = {}
+
+    def parte(nome, f):
+        try:
+            out[nome] = f()
+        except Exception as e:  # noqa: BLE001
+            out[nome] = f"falhou: {type(e).__name__}: {e}"[:150]
+
+    def _5min():
+        d = cinco_min()
+        if d.attrs.get("ausentes"):
+            out["series_ausentes"] = d.attrs["ausentes"]
+        return _acrescentar(ARQ_5MIN, d, "ts")
+
+    def _ano():
+        j = _baixar("year")                                       # 36 MB: no maximo uma vez por dia
+        return {"diario": _acrescentar(ARQ_DIA, diario(j), "dia"),
+                "termo_ano": len(historico_termo(j))}             # preenche as horas que a coleta de 5 min perdeu
+
+    parte("github", importar_github)
+    parte("5min", _5min)
+    parte("horario", lambda: _acrescentar(ARQ_HORA, horario(), "hora"))
     hoje = pd.Timestamp.now(tz="America/Sao_Paulo").date().isoformat()
     if not ARQ_DIA.exists() or pd.read_parquet(ARQ_DIA).dia.max() < hoje:
-        j = _baixar("year")                                       # 36 MB: no maximo uma vez por dia
-        out["diario"] = _acrescentar(ARQ_DIA, diario(j), "dia")
-        out["termo_ano"] = len(historico_termo(j))                # preenche as horas que a coleta de 5 min perdeu
+        parte("ano", _ano)
     return out
 
 
@@ -185,11 +247,9 @@ def historico_termo(j: dict | None = None) -> pd.DataFrame:
     Acrescenta em ARQ_TERMO_ANO sem apagar o que ja havia: na virada do ano o
     year.json deve recomecar do zero."""
     j = j or _baixar("year")
-    partes = [_serie(j, "chart1", "outTemp", ["temp_c"]), _serie(j, "chart1", "dewpoint", ["orvalho_c"]),
-              _serie(j, "chart2", "outHumidity", ["umidade"]), _serie(j, "chart6", "radiation", ["radiacao_wm2"])]
-    d = partes[0]
-    for x in partes[1:]:
-        d = d.merge(x, on="ts", how="outer")
+    d = _juntar([_serie(j, "chart1", "outTemp", ["temp_c"]), _serie(j, "chart1", "dewpoint", ["orvalho_c"]),
+                 _serie(j, "chart2", "outHumidity", ["umidade"]), _serie(j, "chart6", "radiation", ["radiacao_wm2"])],
+                ["temp_c", "orvalho_c", "umidade", "radiacao_wm2"])
     PASTA.mkdir(parents=True, exist_ok=True)
     _acrescentar(ARQ_TERMO_ANO, d, "ts")
     return d
@@ -197,7 +257,8 @@ def historico_termo(j: dict | None = None) -> pd.DataFrame:
 
 # ------------------------------------------------------------------ historico
 _WEEWX = {"windSpeed": "vento_kmh", "windGust": "rajada_kmh", "outTemp": "temp_c", "dewpoint": "orvalho_c",
-          "outHumidity": "umidade", "rainRate": "chuva_mmh", "radiation": "radiacao_wm2", "barometer": "pressao_hpa"}
+          "outHumidity": "umidade", "rainRate": "chuva_mmh", "radiation": "radiacao_wm2", "barometer": "pressao_hpa",
+          "altimeter": "qnh_hpa", "UV": "uv"}
 
 
 def _de_weewx(a: pd.DataFrame) -> pd.DataFrame:
@@ -219,7 +280,7 @@ def _de_weewx(a: pd.DataFrame) -> pd.DataFrame:
             v = np.where(u == 1, (v - 32) * 5 / 9, v)
         elif novo == "chuva_mmh":
             v = v * chuva
-        elif novo == "pressao_hpa":
+        elif novo in ("pressao_hpa", "qnh_hpa"):
             v = v * pres
         out[novo] = v
     return out
