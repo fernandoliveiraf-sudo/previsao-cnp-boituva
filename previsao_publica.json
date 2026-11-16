@@ -4439,13 +4439,13 @@
     "estacao_nome": "Sorocaba",
     "km_cnp": 17.9,
     "modelo": "satelite_metar",
-    "base_utc": "2026-11-16 15:00:00+00:00",
-    "metar_ultimo_utc": "2026-11-16 15:00:00+00:00",
+    "base_utc": "2026-11-16 16:00:00+00:00",
+    "metar_ultimo_utc": "2026-11-16 16:00:00+00:00",
     "previsoes": [
       {
         "h": 1,
-        "ts_alvo_utc": "2026-11-16 16:00:00+00:00",
-        "rajada_kmh": 14.0,
+        "ts_alvo_utc": "2026-11-16 17:00:00+00:00",
+        "rajada_kmh": 18.0,
         "faixa": {
           "acima_de": [],
           "dentro_de": [
@@ -4485,33 +4485,34 @@
       },
       {
         "h": 2,
-        "ts_alvo_utc": "2026-11-16 17:00:00+00:00",
-        "rajada_kmh": 17.0,
+        "ts_alvo_utc": "2026-11-16 18:00:00+00:00",
+        "rajada_kmh": 22.7,
         "faixa": {
-          "acima_de": [],
+          "acima_de": [
+            "IA/A (rodovia)"
+          ],
           "dentro_de": [
-            "IA/A (rodovia)",
             "IA/A (matos)",
             "B (rodovia)",
             "B (matos)",
             "C",
             "D"
           ],
-          "texto": "abaixo do limite de todas as categorias"
+          "texto": "acima do limite de IA/A (rodovia)"
         },
         "mae_kmh": 4.927187310374151,
         "alertas": [
           {
             "limite_kmh": 26,
             "categorias": "IA/A (matos) e B (rodovia)",
-            "alerta": false,
+            "alerta": true,
             "precisao": 0.42342931937172773,
             "sensibilidade": 0.8490813648293963
           },
           {
             "limite_kmh": 31,
             "categorias": "C",
-            "alerta": false,
+            "alerta": true,
             "precisao": 0.374578177727784,
             "sensibilidade": 0.7966507177033493
           },
@@ -4526,40 +4527,41 @@
       },
       {
         "h": 3,
-        "ts_alvo_utc": "2026-11-16 18:00:00+00:00",
-        "rajada_kmh": 18.4,
+        "ts_alvo_utc": "2026-11-16 19:00:00+00:00",
+        "rajada_kmh": 29.2,
         "faixa": {
-          "acima_de": [],
-          "dentro_de": [
+          "acima_de": [
             "IA/A (rodovia)",
             "IA/A (matos)",
             "B (rodovia)",
-            "B (matos)",
+            "B (matos)"
+          ],
+          "dentro_de": [
             "C",
             "D"
           ],
-          "texto": "abaixo do limite de todas as categorias"
+          "texto": "acima do limite de IA/A (rodovia), IA/A (matos), B (rodovia), B (matos)"
         },
         "mae_kmh": 4.920294098944679,
         "alertas": [
           {
             "limite_kmh": 26,
             "categorias": "IA/A (matos) e B (rodovia)",
-            "alerta": false,
+            "alerta": true,
             "precisao": 0.46097738876732314,
             "sensibilidade": 0.8293963254593176
           },
           {
             "limite_kmh": 31,
             "categorias": "C",
-            "alerta": false,
+            "alerta": true,
             "precisao": 0.3955773955773956,
             "sensibilidade": 0.7703349282296651
           },
           {
             "limite_kmh": 35,
             "categorias": "D",
-            "alerta": false,
+            "alerta": true,
             "precisao": 0.3102836879432624,
             "sensibilidade": 0.7261410788381742
           }
@@ -4571,59 +4573,59 @@
   },
   "satelite": {
     "status": "ok",
-    "ts_utc": "2026-11-16T15:00:00+00:00",
-    "fim_utc": "2026-11-16T15:15:00+00:00",
-    "gerado_utc": "2026-11-16T15:00:16+00:00",
+    "ts_utc": "2026-11-16T16:00:00+00:00",
+    "fim_utc": "2026-11-16T16:15:00+00:00",
+    "gerado_utc": "2026-11-16T16:00:16+00:00",
     "modelo": "goes_msg_metar",
     "prob_niveis": [
-      0.05863825744118889,
-      0.009321277945847362,
-      0.12574695739096706,
-      0.38201673736376424,
-      0.4242767698582324
+      0.022741738661655148,
+      0.004882369058632707,
+      0.01989578213817352,
+      0.17423340849548427,
+      0.7782467016460544
     ],
     "nivel_mais_provavel": 4,
     "prob_por_categoria": {
-      "D": 0.941361742558811,
-      "C": 0.9320404646129636,
-      "B": 0.8062935072219967,
-      "A": 0.4242767698582324,
-      "AI": 0.4242767698582324
+      "D": 0.9772582613383449,
+      "C": 0.9723758922797121,
+      "B": 0.9524801101415387,
+      "A": 0.7782467016460544,
+      "AI": 0.7782467016460544
     },
     "sem_satelite": {
-      "D": 0.9099436561809466,
-      "C": 0.9076694787827052,
-      "B": 0.8280162191111481,
-      "A": 0.723902840464219,
-      "AI": 0.723902840464219
+      "D": 0.8974911291720733,
+      "C": 0.8949066896669927,
+      "B": 0.7709890156481971,
+      "A": 0.6422939810369223,
+      "AI": 0.6422939810369223
     },
     "goes": {
       "satelite": "G19",
-      "fim_varredura_utc": "2026-11-16T14:49:52+00:00",
+      "fim_varredura_utc": "2026-11-16T15:49:52+00:00",
       "idade_min": 10.133333333333333,
       "frac_nuvem_10km": 1.0,
-      "frac_baixa_10km": 0.7777777777777778
+      "frac_baixa_10km": 0.8888888888888888
     },
     "msg": {
-      "carimbo_utc": "2026-11-16T13:00:00+00:00"
+      "carimbo_utc": "2026-11-16T14:00:00+00:00"
     },
     "metar": {
       "estacao": "SDCO",
-      "hora_utc": "2026-11-16T14:00:00+00:00",
-      "texto": "SDCO 161400Z VRB05KT 9999 BKN030 SCT100 26/17 Q1012",
+      "hora_utc": "2026-11-16T15:00:00+00:00",
+      "texto": "SDCO 161500Z VRB03KT 9999 BKN040 26/17 Q1011",
       "chovendo": false,
       "trovoada": false,
-      "teto_ft": 3000.0
+      "teto_ft": 4000.0
     },
     "estacao_cnp": {
-      "base_estimada_m": 899.9999999999999,
-      "sol_vs_ceu_limpo": 0.8795712693892715,
+      "base_estimada_m": 987.4999999999998,
+      "sol_vs_ceu_limpo": 1.0162531044276744,
       "sem_estacao": {
-        "D": 0.9568027648796522,
-        "C": 0.9504593649136117,
-        "B": 0.9032014953765894,
-        "A": 0.5870960810201022,
-        "AI": 0.5870960810201022
+        "D": 0.9687629702153577,
+        "C": 0.9632884749500995,
+        "B": 0.9377481400528017,
+        "A": 0.763861124245513,
+        "AI": 0.763861124245513
       }
     },
     "norma": {
@@ -4633,37 +4635,37 @@
     "ganho_medido": 0.101,
     "sem_suavizar": {
       "prob_niveis": [
-        0.02864287620812167,
-        0.006755822485120522,
-        0.039344627038071955,
-        0.29186956491197935,
-        0.6333871093567065
+        0.018251218365859856,
+        0.004940780434452341,
+        0.02038074720373939,
+        0.1425161574678816,
+        0.8139110965280668
       ],
       "prob_por_categoria": {
-        "D": 0.9713571237918783,
-        "C": 0.9646013013067578,
-        "B": 0.9252566742686859,
-        "A": 0.6333871093567065,
-        "AI": 0.6333871093567065
+        "D": 0.9817487816341401,
+        "C": 0.9768080011996878,
+        "B": 0.9564272539959484,
+        "A": 0.8139110965280668,
+        "AI": 0.8139110965280668
       }
     },
     "suavizacao": {
       "janela_min": 45,
       "intervalos_utc": [
-        "2026-11-16T15:00:00+00:00",
-        "2026-11-16T14:45:00+00:00",
-        "2026-11-16T14:30:00+00:00"
+        "2026-11-16T16:00:00+00:00",
+        "2026-11-16T15:45:00+00:00",
+        "2026-11-16T15:30:00+00:00"
       ]
     },
     "chuva_cnp": {
       "estacao_mmh": 0.0,
       "radar": {
-        "tempo_utc": "2026-11-16T14:46:38+00:00",
+        "tempo_utc": "2026-11-16T15:46:30+00:00",
         "eco_frac_10km": 0.0,
         "eco_max_10km": 0.0
       },
       "metar_sdco": {
-        "hora_utc": "2026-11-16T15:00:00+00:00",
+        "hora_utc": "2026-11-16T16:00:00+00:00",
         "chuva": false
       },
       "confirmada": false
@@ -4671,18 +4673,18 @@
   },
   "estacao": {
     "status": "ok",
-    "ts_utc": "2026-11-16T14:55:00+00:00",
+    "ts_utc": "2026-11-16T15:55:00+00:00",
     "fonte": "estacao automatica do CNP (Klimadata)",
-    "vento_kmh": 5.0,
-    "rajada_kmh": 7.0,
-    "direcao_graus": 193.0,
-    "direcao_txt": "SSO",
-    "temp_c": 27.0,
-    "orvalho_c": 19.8,
-    "umidade": 65.0,
+    "vento_kmh": 6.0,
+    "rajada_kmh": 9.0,
+    "direcao_graus": 232.0,
+    "direcao_txt": "SO",
+    "temp_c": 26.4,
+    "orvalho_c": 18.5,
+    "umidade": 62.0,
     "chuva_mmh": 0.0,
-    "base_estimada_m": 900,
-    "rajada_max_30_kmh": 14.8,
+    "base_estimada_m": 990,
+    "rajada_max_30_kmh": 20.2,
     "choveu_30min": false
   }
 }
