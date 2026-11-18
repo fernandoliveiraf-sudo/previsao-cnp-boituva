@@ -4439,13 +4439,13 @@
     "estacao_nome": "Sorocaba",
     "km_cnp": 17.9,
     "modelo": "satelite_metar",
-    "base_utc": "2026-11-18 09:00:00+00:00",
-    "metar_ultimo_utc": "2026-11-18 09:00:00+00:00",
+    "base_utc": "2026-11-18 10:00:00+00:00",
+    "metar_ultimo_utc": "2026-11-18 10:00:00+00:00",
     "previsoes": [
       {
         "h": 1,
-        "ts_alvo_utc": "2026-11-18 10:00:00+00:00",
-        "rajada_kmh": 7.9,
+        "ts_alvo_utc": "2026-11-18 11:00:00+00:00",
+        "rajada_kmh": 11.5,
         "faixa": {
           "acima_de": [],
           "dentro_de": [
@@ -4485,8 +4485,8 @@
       },
       {
         "h": 2,
-        "ts_alvo_utc": "2026-11-18 11:00:00+00:00",
-        "rajada_kmh": 8.4,
+        "ts_alvo_utc": "2026-11-18 12:00:00+00:00",
+        "rajada_kmh": 11.8,
         "faixa": {
           "acima_de": [],
           "dentro_de": [
@@ -4526,8 +4526,8 @@
       },
       {
         "h": 3,
-        "ts_alvo_utc": "2026-11-18 12:00:00+00:00",
-        "rajada_kmh": 10.9,
+        "ts_alvo_utc": "2026-11-18 13:00:00+00:00",
+        "rajada_kmh": 11.1,
         "faixa": {
           "acima_de": [],
           "dentro_de": [
@@ -4571,24 +4571,24 @@
   },
   "satelite": {
     "status": "fora_do_horario",
-    "ts_utc": "2026-11-18T09:00:00+00:00",
-    "fim_utc": "2026-11-18T09:15:00+00:00",
-    "gerado_utc": "2026-11-18T09:03:34+00:00"
+    "ts_utc": "2026-11-18T10:00:00+00:00",
+    "fim_utc": "2026-11-18T10:15:00+00:00",
+    "gerado_utc": "2026-11-18T10:00:25+00:00"
   },
   "estacao": {
     "status": "ok",
-    "ts_utc": "2026-11-18T09:00:00+00:00",
+    "ts_utc": "2026-11-18T09:55:00+00:00",
     "fonte": "estacao automatica do CNP (Klimadata)",
     "vento_kmh": 3.0,
-    "rajada_kmh": 4.0,
-    "direcao_graus": 250.0,
-    "direcao_txt": "OSO",
-    "temp_c": 18.7,
-    "orvalho_c": 18.0,
-    "umidade": 96.0,
+    "rajada_kmh": 5.0,
+    "direcao_graus": 64.0,
+    "direcao_txt": "ENE",
+    "temp_c": 21.6,
+    "orvalho_c": 18.6,
+    "umidade": 83.0,
     "chuva_mmh": 0.0,
-    "base_estimada_m": 90,
-    "rajada_max_30_kmh": 3.6,
+    "base_estimada_m": 380,
+    "rajada_max_30_kmh": 5.4,
     "choveu_30min": false
   }
 }
