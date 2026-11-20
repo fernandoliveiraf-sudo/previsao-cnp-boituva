@@ -11,7 +11,11 @@ COLETA. O site so deixa no ar:
                     radiacao e pressao (10 min);
   - json/week.json  vento, rajada, direcao e chuva por hora, ultimos 7 dias;
   - json/year.json  um valor por dia desde 01/01/2026 (o maximo do dia; a
-                    chuva, o total) e o termo/radiacao de 10 min.
+                    chuva, o total), carimbado ao meio-dia local. Ate 16/11/2026
+                    trazia tambem o termo/radiacao de 10 min (36 MB); desde 17/11
+                    so os valores diarios (0,5 MB). O 10 min de 01/01 a 16/11 6h
+                    ficou guardado em cnp_termo_ano.parquet, e nao existe mais no
+                    site; dali em diante o termo de 10 min vem so do day.json.
 Entao a serie de 5 min so existe se for guardada todo dia: coletar() e
 chamada pela atualizacao da pagina (de hora em hora, 06-17 h) e acrescenta o
 que for novo, sem duplicar. Falha aqui nunca impede a pagina.
@@ -22,7 +26,11 @@ virou "altimeter" (QNH, ~3 hPa acima) e a chuva "rainRate" (taxa, mm/h) virou
 era obrigatoria, a coleta inteira caiu (inclusive o vento) de 07/11 16h20 a
 15/11, aqui e no GitHub Actions. Agora cada serie tem alternativas
 (SERIES_DIA), a que faltar fica vazia e o resto e gravado, e as essenciais
-ausentes aparecem no log da pagina ("series_ausentes").
+ausentes aparecem no log da pagina ("series_ausentes"). Na troca do year.json
+(17/11) os pontos diarios das 12h entraram em cnp_termo_ano.parquet como se
+fossem leituras de 10 min (324 linhas, retiradas em 20/11; copia do arquivo
+anterior em cnp_termo_ano_antes_limpeza_2026-11-20.parquet). historico_termo()
+agora so aceita pontos com vizinho a ate 30 min.
 
 HISTORICO. Se o Klimadata mandar o arquivo da estacao (pedido por e-mail),
 basta po-lo em dados/estacao_cnp/historico/: o banco do WeeWX (.sdb/.sqlite,
@@ -37,9 +45,11 @@ estimada das nuvens baixas (125 m x (T - Td)) e radiacao medida / radiacao de
 ceu limpo (Haurwitz). Leitura com mais de IDADE_MAX_MIN fica vazia.
 
 Saidas (dados/estacao_cnp/, fora do git):
-  cnp_5min.parquet     ts (UTC) + COLUNAS
-  cnp_horario.parquet  hora, ts (UTC, fim da hora agregada), vento_kmh, rajada_kmh, direcao, chuva_mm
-  cnp_diario.parquet   dia, vento_max_kmh, rajada_max_kmh, direcao, chuva_mm (do year.json)
+  cnp_5min.parquet       ts (UTC) + COLUNAS
+  cnp_horario.parquet    hora, ts (UTC, inicio da janela agregada [ts, ts + 1 h)), vento_kmh, rajada_kmh,
+                         direcao, chuva_mm
+  cnp_diario.parquet     dia, vento_max_kmh, rajada_max_kmh, direcao, chuva_mm (do year.json)
+  cnp_termo_ano.parquet  ts (UTC), temp_c, orvalho_c, umidade, radiacao_wm2 de 10 min, 01/01 a 16/11/2026
 
 Uso:  python modulo_rajada/estacao_cnp.py          # coleta agora
 """
@@ -68,7 +78,7 @@ PASTA_HIST = PASTA / "historico"
 ARQ_5MIN = PASTA / "cnp_5min.parquet"
 ARQ_HORA = PASTA / "cnp_horario.parquet"
 ARQ_DIA = PASTA / "cnp_diario.parquet"
-ARQ_TERMO_ANO = PASTA / "cnp_termo_ano.parquet"     # 10 min do year.json: temperatura, orvalho, umidade, radiacao
+ARQ_TERMO_ANO = PASTA / "cnp_termo_ano.parquet"     # 10 min do year.json ate 16/11/2026: temperatura, orvalho, umidade, radiacao
 LAT, LON, ALT_M = -23.299121, -47.691638, 624
 COLUNAS = ["vento_kmh", "rajada_kmh", "temp_c", "orvalho_c", "umidade", "chuva_mmh", "radiacao_wm2", "pressao_hpa",
            "qnh_hpa", "uv"]
@@ -180,10 +190,40 @@ def _acrescentar(arq: Path, novo: pd.DataFrame, chave: str) -> int:
     return len(tudo) - antes
 
 
+def _com_nuvem(velho: pd.DataFrame, nuvem: pd.DataFrame) -> tuple[pd.DataFrame, int, int]:
+    """Junta a coleta da nuvem a local. Instantes novos entram inteiros; nos que as duas tem, a nuvem
+    preenche o que o local deixou vazio e corrige o que difere mais que o arredondamento dela (3 casas).
+    Motivo: o PC coleta no minuto :00 e grava o ultimo instante ainda provisorio (termo e radiacao
+    mudam depois; as vezes o vento ainda nem veio); a nuvem coleta em :01/:16/:31/:46 e regrava o
+    instante a cada execucao. O year.json confirmou a nuvem em todos os casos de 02 a 19/11/2026.
+    Devolve (tabela, instantes novos, valores corrigidos)."""
+    v = velho.copy()
+    v["ts"] = pd.to_datetime(v.ts, utc=True).astype("datetime64[ns, UTC]")
+    n = nuvem.copy()
+    n["ts"] = pd.to_datetime(n.ts, utc=True).astype("datetime64[ns, UTC]")
+    v, n = v.set_index("ts"), n.drop_duplicates("ts", keep="last").set_index("ts")
+    for c in COLUNAS:
+        if c not in v:
+            v[c] = np.nan
+    cols = [c for c in COLUNAS if c in n]
+    comum = v.index.intersection(n.index)
+    corrigidos = 0
+    if len(comum):
+        a = v.loc[comum, cols].astype(float)
+        b = n.loc[comum, cols].astype(float)
+        troca = b.notna() & (a.isna() | (a - b).abs().gt(0.01))
+        corrigidos = int(troca.to_numpy().sum())
+        if corrigidos:
+            v.loc[comum, cols] = a.mask(troca, b)
+    novos = n.index.difference(v.index)
+    tudo = pd.concat([v, n.loc[novos, cols]]).sort_index().reset_index()
+    return tudo, len(novos), corrigidos
+
+
 def importar_github() -> dict:
     """Traz o que o GitHub Actions coletou (inclusive com este computador
     desligado) e junta aos arquivos locais. Falha silenciosa: e reforco."""
-    out = {"5min": 0, "horario": 0}
+    out = {"5min": 0, "5min_corrigidos": 0, "horario": 0}
     agora = pd.Timestamp.now(tz="UTC")
     for mes in pd.period_range("2026-10", agora.strftime("%Y-%m"), freq="M"):
         try:
@@ -191,10 +231,12 @@ def importar_github() -> dict:
         except Exception:  # noqa: BLE001
             continue
         d["ts"] = pd.to_datetime(d.ts, utc=True)
-        velho = pd.read_parquet(ARQ_5MIN) if ARQ_5MIN.exists() else pd.DataFrame(columns=["ts"])
-        novos = d[~d.ts.isin(pd.to_datetime(velho.ts, utc=True))]           # a coleta local vence onde se cruza
-        if len(novos):
-            out["5min"] += _acrescentar(ARQ_5MIN, pd.concat([novos, velho], ignore_index=True), "ts")
+        velho = pd.read_parquet(ARQ_5MIN) if ARQ_5MIN.exists() else pd.DataFrame(columns=["ts", *COLUNAS])
+        tudo, novos, corrigidos = _com_nuvem(velho, d)
+        if novos or corrigidos:
+            tudo.to_parquet(ARQ_5MIN, index=False)
+        out["5min"] += novos
+        out["5min_corrigidos"] += corrigidos
     try:
         h = pd.read_csv(URL_GITHUB.format("cnp_horario.csv"))
         h["hora"], h["ts"] = pd.to_datetime(h.hora, utc=True), pd.to_datetime(h.ts, utc=True)
@@ -245,13 +287,20 @@ def historico_termo(j: dict | None = None) -> pd.DataFrame:
     (year.json: o site guarda o ano corrente nessa resolucao, ao contrario do
     vento; o Klimadata confirmou em 26/10/2026 que nao ha outro historico).
     Acrescenta em ARQ_TERMO_ANO sem apagar o que ja havia: na virada do ano o
-    year.json deve recomecar do zero."""
+    year.json deve recomecar do zero.
+    Desde 17/11/2026 o year.json so traz um ponto por dia (a maxima, carimbada
+    as 12h): ponto sem vizinho a ate 30 min nao e leitura de 10 min e fica de
+    fora (antes desse filtro, entraram 324 pontos diarios como leituras das 12h)."""
     j = j or _baixar("year")
     d = _juntar([_serie(j, "chart1", "outTemp", ["temp_c"]), _serie(j, "chart1", "dewpoint", ["orvalho_c"]),
                  _serie(j, "chart2", "outHumidity", ["umidade"]), _serie(j, "chart6", "radiation", ["radiacao_wm2"])],
                 ["temp_c", "orvalho_c", "umidade", "radiacao_wm2"])
-    PASTA.mkdir(parents=True, exist_ok=True)
-    _acrescentar(ARQ_TERMO_ANO, d, "ts")
+    t = pd.to_datetime(d.ts, utc=True)
+    vizinho = pd.concat([t.diff(), -t.diff(-1)], axis=1).min(axis=1)
+    d = d[vizinho <= pd.Timedelta("30min")].reset_index(drop=True)
+    if len(d):
+        PASTA.mkdir(parents=True, exist_ok=True)
+        _acrescentar(ARQ_TERMO_ANO, d, "ts")
     return d
 
 
