@@ -4439,13 +4439,13 @@
     "estacao_nome": "Sorocaba",
     "km_cnp": 17.9,
     "modelo": "satelite_metar",
-    "base_utc": "2026-11-21 01:00:00+00:00",
-    "metar_ultimo_utc": "2026-11-21 01:00:00+00:00",
+    "base_utc": "2026-11-21 02:00:00+00:00",
+    "metar_ultimo_utc": "2026-11-21 02:00:00+00:00",
     "previsoes": [
       {
         "h": 1,
-        "ts_alvo_utc": "2026-11-21 02:00:00+00:00",
-        "rajada_kmh": 19.6,
+        "ts_alvo_utc": "2026-11-21 03:00:00+00:00",
+        "rajada_kmh": 18.8,
         "faixa": {
           "acima_de": [],
           "dentro_de": [
@@ -4485,8 +4485,8 @@
       },
       {
         "h": 2,
-        "ts_alvo_utc": "2026-11-21 03:00:00+00:00",
-        "rajada_kmh": 13.1,
+        "ts_alvo_utc": "2026-11-21 04:00:00+00:00",
+        "rajada_kmh": 17.4,
         "faixa": {
           "acima_de": [],
           "dentro_de": [
@@ -4526,7 +4526,7 @@
       },
       {
         "h": 3,
-        "ts_alvo_utc": "2026-11-21 04:00:00+00:00",
+        "ts_alvo_utc": "2026-11-21 05:00:00+00:00",
         "rajada_kmh": 13.6,
         "faixa": {
           "acima_de": [],
@@ -4571,24 +4571,24 @@
   },
   "satelite": {
     "status": "fora_do_horario",
-    "ts_utc": "2026-11-21T01:15:00+00:00",
-    "fim_utc": "2026-11-21T01:30:00+00:00",
-    "gerado_utc": "2026-11-21T01:17:24+00:00"
+    "ts_utc": "2026-11-21T02:15:00+00:00",
+    "fim_utc": "2026-11-21T02:30:00+00:00",
+    "gerado_utc": "2026-11-21T02:17:19+00:00"
   },
   "estacao": {
     "status": "ok",
-    "ts_utc": "2026-11-21T01:15:00+00:00",
+    "ts_utc": "2026-11-21T02:15:00+00:00",
     "fonte": "estacao automatica do CNP (Klimadata)",
-    "vento_kmh": 17.0,
-    "rajada_kmh": 18.0,
-    "direcao_graus": 162.0,
-    "direcao_txt": "SSE",
-    "temp_c": 22.8,
-    "orvalho_c": 20.7,
-    "umidade": 88.0,
-    "chuva_mmh": 0.0,
-    "base_estimada_m": 260,
-    "rajada_max_30_kmh": 18.4,
-    "choveu_30min": false
+    "vento_kmh": 30.0,
+    "rajada_kmh": 53.0,
+    "direcao_graus": 235.0,
+    "direcao_txt": "SO",
+    "temp_c": 21.5,
+    "orvalho_c": 20.5,
+    "umidade": 94.0,
+    "chuva_mmh": 13.2,
+    "base_estimada_m": 120,
+    "rajada_max_30_kmh": 53.3,
+    "choveu_30min": true
   }
 }
