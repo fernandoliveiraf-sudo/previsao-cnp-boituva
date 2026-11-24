@@ -1,8 +1,8 @@
 {
  "status": "indisponivel",
  "motivo": "sem as entradas da espinha para esta hora",
- "ts_utc": "2026-11-24T15:30:00+00:00",
- "fim_utc": "2026-11-24T15:45:00+00:00",
- "gerado_utc": "2026-11-24T15:31:39+00:00",
+ "ts_utc": "2026-11-24T15:45:00+00:00",
+ "fim_utc": "2026-11-24T16:00:00+00:00",
+ "gerado_utc": "2026-11-24T15:46:35+00:00",
  "origem": "nuvem"
 }
