@@ -1,28 +1,32 @@
 """
 coleta/coletar_estacao.py - coleta da estacao meteorologica automatica do CNP
 (Prefeitura de Boituva + Centro Paula Souza; dados publicos do Klimadata em
-https://klimadata.com/wx/boituva/) pelo GitHub Actions, de hora em hora, 24 h
-por dia, sem depender do computador do autor.
+https://klimadata.com/pws/boituva) pelo GitHub Actions, 24 h por dia, sem
+depender do computador do autor.
 
-O site so deixa no ar o vento de 5 min do DIA CORRENTE (json/day.json) e o
-horario dos ultimos 7 dias (json/week.json): o que nao for guardado se perde.
+Desde 24/11/2026 o Klimadata serve os dados por uma API publica em JSON
+(https://klimadata.com/pub/estacoes/boituva/...; o site antigo, wx/boituva/json,
+saiu do ar as 16h10): serie?periodo=dia (ultimas 24 h em blocos de 10 min),
+serie?periodo=mes (30 dias, por hora) e agora (a ultima leitura). Vento e
+rajada vem em m/s; chuva em mm no bloco. O 10 min so fica no ar por 24 h: o que
+nao for guardado se perde.
 
-Grava no diretorio dado (o branch "estacao-cnp" deste repositorio):
-  dados/cnp_5min_AAAA-MM.csv  ts (UTC), vento_kmh, rajada_kmh, temp_c,
-                              orvalho_c, umidade, chuva_mmh, radiacao_wm2,
-                              pressao_hpa, qnh_hpa, uv - um arquivo por mes
-  dados/cnp_horario.csv       hora (UTC), ts, vento_kmh, rajada_kmh, direcao, chuva_mm
-  dados/agora.json            a ultima leitura (leitura_atual), que a pagina
-                              le pelo raw.githubusercontent.com (o Klimadata
-                              nao deixa o navegador ler direto: sem CORS)
-O valor mais recente de cada instante vence, sem apagar o que ja havia.
-So biblioteca padrao (roda no Python do runner, sem instalar nada).
-
-O site troca nomes de serie sem aviso: em 07/11/2026 "barometer" virou
-"altimeter" (QNH) e "rainRate" (mm/h) virou "rain" (mm em 5 min, carimbado em
-:02, :07...), e a coleta inteira parou ate 15/11. Agora cada serie tem
-alternativas, a que faltar fica vazia e as partes (5 min, horario, leitura
-atual) sao independentes. Mesma regra de modulo_rajada/estacao_cnp.py.
+Grava no diretorio dado (o branch "estacao-cnp" deste repositorio), nas
+unidades e na convencao da coleta antiga (as de modulo_rajada/estacao_cnp.py):
+  dados/cnp_5min_AAAA-MM.csv  ts (UTC, fim do intervalo), vento_kmh, rajada_kmh,
+                              temp_c, orvalho_c, umidade, chuva_mmh, radiacao_wm2,
+                              pressao_hpa, qnh_hpa, uv, direcao - um arquivo por mes.
+                              5 min ate 24/11/2026 16h10; depois 10 min, com
+                              ts = carimbo da API + 5 min (o bloco T da API junta os
+                              registros antigos T e T+5) e radiacao / 1,05 (a API
+                              nova publica 5% acima da antiga)
+  dados/cnp_horario.csv       hora (UTC, inicio da hora), ts, vento_kmh (media),
+                              rajada_kmh (maximo), direcao, chuva_mm (soma)
+  dados/agora.json            a ultima leitura (leitura_atual), que a pagina le
+                              pelo raw.githubusercontent.com
+O valor mais recente de cada instante vence, sem apagar o que ja havia. Campo
+que sumir da API fica vazio; as partes (10 min, horario, leitura atual) sao
+independentes. So biblioteca padrao (roda no Python do runner).
 
 Uso:  python coleta/coletar_estacao.py <diretorio do branch de dados>
 """
@@ -35,35 +39,23 @@ import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
 
-URL = "https://klimadata.com/wx/boituva/json/{}.json"
+URL = "https://klimadata.com/pub/estacoes/boituva/{}"
 COLS_5MIN = ["vento_kmh", "rajada_kmh", "temp_c", "orvalho_c", "umidade", "chuva_mmh", "radiacao_wm2", "pressao_hpa",
-             "qnh_hpa", "uv"]
+             "qnh_hpa", "uv", "direcao"]
 COLS_HORA = ["hora", "ts", "vento_kmh", "rajada_kmh", "direcao", "chuva_mm"]
-# (colunas, alternativas [(grafico, serie, fator)], essencial): vale a primeira que o site publicar.
-# "rain" e mm em 5 min: x12 = taxa media em mm/h, a unidade do antigo "rainRate".
-SERIES_DIA = [
-    (["vento_kmh", "rajada_kmh"], [("chart4", "haysChart", 1)], True),
-    (["chuva_mmh"], [("chart3", "rainRate", 1), ("chart3", "rain", 12)], True),
-    (["temp_c"], [("chart1", "outTemp", 1)], True),
-    (["orvalho_c"], [("chart1", "dewpoint", 1)], True),
-    (["umidade"], [("chart2", "outHumidity", 1)], False),
-    (["radiacao_wm2"], [("chart6", "radiation", 1)], True),
-    (["uv"], [("chart6", "UV", 1)], False),
-    (["pressao_hpa"], [("chart7", "barometer", 1)], False),
-    (["qnh_hpa"], [("chart7", "altimeter", 1)], False),
-]
+# (campo da API, coluna, fator, essencial). A chuva fica em mm no bloco ("chuva") e vira mm/h nos 10 min.
+CAMPOS = [("vento", "vento_kmh", 3.6, True), ("rajada", "rajada_kmh", 3.6, True),
+          ("temperatura", "temp_c", 1, True), ("ponto_orvalho", "orvalho_c", 1, True),
+          ("umidade", "umidade", 1, False), ("chuva", "chuva", 1, True),
+          ("radiacao", "radiacao_wm2", 1 / 1.05, True), ("uv", "uv", 1, False),
+          ("qnh", "qnh_hpa", 1, False), ("direcao", "direcao", 1, False)]
+FIM_5MIN_MS = 1795547400000           # 24/11/2026 19h10 UTC: ultimo instante do site antigo (nao sobrescrever)
+PONTOS = ["N", "NNE", "NE", "ENE", "L", "ESE", "SE", "SSE", "S", "SSO", "SO", "OSO", "O", "ONO", "NO", "NNO"]
 
 
-def serie(j: dict, grafico: str, nome: str):
-    """Os pontos de uma serie, ou None se o site nao a publica mais."""
-    try:
-        return j[grafico]["series"][nome]["data"]
-    except (KeyError, TypeError):
-        return None
-
-
-def baixar(nome: str) -> dict:
-    req = urllib.request.Request(URL.format(nome), headers={"User-Agent": "TCC-previsao-CNP (coleta horaria)"})
+def baixar(caminho: str):
+    req = urllib.request.Request(URL.format(caminho), headers={"User-Agent": "TCC-previsao-CNP (coleta horaria)",
+                                                               "Accept": "application/json"})
     with urllib.request.urlopen(req, timeout=90) as r:
         return json.load(r)
 
@@ -101,87 +93,97 @@ def juntar(antigo: dict, novo: dict) -> tuple[dict, int]:
     return antigo, n
 
 
-def cinco_min() -> tuple[dict, list[str]]:
-    """day.json -> {ts: linha}, e as series essenciais que nao vieram."""
-    j = baixar("day")
-    linhas: dict[str, dict] = {}
-    ausentes = []
-    for cols, alternativas, essencial in SERIES_DIA:
-        achou = next(((d, f) for g, n, f in alternativas if (d := serie(j, g, n)) is not None), None)
-        if achou is None:
-            if essencial:
-                ausentes.append("/".join(n for _, n, _ in alternativas))
-            continue
-        dados, fator = achou
-        for ponto in dados:
-            vals = ponto[1:]
-            if all(v is None for v in vals):
-                continue
-            ms = ponto[0] // 300000 * 300000                 # a chuva vem carimbada em :02, :07...
-            r = linhas.setdefault(iso(ms), {"ts": iso(ms)})
-            for c, v in zip(cols, vals):
-                if v is None:
-                    r.setdefault(c, "")
-                    continue
-                v = round(float(v) * fator, 3)
-                if r.get(c) in ("", None) or v > r[c]:     # dois pontos no mesmo intervalo: fica o maior
-                    r[c] = v
-    return linhas, ausentes
-
-
-def horario() -> dict:
-    j = baixar("week")
-    linhas: dict[str, dict] = {}
-    for grafico, nome, col in (("chart5", "windSpeed", "vento_kmh"), ("chart5", "windGust", "rajada_kmh"),
-                               ("chart5", "windDir", "direcao"), ("chart3", "rain", "chuva_mm")):
-        for t, v in serie(j, grafico, nome) or []:
-            if v is None:
-                continue
-            hora = datetime.fromtimestamp(t / 1000, tz=timezone.utc).strftime("%Y-%m-%dT%H:00:00+00:00")
-            r = linhas.setdefault(hora, {"hora": hora, "ts": iso(t)})
-            r[col] = round(float(v), 3)
-    return linhas
-
-
-PONTOS = ["N", "NNE", "NE", "ENE", "L", "ESE", "SE", "SSE", "S", "SSO", "SO", "OSO", "O", "ONO", "NO", "NNO"]
-
-
-def _num(txt) -> float | None:
-    """'23,5' / '201' / 'N/A' -> numero (o weewx_data.json vem formatado em pt-BR)."""
+def _num(v) -> float | None:
     try:
-        return float(str(txt).replace(".", "").replace(",", ".")) if str(txt).count(",") else float(txt)
+        return None if v is None else float(v)
     except (TypeError, ValueError):
         return None
 
 
-def leitura_atual(agora_ms: float | None = None) -> dict:
-    """A ultima leitura da estacao do CNP, para a pagina: vento e direcao
-    (de onde vem) da leitura atual (json/weewx_data.json), rajada maxima dos
-    ultimos 30 min e chuva do json/day.json, e a base de nuvem estimada pelo
-    afastamento temperatura - orvalho (125 m por grau, a mesma conta da
-    segunda etapa do Agora; so vale para nuvem de conveccao)."""
-    j = baixar("weewx_data")
-    c = j["current"]
-    ts_ms = float(c["datetime_raw"]) * 1000
-    t, td = _num(c.get("outTemp_formatted")), _num(str(c.get("dewpoint", "")).split(" ")[0])
-    dirg = _num(c.get("winddir_formatted"))
-    vento = _num(c.get("windspeed", "").split(" ")[0])
-    out = {"status": "ok", "ts_utc": iso(ts_ms), "fonte": "estacao automatica do CNP (Klimadata)",
-           "vento_kmh": vento, "rajada_kmh": _num(c.get("windGust_formatted")),
+def serie(periodo: str) -> tuple[list[int], dict[str, list], int, list[str]]:
+    """(carimbos da API em ms, {coluna: valores ja convertidos}, intervalo em s, campos essenciais ausentes)."""
+    j = baixar(f"serie?periodo={periodo}")
+    t = [int(x) * 1000 for x in j["t"]]
+    cols, ausentes = {}, []
+    for campo, col, fator, essencial in CAMPOS:
+        v = j.get(campo)
+        if not isinstance(v, list) or len(v) != len(t):
+            if essencial:
+                ausentes.append(campo)
+            continue
+        cols[col] = [None if (x := _num(a)) is None else round(x * fator, 3) for a in v]
+    return t, cols, int(j.get("intervalo_s") or 0), ausentes
+
+
+def cinco_min() -> tuple[dict, list[str]]:
+    """Ultimas 24 h (blocos de 10 min) -> {ts: linha} na convencao antiga, e os campos essenciais ausentes."""
+    t, cols, passo, ausentes = serie("dia")
+    if passo <= 0:
+        raise ValueError("serie do dia sem intervalo_s")
+    linhas: dict[str, dict] = {}
+    for i, ms in enumerate(t):
+        fim = ms + (passo - 300) * 1000
+        if fim <= FIM_5MIN_MS:
+            continue
+        r = {"ts": iso(fim)}
+        for c, v in cols.items():
+            if c == "chuva":
+                r["chuva_mmh"] = "" if v[i] is None else round(v[i] * 3600 / passo, 3)
+            else:
+                r[c] = "" if v[i] is None else v[i]
+        if any(r.get(c) not in ("", None) for c in COLS_5MIN):
+            linhas[r["ts"]] = r
+    return linhas, ausentes
+
+
+def horario() -> dict:
+    """Por hora, ultimos 30 dias: hora = ts = inicio da hora. A hora corrente vem parcial e e regravada."""
+    t, cols, _, _ = serie("mes")
+    linhas: dict[str, dict] = {}
+    for i, ms in enumerate(t):
+        h = iso(ms)
+        r = {"hora": h, "ts": h}
+        for orig, col in (("vento_kmh", "vento_kmh"), ("rajada_kmh", "rajada_kmh"), ("direcao", "direcao"),
+                          ("chuva", "chuva_mm")):
+            v = cols.get(orig)
+            r[col] = "" if v is None or v[i] is None else v[i]
+        linhas[h] = r
+    return linhas
+
+
+def leitura_atual() -> dict:
+    """A ultima leitura da estacao do CNP, para a pagina: vento, rajada e direcao (de onde vem),
+    temperatura, orvalho e umidade da leitura atual (agora); rajada maxima e chuva dos ultimos
+    30 min pelos blocos de 10 min; e a base de nuvem estimada pelo afastamento temperatura -
+    orvalho (125 m por grau, a mesma conta da segunda etapa do Agora; so vale para nuvem de
+    conveccao)."""
+    c = baixar("agora")
+    ts = datetime.fromisoformat(str(c["ultima_leitura"]).replace("Z", "+00:00"))
+    ts_ms = ts.timestamp() * 1000
+    t, td = _num(c.get("temperatura")), _num(c.get("ponto_orvalho"))
+    vento, raj, dirg = _num(c.get("vento")), _num(c.get("rajada")), _num(c.get("direcao"))
+    vento = None if vento is None else round(vento * 3.6, 1)
+    raj = None if raj is None else round(raj * 3.6, 1)
+    out = {"status": "ok" if c.get("no_ar", True) else "fora_do_ar", "ts_utc": iso(ts_ms),
+           "fonte": "estacao automatica do CNP (Klimadata)",
+           "vento_kmh": vento, "rajada_kmh": raj,
            "direcao_graus": None if dirg is None or not vento else dirg,
            "direcao_txt": None if dirg is None or not vento else PONTOS[int((dirg % 360) / 22.5 + 0.5) % 16],
-           "temp_c": t, "orvalho_c": td, "umidade": _num(str(c.get("outHumidity", "")).rstrip("%")),
-           "chuva_mmh": _num(str(c.get("rainRate", "")).split(" ")[0]),
+           "temp_c": t, "orvalho_c": td, "umidade": _num(c.get("umidade")), "chuva_mmh": None,
            "base_estimada_m": None if t is None or td is None else round(max(0.0, 125 * (t - td)) / 10) * 10}
-    try:                                    # rajada maxima e chuva dos ultimos 30 min (5 min)
-        d = baixar("day")
-        ini = ts_ms - 30 * 60 * 1000
-        raj = [p[2] for p in d["chart4"]["series"]["haysChart"]["data"]
-               if ini < p[0] <= ts_ms and p[2] is not None]
-        chuva = serie(d, "chart3", "rainRate") or serie(d, "chart3", "rain") or []
-        chv = [p[1] for p in chuva if ini < p[0] <= ts_ms and p[1] is not None]
-        out["rajada_max_30_kmh"] = round(max(raj), 1) if raj else None
+    try:                                    # rajada maxima e chuva dos ultimos 30 min (blocos de 10 min)
+        tt, cols, passo, _ = serie("dia")
+        fins = [ms + (passo - 300) * 1000 for ms in tt]
+        sel = [i for i, f in enumerate(fins) if f > ts_ms - 30 * 60 * 1000]
+        rajs = [cols["rajada_kmh"][i] for i in sel if cols.get("rajada_kmh") and cols["rajada_kmh"][i] is not None]
+        if raj is not None:
+            rajs.append(raj)
+        chv = [cols["chuva"][i] for i in sel if cols.get("chuva") and cols["chuva"][i] is not None]
+        out["rajada_max_30_kmh"] = round(max(rajs), 1) if rajs else None
         out["choveu_30min"] = bool(chv and max(chv) > 0)
+        if chv and sel:
+            ult = cols["chuva"][sel[-1]]
+            out["chuva_mmh"] = None if ult is None else round(ult * 3600 / passo, 1)
     except Exception:  # noqa: BLE001 - so a leitura atual
         out["rajada_max_30_kmh"], out["choveu_30min"] = None, None
     return out
@@ -207,11 +209,11 @@ def main():
             gravar(arq, tudo, ["ts"] + COLS_5MIN)
             total += n
         gravou += 1
-        msg5 = f"5 min: {total} instantes novos ({len(novos)} no day.json)"
+        msg5 = f"10 min: {total} instantes novos ({len(novos)} na serie do dia)"
         if ausentes:
-            msg5 += f"; SERIES AUSENTES: {', '.join(ausentes)}"
-    except Exception as e:  # noqa: BLE001 - o horario segue mesmo sem os 5 min
-        msg5 = f"5 min FALHOU: {type(e).__name__}: {e}"
+            msg5 += f"; CAMPOS AUSENTES: {', '.join(ausentes)}"
+    except Exception as e:  # noqa: BLE001 - o horario segue mesmo sem os 10 min
+        msg5 = f"10 min FALHOU: {type(e).__name__}: {e}"
     try:
         arq_h = base / "cnp_horario.csv"
         tudo_h, n_h = juntar(ler(arq_h, "hora"), horario())
