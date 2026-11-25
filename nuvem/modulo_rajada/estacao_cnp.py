@@ -1,36 +1,39 @@
 """
 modulo_rajada/estacao_cnp.py - a estacao meteorologica automatica do proprio
 CNP (Prefeitura de Boituva + Centro Paula Souza, instalada em dez/2025;
-dados publicos no Klimadata, WeeWX 5.4 com o tema Belchertown):
-https://klimadata.com/wx/boituva/  (-23,299121; -47,691638; 624 m)
+dados publicos no Klimadata): https://klimadata.com/pws/boituva
+(-23,299121; -47,691638; 624 m)
 
-COLETA. O site so deixa no ar:
-  - json/day.json   so o dia corrente: vento medio e rajada a cada 5 min
-                    (chart4 "haysChart": [t, vento, rajada], km/h), chuva e
-                    indice UV (5 min), temperatura, ponto de orvalho, umidade,
-                    radiacao e pressao (10 min);
-  - json/week.json  vento, rajada, direcao e chuva por hora, ultimos 7 dias;
-  - json/year.json  um valor por dia desde 01/01/2026 (o maximo do dia; a
-                    chuva, o total), carimbado ao meio-dia local. Ate 16/11/2026
-                    trazia tambem o termo/radiacao de 10 min (36 MB); desde 17/11
-                    so os valores diarios (0,5 MB). O 10 min de 01/01 a 16/11 6h
-                    ficou guardado em cnp_termo_ano.parquet, e nao existe mais no
-                    site; dali em diante o termo de 10 min vem so do day.json.
-Entao a serie de 5 min so existe se for guardada todo dia: coletar() e
-chamada pela atualizacao da pagina (de hora em hora, 06-17 h) e acrescenta o
-que for novo, sem duplicar. Falha aqui nunca impede a pagina.
+COLETA (desde 24/11/2026). O Klimadata trocou o site antigo (WeeWX/Belchertown,
+klimadata.com/wx/boituva/json/*.json, fora do ar desde 24/11 16h10) por uma
+plataforma nova com API publica em JSON (klimadata.com/pub/estacoes/boituva/...):
+  - serie?periodo=dia     ultimas 24 h (janela movel), blocos de 10 min;
+  - serie?periodo=mes     ultimos 30 dias, por hora (periodo=semana: 7 dias, igual);
+  - serie?periodo=ano     ultimo ano, por dia (carimbo: 00h local);
+  - agora                 a ultima leitura (vai para a pagina pelo coletor da nuvem).
+Vento e rajada em m/s, chuva em mm no bloco. Conferido contra os 5 min antigos em
+24/11 (07h-16h10) e por hora de 26/10 a 24/11: e o mesmo dado bruto, reagregado.
+  - O bloco de 10 min carimbado T junta os registros antigos T e T+5 (o carimbo
+    antigo era o fim do intervalo): vento = media, rajada = maximo, chuva = soma
+    (diferenca 0,01 km/h). Aqui ele vai para ts = T + 5 min, o fim do bloco, e a
+    temperatura cai exatamente onde a antiga caia (:x5).
+  - A radiacao nova e 1,050 x a antiga (55 pares, razao constante): ela e
+    dividida por FATOR_RADIACAO para o cnp_kt seguir na escala em que a segunda
+    etapa do Agora foi treinada.
+  - A hora carimbada T e [T, T+1 h) dos registros antigos (vento |dif| 0,09 km/h,
+    rajada 0,01, chuva corr 0,998).
+So ha 10 min das ultimas 24 h: o que nao for guardado se perde (por hora, 30 dias).
+Os 5 min vao ate 24/11 16h10; dali em diante a tabela e de 10 min (as janelas de
+variaveis() sao por tempo e valem para os dois). coletar() e chamada pela
+atualizacao da pagina e pela tarefa ColetaEstacao; falha aqui nunca impede a pagina.
 
-O SITE TROCA NOMES DE SERIE SEM AVISO. Em 07/11/2026 a pressao "barometer"
-virou "altimeter" (QNH, ~3 hPa acima) e a chuva "rainRate" (taxa, mm/h) virou
-"rain" (mm no intervalo de 5 min, carimbado em :02, :07...). Como cada serie
-era obrigatoria, a coleta inteira caiu (inclusive o vento) de 07/11 16h20 a
-15/11, aqui e no GitHub Actions. Agora cada serie tem alternativas
-(SERIES_DIA), a que faltar fica vazia e o resto e gravado, e as essenciais
-ausentes aparecem no log da pagina ("series_ausentes"). Na troca do year.json
-(17/11) os pontos diarios das 12h entraram em cnp_termo_ano.parquet como se
-fossem leituras de 10 min (324 linhas, retiradas em 20/11; copia do arquivo
-anterior em cnp_termo_ano_antes_limpeza_2026-11-20.parquet). historico_termo()
-agora so aceita pontos com vizinho a ate 30 min.
+HISTORIA DO SITE ANTIGO (troca de formato sem aviso, duas vezes antes desta):
+em 07/11/2026 "barometer" virou "altimeter" e "rainRate" virou "rain", e a coleta
+caiu de 07/11 16h20 a 15/11; em 17/11 o year.json deixou de ter o termo/radiacao
+de 10 min do ano, e os pontos diarios das 12h entraram em cnp_termo_ano.parquet
+como leituras (324 linhas, retiradas em 20/11; copia em
+cnp_termo_ano_antes_limpeza_2026-11-20.parquet). O 10 min de 01/01 a 16/11/2026
+so existe em cnp_termo_ano.parquet. Copias brutas da API em klimadata_pub/.
 
 HISTORICO. Se o Klimadata mandar o arquivo da estacao (pedido por e-mail),
 basta po-lo em dados/estacao_cnp/historico/: o banco do WeeWX (.sdb/.sqlite,
@@ -45,10 +48,12 @@ estimada das nuvens baixas (125 m x (T - Td)) e radiacao medida / radiacao de
 ceu limpo (Haurwitz). Leitura com mais de IDADE_MAX_MIN fica vazia.
 
 Saidas (dados/estacao_cnp/, fora do git):
-  cnp_5min.parquet       ts (UTC) + COLUNAS
+  cnp_5min.parquet       ts (UTC, fim do intervalo) + COLUNAS; 5 min ate 24/11/2026 16h10, depois 10 min
   cnp_horario.parquet    hora, ts (UTC, inicio da janela agregada [ts, ts + 1 h)), vento_kmh, rajada_kmh,
                          direcao, chuva_mm
-  cnp_diario.parquet     dia, vento_max_kmh, rajada_max_kmh, direcao, chuva_mm (do year.json)
+  cnp_diario.parquet     dia + maximos/totais do dia (ate 23/11: vento_max_kmh, rajada_max_kmh, direcao,
+                         chuva_mm do year.json; depois: rajada_max_kmh, vento_med_kmh, chuva_mm, temp_max_c,
+                         temp_min_c da serie anual da API)
   cnp_termo_ano.parquet  ts (UTC), temp_c, orvalho_c, umidade, radiacao_wm2 de 10 min, 01/01 a 16/11/2026
 
 Uso:  python modulo_rajada/estacao_cnp.py          # coleta agora
@@ -68,7 +73,7 @@ AQUI = Path(__file__).resolve().parent
 sys.path.insert(0, str(AQUI.parent))
 import caminhos as C  # noqa: E402
 
-URL = "https://klimadata.com/wx/boituva/json/{}.json"
+URL_PUB = "https://klimadata.com/pub/estacoes/boituva/{}"
 # a coleta de hora em hora, 24 h, roda tambem no GitHub Actions (repositorio da
 # pagina, branch estacao-cnp): independe deste computador estar ligado
 URL_GITHUB = ("https://raw.githubusercontent.com/fernandoliveiraf-sudo/previsao-cnp-boituva/"
@@ -81,22 +86,18 @@ ARQ_DIA = PASTA / "cnp_diario.parquet"
 ARQ_TERMO_ANO = PASTA / "cnp_termo_ano.parquet"     # 10 min do year.json ate 16/11/2026: temperatura, orvalho, umidade, radiacao
 LAT, LON, ALT_M = -23.299121, -47.691638, 624
 COLUNAS = ["vento_kmh", "rajada_kmh", "temp_c", "orvalho_c", "umidade", "chuva_mmh", "radiacao_wm2", "pressao_hpa",
-           "qnh_hpa", "uv"]
-# day.json -> COLUNAS: (colunas, alternativas [(grafico, serie, fator)], essencial). Vale a primeira
-# alternativa que o site publicar. "rain" e mm em 5 min: x12 da a taxa media (mm/h), a mesma unidade do
-# antigo "rainRate" (o que se usa adiante e so se choveu). barometer (pressao ao nivel do mar) e
-# altimeter (QNH) ficam em colunas separadas: nao sao a mesma grandeza.
-SERIES_DIA = [
-    (["vento_kmh", "rajada_kmh"], [("chart4", "haysChart", 1)], True),
-    (["chuva_mmh"], [("chart3", "rainRate", 1), ("chart3", "rain", 12)], True),
-    (["temp_c"], [("chart1", "outTemp", 1)], True),
-    (["orvalho_c"], [("chart1", "dewpoint", 1)], True),
-    (["umidade"], [("chart2", "outHumidity", 1)], False),
-    (["radiacao_wm2"], [("chart6", "radiation", 1)], True),
-    (["uv"], [("chart6", "UV", 1)], False),
-    (["pressao_hpa"], [("chart7", "barometer", 1)], False),
-    (["qnh_hpa"], [("chart7", "altimeter", 1)], False),
+           "qnh_hpa", "uv", "direcao"]
+# API nova -> colunas: (campo da API, coluna, fator, essencial). Vento e rajada em m/s; a chuva (mm no
+# bloco) vira taxa (mm/h) em cinco_min(). pressao_hpa (barometro, ao nivel do mar) nao existe mais: so QNH.
+CAMPOS_PUB = [
+    ("vento", "vento_kmh", 3.6, True), ("rajada", "rajada_kmh", 3.6, True),
+    ("temperatura", "temp_c", 1, True), ("ponto_orvalho", "orvalho_c", 1, True),
+    ("umidade", "umidade", 1, False), ("chuva", "chuva_mm", 1, True),
+    ("radiacao", "radiacao_wm2", None, True), ("uv", "uv", 1, False),
+    ("qnh", "qnh_hpa", 1, False), ("direcao", "direcao", 1, False),
 ]
+FATOR_RADIACAO = 1.05                     # radiacao da API nova / da antiga (24/11/2026, 55 pares)
+FIM_5MIN = pd.Timestamp("2026-11-24 19:10", tz="UTC")   # ultimo instante do site antigo (16h10 locais)
 
 ATRASO_MIN = 5            # como o METAR no "Agora": so o que existia 5 min antes do intervalo
 IDADE_MAX_MIN = 15        # leitura mais velha que isso nao vale
@@ -106,75 +107,70 @@ COLS_CNP = ["cnp_raj_max_30", "cnp_raj_max_60", "cnp_vento_med_30", "cnp_tend_ra
 
 
 # ------------------------------------------------------------------ coleta
-def _baixar(nome: str) -> dict:
-    req = urllib.request.Request(URL.format(nome), headers={"User-Agent": "TCC-previsao-CNP (coleta horaria)"})
+def _pub(caminho: str):
+    req = urllib.request.Request(URL_PUB.format(caminho), headers={"User-Agent": "TCC-previsao-CNP (coleta horaria)",
+                                                                   "Accept": "application/json"})
     with urllib.request.urlopen(req, timeout=60) as r:
         return json.load(r)
 
 
-def _serie(j: dict, grafico: str, nome: str, colunas: list[str], fator: float = 1) -> pd.DataFrame | None:
-    """Uma serie de um grafico do site, ou None se ele nao a publica mais."""
-    try:
-        dados = j[grafico]["series"][nome]["data"]
-    except (KeyError, TypeError):
-        return None
-    d = pd.DataFrame(dados, columns=["ts", *colunas])
-    d["ts"] = pd.to_datetime(d.ts, unit="ms", utc=True)
-    if fator != 1:
-        d[colunas] = d[colunas] * fator
-    return d.dropna(subset=colunas, how="all")
-
-
-def _juntar(partes: list[pd.DataFrame | None], colunas: list[str]) -> pd.DataFrame:
-    partes = [p for p in partes if p is not None]
-    if not partes:
-        return pd.DataFrame(columns=["ts", *colunas])
-    d = partes[0]
-    for p in partes[1:]:
-        d = d.merge(p, on="ts", how="outer")
-    for c in colunas:
-        if c not in d:
-            d[c] = np.nan
-    return d.sort_values("ts").reset_index(drop=True)
+def _serie_pub(periodo: str) -> tuple[pd.DataFrame, int, list[str]]:
+    """serie?periodo=... da API: (tabela com ts = carimbo da API, UTC, e as colunas de CAMPOS_PUB nas
+    unidades antigas; intervalo em segundos; campos essenciais que nao vieram). Campo que sumir fica vazio."""
+    j = _pub(f"serie?periodo={periodo}")
+    d = pd.DataFrame({"ts": pd.to_datetime(pd.Series(j["t"], dtype="int64"), unit="s", utc=True)})
+    ausentes = []
+    for campo, col, fator, essencial in CAMPOS_PUB:
+        v = j.get(campo)
+        if not isinstance(v, list) or len(v) != len(d):
+            d[col] = np.nan
+            if essencial:
+                ausentes.append(campo)
+            continue
+        v = pd.to_numeric(pd.Series(v), errors="coerce").to_numpy(float)
+        d[col] = v / FATOR_RADIACAO if col == "radiacao_wm2" else v * fator
+    return d, int(j.get("intervalo_s") or 0), ausentes
 
 
 def cinco_min() -> pd.DataFrame:
-    """O day.json em ts + COLUNAS (todas, mesmo as que o site nao publica mais);
-    d.attrs["ausentes"] lista as series essenciais que nao vieram."""
-    j = _baixar("day")
-    partes, ausentes = [], []
-    for cols, alternativas, essencial in SERIES_DIA:
-        s = next((x for x in (_serie(j, g, n, cols, f) for g, n, f in alternativas) if x is not None), None)
-        if s is None:
-            if essencial:
-                ausentes.append("/".join(n for _, n, _ in alternativas))
-            continue
-        s["ts"] = s.ts.dt.floor("5min")                 # a chuva vem carimbada em :02, :07...
-        partes.append(s.groupby("ts", as_index=False)[cols].max())
-    d = _juntar(partes, COLUNAS)[["ts", *COLUNAS]]
+    """As ultimas 24 h (serie?periodo=dia, blocos de 10 min) em ts + COLUNAS, na convencao da coleta
+    antiga: ts = fim do bloco (carimbo da API + intervalo - 5 min), chuva em mm/h, radiacao na escala
+    antiga. So instantes depois do fim do site antigo (FIM_5MIN): os 5 min de antes nao sao sobrescritos.
+    d.attrs["ausentes"] lista os campos essenciais que nao vieram."""
+    d, passo, ausentes = _serie_pub("dia")
+    if passo <= 0:
+        raise ValueError("serie do dia sem intervalo_s")
+    d["ts"] = d.ts + pd.Timedelta(seconds=passo) - pd.Timedelta(minutes=5)
+    d["chuva_mmh"] = d.chuva_mm * 3600 / passo
+    d["pressao_hpa"] = np.nan
+    d = d[d.ts > FIM_5MIN].dropna(subset=[c for c in COLUNAS if c != "pressao_hpa"], how="all")
+    d = d[["ts", *COLUNAS]].reset_index(drop=True)
     d.attrs["ausentes"] = ausentes
     return d
 
 
 def horario() -> pd.DataFrame:
-    j = _baixar("week")
-    d = _juntar([_serie(j, "chart5", "windSpeed", ["vento_kmh"]), _serie(j, "chart5", "windGust", ["rajada_kmh"]),
-                 _serie(j, "chart5", "windDir", ["direcao"]), _serie(j, "chart3", "rain", ["chuva_mm"])],
-                ["vento_kmh", "rajada_kmh", "direcao", "chuva_mm"])
-    # o site agrega horas que terminam no minuto em que gerou o arquivo (:25, :35...):
-    # uma linha por hora cheia, a da coleta mais recente
-    d.insert(0, "hora", pd.to_datetime(d.ts, utc=True).dt.floor("h"))
-    return d
+    """Por hora, ultimos 30 dias (serie?periodo=mes): hora = ts = inicio da hora; vento medio, rajada
+    maxima, direcao e chuva (mm) da hora. A hora corrente vem parcial e e regravada na coleta seguinte."""
+    d, _, _ = _serie_pub("mes")
+    return pd.DataFrame({"hora": d.ts, "ts": d.ts, "vento_kmh": d.vento_kmh, "rajada_kmh": d.rajada_kmh,
+                         "direcao": d.direcao, "chuva_mm": d.chuva_mm})
 
 
-def diario(j: dict | None = None) -> pd.DataFrame:
-    j = j or _baixar("year")
-    d = _juntar([_serie(j, "chart5", "windSpeed", ["vento_max_kmh"]), _serie(j, "chart5", "windGust", ["rajada_max_kmh"]),
-                 _serie(j, "chart5", "windDir", ["direcao"]), _serie(j, "chart3", "rain", ["chuva_mm"])],
-                ["vento_max_kmh", "rajada_max_kmh", "direcao", "chuva_mm"])
-    # o ponto do dia vem carimbado no meio do dia local
-    d.insert(0, "dia", pd.to_datetime(d.ts, utc=True).dt.tz_convert("America/Sao_Paulo").dt.date.astype(str))
-    return d.drop(columns="ts")
+def diario() -> pd.DataFrame:
+    """Por dia local, ultimo ano ate ontem (serie?periodo=ano, carimbo 00h local)."""
+    j = _pub("serie?periodo=ano")
+    t = pd.to_datetime(pd.Series(j["t"], dtype="int64"), unit="s", utc=True).dt.tz_convert("America/Sao_Paulo")
+
+    def num(campo, fator=1.0):
+        v = j.get(campo)
+        if not isinstance(v, list) or len(v) != len(t):
+            return np.full(len(t), np.nan)
+        return pd.to_numeric(pd.Series(v), errors="coerce").to_numpy(float) * fator
+
+    return pd.DataFrame({"dia": t.dt.strftime("%Y-%m-%d"), "rajada_max_kmh": num("rajada", 3.6),
+                         "vento_med_kmh": num("vento", 3.6), "chuva_mm": num("chuva"),
+                         "temp_max_c": num("temp_max"), "temp_min_c": num("temp_min")})
 
 
 def _acrescentar(arq: Path, novo: pd.DataFrame, chave: str) -> int:
@@ -268,46 +264,29 @@ def coletar() -> dict:
             out["series_ausentes"] = d.attrs["ausentes"]
         return _acrescentar(ARQ_5MIN, d, "ts")
 
-    def _ano():
-        j = _baixar("year")                                       # 36 MB: no maximo uma vez por dia
-        return {"diario": _acrescentar(ARQ_DIA, diario(j), "dia"),
-                "termo_ano": len(historico_termo(j))}             # preenche as horas que a coleta de 5 min perdeu
-
     parte("github", importar_github)
     parte("5min", _5min)
     parte("horario", lambda: _acrescentar(ARQ_HORA, horario(), "hora"))
-    hoje = pd.Timestamp.now(tz="America/Sao_Paulo").date().isoformat()
-    if not ARQ_DIA.exists() or pd.read_parquet(ARQ_DIA).dia.max() < hoje:
-        parte("ano", _ano)
+    def _diario():
+        # coluna a coluna: o valor novo vence, e as colunas que so o year.json tinha (vento maximo,
+        # direcao) ficam nos dias antigos
+        novo = diario().set_index("dia")
+        velho = pd.read_parquet(ARQ_DIA).set_index("dia") if ARQ_DIA.exists() else novo.iloc[:0]
+        tudo = novo.combine_first(velho).sort_index().reset_index()
+        tudo.to_parquet(ARQ_DIA, index=False)
+        return len(tudo) - len(velho)
+
+    # a serie anual vai ate ontem: no maximo uma vez por dia
+    ontem = (pd.Timestamp.now(tz="America/Sao_Paulo") - pd.Timedelta("1D")).date().isoformat()
+    if not ARQ_DIA.exists() or pd.read_parquet(ARQ_DIA).dia.max() < ontem:
+        parte("diario", _diario)
     return out
-
-
-def historico_termo(j: dict | None = None) -> pd.DataFrame:
-    """Temperatura, orvalho, umidade e radiacao a cada 10 min desde 01/01/2026
-    (year.json: o site guarda o ano corrente nessa resolucao, ao contrario do
-    vento; o Klimadata confirmou em 26/10/2026 que nao ha outro historico).
-    Acrescenta em ARQ_TERMO_ANO sem apagar o que ja havia: na virada do ano o
-    year.json deve recomecar do zero.
-    Desde 17/11/2026 o year.json so traz um ponto por dia (a maxima, carimbada
-    as 12h): ponto sem vizinho a ate 30 min nao e leitura de 10 min e fica de
-    fora (antes desse filtro, entraram 324 pontos diarios como leituras das 12h)."""
-    j = j or _baixar("year")
-    d = _juntar([_serie(j, "chart1", "outTemp", ["temp_c"]), _serie(j, "chart1", "dewpoint", ["orvalho_c"]),
-                 _serie(j, "chart2", "outHumidity", ["umidade"]), _serie(j, "chart6", "radiation", ["radiacao_wm2"])],
-                ["temp_c", "orvalho_c", "umidade", "radiacao_wm2"])
-    t = pd.to_datetime(d.ts, utc=True)
-    vizinho = pd.concat([t.diff(), -t.diff(-1)], axis=1).min(axis=1)
-    d = d[vizinho <= pd.Timedelta("30min")].reset_index(drop=True)
-    if len(d):
-        PASTA.mkdir(parents=True, exist_ok=True)
-        _acrescentar(ARQ_TERMO_ANO, d, "ts")
-    return d
 
 
 # ------------------------------------------------------------------ historico
 _WEEWX = {"windSpeed": "vento_kmh", "windGust": "rajada_kmh", "outTemp": "temp_c", "dewpoint": "orvalho_c",
           "outHumidity": "umidade", "rainRate": "chuva_mmh", "radiation": "radiacao_wm2", "barometer": "pressao_hpa",
-          "altimeter": "qnh_hpa", "UV": "uv"}
+          "altimeter": "qnh_hpa", "UV": "uv", "windDir": "direcao"}
 
 
 def _de_weewx(a: pd.DataFrame) -> pd.DataFrame:
